@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ----------------------------------------------------------------------------
+   Lantern — design tokens
+   "Carry the light of a language forward."
+   A warm light held in the dark: deep ink base, lantern-amber glow,
+   pounamu (Māori greenstone) jade for life/revival.
+---------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #09090c;
+  --color-ink-2: #0e0d13;
+  --color-surface: #16141d;
+  --color-surface-2: #1f1c29;
+  --color-line: #2c2838;
+
+  --color-cream: #f4eee3;
+  --color-muted: #a59d90;
+  --color-faint: #6f6859;
+
+  --color-ember: #ffb454; /* lantern flame */
+  --color-flame: #ffd488; /* hot core */
+  --color-ember-deep: #d98324;
+
+  --color-pounamu: #34d8a6; /* greenstone jade — life */
+  --color-pounamu-deep: #119b76;
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  --radius-xl2: 1.25rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Dark-by-default canvas with a low lantern glow rising from the bottom. */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ink);
+  background-image:
+    radial-gradient(60% 50% at 50% 110%, rgba(255, 180, 84, 0.14), transparent 70%),
+    radial-gradient(40% 40% at 85% 0%, rgba(52, 216, 166, 0.06), transparent 70%);
+  background-attachment: fixed;
+  color: var(--color-cream);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+::selection {
+  background: rgba(255, 180, 84, 0.28);
+  color: #fff;
+}
+
+/* Thin, warm scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+/* ---- Utility classes ---- */
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+}
+
+.text-gradient-ember {
+  background: linear-gradient(120deg, var(--color-flame), var(--color-ember) 45%, var(--color-ember-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow-ember {
+  box-shadow: 0 0 0 1px rgba(255, 180, 84, 0.18), 0 0 40px -8px rgba(255, 180, 84, 0.45);
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl2);
+  backdrop-filter: blur(8px);
+}
+
+.hairline {
+  border-color: color-mix(in srgb, var(--color-line) 80%, transparent);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  48% { opacity: 0.86; }
+  52% { opacity: 0.97; }
+}
+.flicker { animation: flicker 4.5s ease-in-out infinite; }
+
+@keyframes rise {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.rise { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
