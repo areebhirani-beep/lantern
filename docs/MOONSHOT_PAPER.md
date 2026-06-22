@@ -38,7 +38,7 @@ The system is a single loop with four stages and one invariant.
 
 **Seed.** A typed corpus of `Phrase` records (target, gloss, meaning, source, confidence). Ground truth.
 
-**Induce.** A `report_induction` tool call to Claude Opus, constrained by a field-linguist system prompt and a JSON schema. It returns a **vocabulary bank** (each item carrying `evidence` = the phrase ids that attest it) and **grammar patterns** (each carrying corpus examples and a confidence). The output is validated with a runtime schema (zod) before use.
+**Induce.** A structured `report_induction` call to a frontier LLM (Gemini's free tier or Claude), constrained by a field-linguist system prompt and a JSON schema. It returns a **vocabulary bank** (each item carrying `evidence` = the phrase ids that attest it) and **grammar patterns** (each carrying corpus examples and a confidence). The output is validated with a runtime schema (zod) before use.
 
 **Generate.** From the *induced* vocabulary and patterns, the model builds a beginner lesson: flashcards plus practice sentences. Each practice sentence declares the vocabulary it uses.
 

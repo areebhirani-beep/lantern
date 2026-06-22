@@ -69,7 +69,7 @@ That's what makes Lantern trustworthy to a linguist *and* to a community.
 ```
 
 1. **Seed** — a speaker contributes a few phrases with meanings. Even 20 is enough.
-2. **Induce** — Claude aligns words to meanings (interlinear glossing), induces grammar from minimal pairs, and builds a cited vocabulary bank.
+2. **Induce** — the model aligns words to meanings (interlinear glossing), induces grammar from minimal pairs, and builds a cited vocabulary bank.
 3. **Learn** — a beginner course materializes: flashcards on an SM-2 spaced-repetition schedule, with text-to-speech pronunciation.
 4. **Grow** — every contribution invalidates the cached induction, so the next learner gets a richer course. The language's living record compounds.
 
@@ -81,7 +81,7 @@ That's what makes Lantern trustworthy to a linguist *and* to a community.
 |---|---|---|
 | Framework | **Next.js 16** (App Router, RSC, Turbopack) | One codebase, server + client, fast |
 | Language | **TypeScript** end to end | A typed domain model is the contract |
-| Reasoning | **Claude Opus** via the Anthropic SDK — forced structured output (tool use) + zod validation | Deep, citable linguistic induction |
+| Reasoning | **Frontier LLM** — Gemini (free tier) or Claude — forced structured output + zod validation | Deep, citable linguistic induction |
 | Persistence | **MongoDB Atlas** (optional) with an in-memory fallback | The living corpus + flywheel |
 | Styling | **Tailwind v4**, Framer Motion | The Lantern design system |
 | Pronunciation | **Web Speech API** | Free, in-browser, no key |
@@ -118,8 +118,8 @@ npm run dev          # → http://localhost:3000  (works immediately, fixture mo
 To enable the **live** induction engine and persistent corpus, copy `.env.example` to `.env.local`:
 
 ```bash
-ANTHROPIC_API_KEY=sk-ant-...      # turns on live induction (Claude Opus)
-ANTHROPIC_MODEL=claude-opus-4-8
+GEMINI_API_KEY=...                # FREE at aistudio.google.com/apikey — turns on live induction
+# or ANTHROPIC_API_KEY=sk-ant-... # Claude instead, if you have credits
 MONGODB_URI=mongodb+srv://...     # turns on the persistent living corpus
 MONGODB_DB=lantern
 ```

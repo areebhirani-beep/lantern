@@ -107,6 +107,22 @@ export const INDUCTION_TOOL_SCHEMA = {
   additionalProperties: false,
 };
 
+// For providers that use JSON mode instead of tool-use (e.g. Gemini), this
+// describes the exact object to return. Mirrors INDUCTION_TOOL_SCHEMA.
+export const INDUCTION_JSON_HINT = [
+  "Respond with ONLY a JSON object (no markdown, no prose) of this shape:",
+  "{",
+  '  "vocab": [{ "form": string, "meaning": string, "pos"?: string, "notes"?: string, "confidence": "high"|"medium"|"low", "evidence": string[] }],',
+  '  "patterns": [{ "label": string, "description": string, "examples": string[], "confidence": "high"|"medium"|"low" }],',
+  '  "lesson": {',
+  '    "title": string, "intro": string,',
+  '    "cards": [{ "prompt": string, "answer": string, "romanization"?: string, "hint"?: string, "category"?: string }],',
+  '    "practice": [{ "target": string, "english": string, "usesVocab": string[], "note"?: string }]',
+  "  }",
+  "}",
+  "evidence holds the ids (e.g. mi-015) of corpus phrases attesting the item. Every word in a practice `target` must be attested and listed in usesVocab.",
+].join("\n");
+
 export function buildSystemPrompt(language: Language): string {
   return [
     `You are a careful field linguist and language teacher helping a community revitalize ${language.name} (${language.endonym}), a ${language.status.replace(/-/g, " ")} language of ${language.region}.`,

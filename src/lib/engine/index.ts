@@ -9,13 +9,8 @@ import type {
   PracticeSentence,
   VocabItem,
 } from "../types";
-import { ANTHROPIC_MODEL, getAnthropic, hasAnthropicKey } from "../anthropic";
-import {
-  INDUCTION_TOOL_NAME,
-  INDUCTION_TOOL_SCHEMA,
-  buildSystemPrompt,
-  buildUserPrompt,
-} from "./prompts";
+import { activeModel, callInduction, hasLLMKey } from "../llm";
+import { buildSystemPrompt, buildUserPrompt } from "./prompts";
 import { getFixture } from "./fixtures";
 
 // ---- Runtime validation of the model's structured output -------------------
@@ -171,34 +166,6 @@ function assemble(
   };
 }
 
-// ---- Model call ------------------------------------------------------------
-
-async function callModel(language: Language, phrases: Phrase[]): Promise<unknown> {
-  const client = getAnthropic();
-  const res = await client.messages.create({
-    model: ANTHROPIC_MODEL,
-    max_tokens: 8000,
-    temperature: 0.2,
-    system: buildSystemPrompt(language),
-    tools: [
-      {
-        name: INDUCTION_TOOL_NAME,
-        description:
-          "Report the vocabulary, grammatical patterns, and beginner lesson induced strictly from the provided corpus.",
-        input_schema: INDUCTION_TOOL_SCHEMA,
-      },
-    ],
-    tool_choice: { type: "tool", name: INDUCTION_TOOL_NAME },
-    messages: [{ role: "user", content: buildUserPrompt(language, phrases) }],
-  });
-
-  const block = res.content.find((b) => b.type === "tool_use");
-  if (!block || block.type !== "tool_use") {
-    throw new Error("Induction model returned no tool_use block");
-  }
-  return block.input;
-}
-
 // ---- Public entry point ----------------------------------------------------
 
 /**
@@ -212,15 +179,18 @@ export async function runInduction(
 ): Promise<InductionResult> {
   const generatedAt = Date.now();
 
-  if (!hasAnthropicKey()) {
+  if (!hasLLMKey()) {
     const fx = getFixture(language.id, phrases.length);
     if (fx) return fx;
   }
 
   try {
-    const raw = await callModel(language, phrases);
+    const raw = await callInduction(
+      buildSystemPrompt(language),
+      buildUserPrompt(language, phrases),
+    );
     const parsed = OutputZ.parse(raw);
-    return assemble(language, phrases, parsed, "ai", ANTHROPIC_MODEL, generatedAt);
+    return assemble(language, phrases, parsed, "ai", activeModel(), generatedAt);
   } catch (err) {
     console.error("[induction] falling back to fixture:", err);
     const fx = getFixture(language.id, phrases.length);
