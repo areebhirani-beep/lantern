@@ -23,7 +23,7 @@ export function ScrollProgress() {
 export function StoryReveal({
   children,
   delay = 0,
-  y = 18,
+  y = 28,
   className,
 }: {
   children: ReactNode;
@@ -34,10 +34,10 @@ export function StoryReveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y, filter: "blur(5px)" }}
+      initial={{ opacity: 0, y, filter: "blur(8px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-12% 0px -12% 0px" }}
-      transition={{ duration: 1.05, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
@@ -108,14 +108,14 @@ export function Atmosphere({ extra }: { extra?: ReactNode }) {
 }
 
 /** Sparks rising from the flame, deterministic positions (SSR-safe), no random. */
-export function EmberField({ count = 16 }: { count?: number }) {
+export function EmberField({ count = 22 }: { count?: number }) {
   const parts = Array.from({ length: count }, (_, i) => ({
-    left: (i * 61 + 9) % 100,
-    size: 1.5 + (i % 3) * 0.7,
-    dur: 11 + (i % 6) * 1.8,
-    delay: ((i * 2.3) % 11) * -1,
-    drift: (((i * 3) % 5) - 2) * 18,
-    jade: i % 6 === 0,
+    left: (i * 47 + 7) % 100,
+    size: 2 + (i % 3),
+    dur: 7 + (i % 6) * 1.4,
+    delay: ((i * 1.7) % 9) * -1,
+    drift: (((i * 3) % 5) - 2) * 24,
+    jade: i % 5 === 0,
   }));
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -129,10 +129,10 @@ export function EmberField({ count = 16 }: { count?: number }) {
             width: p.size,
             height: p.size,
             background: p.jade ? "#34d8a6" : "#ffb454",
-            boxShadow: `0 0 6px ${p.jade ? "#34d8a6" : "#ffb454"}`,
+            boxShadow: `0 0 8px ${p.jade ? "#34d8a6" : "#ffb454"}`,
           }}
           initial={{ y: 0, opacity: 0 }}
-          animate={{ y: [-10, -720], x: [0, p.drift], opacity: [0, 0.55, 0] }}
+          animate={{ y: [-10, -640], x: [0, p.drift], opacity: [0, 0.85, 0] }}
           transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "easeOut" }}
         />
       ))}
