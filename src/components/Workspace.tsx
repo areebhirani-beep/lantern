@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Loader2,
@@ -11,6 +12,8 @@ import {
   Users,
   Sparkles,
   AlertCircle,
+  Info,
+  ArrowLeft,
 } from "lucide-react";
 import type { InductionResult, Language, Phrase } from "@/lib/types";
 import { StatusBadge } from "./ui";
@@ -91,18 +94,26 @@ export function Workspace({
   return (
     <main className="mx-auto max-w-5xl px-5 pb-16 pt-10">
       {/* header */}
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-3">
+      <Link
+        href="/ark"
+        className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-cream"
+      >
+        <ArrowLeft className="h-4 w-4" /> The Living Ark
+      </Link>
+      <div className="mt-5 flex flex-col gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <span
             className="h-3.5 w-3.5 rounded-full"
             style={{ backgroundColor: language.color, boxShadow: `0 0 14px ${language.color}` }}
           />
-          <h1 className="font-display text-4xl text-cream sm:text-5xl">
-            {language.endonym}
-          </h1>
+          <h1 className="font-display text-4xl text-cream sm:text-5xl">{language.name}</h1>
           <StatusBadge status={language.status} />
         </div>
-        <p className="max-w-2xl text-muted">{language.blurb}</p>
+        <p className="font-display text-lg text-muted">
+          {language.endonym}
+          <span className="text-faint"> — what its speakers call it</span>
+        </p>
+        <p className="max-w-2xl leading-relaxed text-muted">{language.blurb}</p>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-faint">
           <span className="inline-flex items-center gap-1.5">
             <MapPin className="h-3.5 w-3.5" /> {language.region}
@@ -111,6 +122,21 @@ export function Workspace({
             <Users className="h-3.5 w-3.5" /> {language.speakers}
           </span>
         </div>
+      </div>
+
+      {/* what is this page */}
+      <div className="mt-6 flex gap-3 rounded-2xl border border-line bg-surface/40 p-4">
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-ember" />
+        <p className="text-sm leading-relaxed text-muted">
+          Lantern read{" "}
+          <span className="text-cream">{phrases.length} real phrases</span> this
+          community remembers, worked out the grammar, and built a course from them
+          — without inventing a single word.{" "}
+          <span className="text-cream">Structure</span> shows what it found,{" "}
+          <span className="text-cream">Learn</span> is the course, and{" "}
+          <span className="text-cream">Contribute</span> grows it. New here? Start
+          with <span className="text-ember">Learn</span>.
+        </p>
       </div>
 
       {/* flywheel toast */}
