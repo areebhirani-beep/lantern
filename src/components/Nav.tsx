@@ -17,21 +17,15 @@ export function Nav() {
         <nav className="flex items-center gap-1 text-sm">
           <Link
             href="/ark"
-            className="rounded-full px-3.5 py-2 text-muted transition-colors hover:text-cream"
+            className="whitespace-nowrap rounded-full px-3 py-2 text-muted transition-colors hover:text-cream"
           >
             The Ark
           </Link>
           <Link
             href="/lang/mi"
-            className="rounded-full px-3.5 py-2 text-muted transition-colors hover:text-cream"
+            className="ml-1 whitespace-nowrap rounded-full bg-ember px-4 py-2 font-medium text-ink transition-transform hover:scale-[1.03]"
           >
-            Demo
-          </Link>
-          <Link
-            href="/lang/mi"
-            className="ml-1 rounded-full bg-ember px-4 py-2 font-medium text-ink transition-transform hover:scale-[1.03]"
-          >
-            Light a language
+            Try it
           </Link>
         </nav>
       </div>

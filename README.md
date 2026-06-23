@@ -147,7 +147,7 @@ Seed phrases are cited from public, reputable sources (Te Aka Māori Dictionary,
 - Export to Anki / printable primers for offline communities
 - Data-sovereignty controls: communities own and govern their corpus
 
-See [`docs/MOONSHOT_PAPER.md`](docs/MOONSHOT_PAPER.md) for the full blueprint, the philosophy, the architecture, and the long-term vision.
+See [`docs/MOONSHOT_PAPER.md`](docs/MOONSHOT_PAPER.md) for the full blueprint, the philosophy, the architecture, and the long-term vision. See [`docs/EVALUATION.md`](docs/EVALUATION.md) for reproducible metrics (56 cited phrases produced 48 words and 7 grammar patterns, with **zero hallucinated words** and 48/48 vocabulary cited, verifiable at `GET /api/metrics`).
 
 ---
 
