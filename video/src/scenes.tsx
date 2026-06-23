@@ -1,5 +1,6 @@
 import {
   AbsoluteFill,
+  Img,
   interpolate,
   OffthreadVideo,
   spring,
@@ -29,6 +30,16 @@ function useOutro(frames = 16) {
     [1, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   );
+}
+
+/** A slow Ken Burns push for image/video content, so long holds stay alive. */
+function useSlowZoom(from = 1, to = 1.05) {
+  const frame = useCurrentFrame() / 2;
+  const dur = useVideoConfig().durationInFrames / 2;
+  return interpolate(frame, [0, dur], [from, to], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 }
 
 function Chip({ mi, en }: { mi: string; en: string }) {
@@ -204,6 +215,7 @@ export const HonestEngine: React.FC = () => {
 // 6 ─ Demo (the real screen recording) ───────────────────────────────────────
 export const DemoSlot: React.FC = () => {
   const opacity = useOutro();
+  const zoom = useSlowZoom(1, 1.04);
   return (
     <AbsoluteFill style={{ backgroundColor: C.ink, opacity }}>
       <Backdrop />
@@ -215,6 +227,7 @@ export const DemoSlot: React.FC = () => {
             overflow: "hidden",
             border: `1px solid ${C.line}`,
             boxShadow: "0 40px 90px rgba(0,0,0,0.6)",
+            transform: `scale(${zoom})`,
           }}
         >
           <OffthreadVideo
@@ -290,6 +303,65 @@ export const Close: React.FC = () => {
         </FadeUp>
         <FadeUp delay={60} style={{ marginTop: 56 }}>
           <Logo size={64} />
+        </FadeUp>
+      </Center>
+    </AbsoluteFill>
+  );
+};
+
+// 9 ─ The live site ───────────────────────────────────────────────────────────
+export const SiteOutro: React.FC = () => {
+  const opacity = useOutro();
+  const zoom = useSlowZoom(1, 1.035);
+  return (
+    <AbsoluteFill style={{ backgroundColor: C.ink, opacity }}>
+      <Backdrop intensity={0.18} />
+      <Center style={{ padding: 80 }}>
+        <FadeUp>
+          <div
+            style={{
+              width: 1320,
+              borderRadius: 18,
+              overflow: "hidden",
+              border: `1px solid ${C.line}`,
+              boxShadow: "0 50px 100px rgba(0,0,0,0.65)",
+              transform: `scale(${zoom})`,
+            }}
+          >
+            {/* browser chrome with the live URL */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 9,
+                padding: "13px 18px",
+                background: "rgba(255,255,255,0.04)",
+                borderBottom: `1px solid ${C.line}`,
+              }}
+            >
+              <span style={{ width: 11, height: 11, borderRadius: 99, background: "#ff5f57" }} />
+              <span style={{ width: 11, height: 11, borderRadius: 99, background: "#febc2e" }} />
+              <span style={{ width: 11, height: 11, borderRadius: 99, background: "#28c840" }} />
+              <div
+                style={{
+                  marginLeft: 16,
+                  padding: "7px 22px",
+                  borderRadius: 99,
+                  background: "rgba(0,0,0,0.4)",
+                  ...sans(21, C.muted),
+                }}
+              >
+                lantern-cyan.vercel.app
+              </div>
+            </div>
+            <Img src={staticFile("landing.png")} style={{ width: "100%", display: "block" }} />
+          </div>
+        </FadeUp>
+        <FadeUp delay={34} style={{ marginTop: 46, textAlign: "center" }}>
+          <div style={display(40)}>
+            See it live. Start <span style={gradientText}>free</span>.
+          </div>
+          <div style={{ ...sans(28, C.ember), marginTop: 12 }}>lantern-cyan.vercel.app</div>
         </FadeUp>
       </Center>
     </AbsoluteFill>
