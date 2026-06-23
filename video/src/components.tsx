@@ -13,7 +13,7 @@ export const Backdrop: React.FC<{ glow?: string; intensity?: number }> = ({
   glow = C.ember,
   intensity = 0.16,
 }) => {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() / 2; // logical 30fps frame (composition runs at 60)
   const flicker = 0.92 + 0.08 * Math.sin(frame / 7);
   return (
     <AbsoluteFill
@@ -35,9 +35,9 @@ export const FadeUp: React.FC<{
   y?: number;
   style?: CSSProperties;
 }> = ({ children, delay = 0, y = 26, style }) => {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() / 2; // logical 30fps frame (composition runs at 60)
   const { fps } = useVideoConfig();
-  const s = spring({ frame: frame - delay, fps, config: { damping: 200 } });
+  const s = spring({ frame: frame - delay, fps: fps / 2, config: { damping: 200 } });
   const opacity = interpolate(frame, [delay, delay + 14], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
@@ -51,7 +51,7 @@ export const FadeUp: React.FC<{
 
 /** A glowing lantern flame. */
 export const Flame: React.FC<{ size?: number }> = ({ size = 64 }) => {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() / 2; // logical 30fps frame (composition runs at 60)
   const flicker = 0.85 + 0.15 * Math.sin(frame / 5) + 0.05 * Math.sin(frame / 2.3);
   return (
     <div
@@ -114,7 +114,7 @@ export const AnimatedNumber: React.FC<{
   suffix?: string;
   style?: CSSProperties;
 }> = ({ value, durationInFrames = 40, suffix = "", style }) => {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() / 2; // logical 30fps frame (composition runs at 60)
   const t = interpolate(frame, [0, durationInFrames], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",

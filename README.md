@@ -120,7 +120,7 @@ One click with the button above, or import this repo into [Vercel](https://verce
 
 - [The Moonshot Paper](docs/MOONSHOT_PAPER.md), the full blueprint and long-term vision.
 - [Evaluation](docs/EVALUATION.md), reproducible metrics and the no-hallucination check.
-- The film, a 90-second story built in Remotion, in [`video/`](video/).
+- The film, an 86-second story in 4K at 60fps, built in Remotion, in [`video/`](video/).
 
 ## Provenance and ethics
 

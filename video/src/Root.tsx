@@ -6,7 +6,7 @@ export const RemotionRoot: React.FC = () => (
     id="LanternPromo"
     component={LanternPromo}
     durationInFrames={PROMO_DURATION}
-    fps={30}
+    fps={60}
     width={1920}
     height={1080}
   />

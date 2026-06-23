@@ -11,18 +11,20 @@ import {
   Vision,
 } from "./scenes";
 
+// Durations are at 60fps. Each scene's internal animation timings are authored
+// in logical 30fps frames (useCurrentFrame() / 2), so these are simply doubled.
 const SCENES: { c: React.FC; frames: number }[] = [
-  { c: ColdOpen, frames: 120 },
-  { c: Stakes, frames: 240 },
-  { c: MeetLantern, frames: 150 },
-  { c: Mechanism, frames: 420 },
-  { c: HonestEngine, frames: 210 },
-  { c: DemoSlot, frames: 1180 },
-  { c: Vision, frames: 210 },
-  { c: Close, frames: 180 },
+  { c: ColdOpen, frames: 240 },
+  { c: Stakes, frames: 480 },
+  { c: MeetLantern, frames: 300 },
+  { c: Mechanism, frames: 840 },
+  { c: HonestEngine, frames: 420 },
+  { c: DemoSlot, frames: 2100 },
+  { c: Vision, frames: 420 },
+  { c: Close, frames: 360 },
 ];
 
-export const PROMO_DURATION = SCENES.reduce((n, s) => n + s.frames, 0); // 1830 = 61s
+export const PROMO_DURATION = SCENES.reduce((n, s) => n + s.frames, 0); // 5160 = 86s at 60fps
 
 export const LanternPromo: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: C.ink }}>

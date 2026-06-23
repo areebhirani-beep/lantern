@@ -9,8 +9,8 @@ import { renameSync, existsSync, mkdirSync } from "node:fs";
 // ---------------------------------------------------------------------------
 
 const BASE = process.env.BASE || "http://localhost:3300";
-const W = 1280;
-const H = 720;
+const W = 2560;
+const H = 1440;
 const OUT = "out";
 if (!existsSync(OUT)) mkdirSync(OUT, { recursive: true });
 
@@ -70,7 +70,7 @@ async function moveTo(page, locator) {
   if (!box) return null;
   const x = box.x + box.width / 2;
   const y = box.y + Math.min(box.height / 2, 28); // aim near the top of tall cards
-  await page.mouse.move(x, y, { steps: 28 });
+  await page.mouse.move(x, y, { steps: 40 }); // slow, cinematic glide
   return { x, y };
 }
 
@@ -95,6 +95,8 @@ async function smoothScroll(page, dy) {
 
 const main = async () => {
   const browser = await chromium.launch();
+  // Record natively at 2560x1440 (QHD/2K). The app composes richly at this
+  // width, captured 1:1 so text stays crisp. Upsampled to 60fps afterward.
   const context = await browser.newContext({
     viewport: { width: W, height: H },
     recordVideo: { dir: OUT, size: { width: W, height: H } },
@@ -164,25 +166,7 @@ const main = async () => {
   } catch {
     console.log("  (toast not seen)");
   }
-  await sleep(page, 2600);
-
-  // ── Shot 5: it works for any language ──────────────────────────────────
-  console.log("Shot 5: the Ark");
-  await page.goto(`${BASE}/ark`, { waitUntil: "domcontentloaded" });
-  await sleep(page, 1600);
-  await smoothScroll(page, 500);
-  // sweep the cursor across cards to trigger the spotlight glow
-  for (const [x, y] of [
-    [360, 520],
-    [760, 540],
-    [1040, 520],
-    [600, 700],
-    [900, 700],
-  ]) {
-    await page.mouse.move(x, y, { steps: 24 });
-    await sleep(page, 650);
-  }
-  await sleep(page, 1200);
+  await sleep(page, 3000); // hold on the grown corpus / re-derive
 
   console.log("Done. Saving video…");
   const video = page.video();

@@ -21,8 +21,8 @@ import {
 
 /** Fades the whole scene out over its final frames for a soft cut. */
 function useOutro(frames = 16) {
-  const frame = useCurrentFrame();
-  const { durationInFrames } = useVideoConfig();
+  const frame = useCurrentFrame() / 2; // logical 30fps frame (composition runs at 60)
+  const durationInFrames = useVideoConfig().durationInFrames / 2;
   return interpolate(
     frame,
     [durationInFrames - frames, durationInFrames],
@@ -52,9 +52,9 @@ function Chip({ mi, en }: { mi: string; en: string }) {
 
 // 1 ─ The person ─────────────────────────────────────────────────────────────
 export const ColdOpen: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() / 2; // logical 30fps frame (composition runs at 60)
   const { fps } = useVideoConfig();
-  const grow = spring({ frame, fps, config: { damping: 200 }, durationInFrames: 40 });
+  const grow = spring({ frame, fps: fps / 2, config: { damping: 200 }, durationInFrames: 40 });
   const opacity = useOutro();
   return (
     <AbsoluteFill style={{ backgroundColor: C.ink, opacity }}>
@@ -229,7 +229,7 @@ export const DemoSlot: React.FC = () => {
 
 // 7 ─ The vision ─────────────────────────────────────────────────────────────
 export const Vision: React.FC = () => {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() / 2; // logical 30fps frame (composition runs at 60)
   const opacity = useOutro();
   const dots = Array.from({ length: 60 });
   return (
