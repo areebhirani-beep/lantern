@@ -11,7 +11,7 @@ Lantern turns the few words an elder still remembers into a real course to learn
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-ffb454?style=flat-square)](LICENSE)
 &nbsp;
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fareebhirani-beep%2Flantern&env=GEMINI_API_KEY,MONGODB_URI&envDescription=Optional.%20A%20free%20Gemini%20key%20turns%20on%20live%20induction.)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fareebhirani-beep%2Flantern&env=GROQ_API_KEY,GEMINI_API_KEY,MONGODB_URI&envDescription=Optional.%20A%20free%20Groq%20or%20Gemini%20key%20turns%20on%20live%20induction.)
 
 </div>
 
@@ -61,7 +61,7 @@ The workspace shows the words the community gave it, the grammar the engine foun
 |---|---|
 | Framework | Next.js 16 (App Router, React Server Components) |
 | Language | TypeScript end to end |
-| Reasoning | Frontier LLM (Gemini free tier or Claude), forced structured output validated with zod |
+| Reasoning | Frontier LLM (Groq or Gemini free tier, or Claude), forced structured output validated with zod |
 | Persistence | MongoDB Atlas, optional, with an in-memory fallback |
 | Styling | Tailwind v4, Framer Motion |
 | Pronunciation | Web Speech API |
@@ -107,14 +107,14 @@ npm run dev          # http://localhost:3000, works immediately
 Optional, to run the engine live and persist the corpus (copy `.env.example` to `.env.local`):
 
 ```bash
-GEMINI_API_KEY=...                # free at aistudio.google.com/apikey
-# or ANTHROPIC_API_KEY=sk-ant-... # Claude, if you have credits
+GROQ_API_KEY=...                  # FREE, no credit card, from console.groq.com/keys
+# or GEMINI_API_KEY=...           # also free, from aistudio.google.com/apikey
 MONGODB_URI=mongodb+srv://...     # optional, persists the living corpus
 ```
 
 ## Deploy
 
-One click with the button above, or import this repo into [Vercel](https://vercel.com/new). It is a standard Next.js app at the repository root. Set `GEMINI_API_KEY` in the Vercel dashboard to enable live induction.
+One click with the button above, or import this repo into [Vercel](https://vercel.com/new). It is a standard Next.js app at the repository root. Set `GROQ_API_KEY` (free, no card, from [console.groq.com](https://console.groq.com/keys)) in the Vercel dashboard to enable live induction.
 
 ## Documentation
 

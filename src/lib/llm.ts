@@ -11,12 +11,28 @@ import {
 // present: Gemini (free tier), Anthropic (Claude), or neither (fixtures).
 // ---------------------------------------------------------------------------
 
-export type Provider = "anthropic" | "gemini";
+export type Provider = "anthropic" | "gemini" | "openai";
 
 export function activeProvider(): Provider | null {
   if (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY) return "gemini";
+  if (process.env.GROQ_API_KEY || process.env.OPENAI_API_KEY) return "openai";
   if (process.env.ANTHROPIC_API_KEY) return "anthropic";
   return null;
+}
+
+// Any OpenAI-compatible endpoint: Groq, OpenRouter, Cerebras, Together, GitHub
+// Models, or OpenAI itself. Groq is the easiest free, no-card option.
+function openaiConfig() {
+  const isGroq = Boolean(process.env.GROQ_API_KEY);
+  return {
+    key: process.env.GROQ_API_KEY || process.env.OPENAI_API_KEY || "",
+    baseUrl:
+      process.env.OPENAI_BASE_URL ||
+      (isGroq ? "https://api.groq.com/openai/v1" : "https://api.openai.com/v1"),
+    model:
+      process.env.OPENAI_MODEL ||
+      (isGroq ? "llama-3.3-70b-versatile" : "gpt-4o-mini"),
+  };
 }
 
 export function hasLLMKey(): boolean {
@@ -27,6 +43,8 @@ export function activeModel(): string {
   switch (activeProvider()) {
     case "gemini":
       return process.env.GEMINI_MODEL || "gemini-2.0-flash";
+    case "openai":
+      return openaiConfig().model;
     case "anthropic":
       return process.env.ANTHROPIC_MODEL || "claude-opus-4-8";
     default:
@@ -44,9 +62,39 @@ export async function callInduction(
       return callAnthropic(system, user);
     case "gemini":
       return callGemini(system, user);
+    case "openai":
+      return callOpenAI(system, user);
     default:
       throw new Error("No LLM provider configured");
   }
+}
+
+async function callOpenAI(system: string, user: string): Promise<unknown> {
+  const { key, baseUrl, model } = openaiConfig();
+  const res = await fetch(`${baseUrl}/chat/completions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${key}`,
+    },
+    body: JSON.stringify({
+      model,
+      temperature: 0.2,
+      max_tokens: 8000,
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: `${system}\n\n${INDUCTION_JSON_HINT}` },
+        { role: "user", content: user },
+      ],
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`OpenAI-compatible ${res.status}: ${await res.text()}`);
+  }
+  const data = await res.json();
+  const text: string = data?.choices?.[0]?.message?.content ?? "";
+  if (!text) throw new Error("OpenAI-compatible returned empty content");
+  return JSON.parse(text);
 }
 
 async function callAnthropic(system: string, user: string): Promise<unknown> {
