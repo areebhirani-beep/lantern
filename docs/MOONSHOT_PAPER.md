@@ -6,7 +6,7 @@
 
 ## Abstract
 
-Half of the world's ~7,000 languages are expected to fall silent this century, roughly one every two weeks. The dominant framing treats this as a sociopolitical inevitability. We argue it is, in large part, a **tooling** problem: the cost of *documenting* a language and *building pedagogy* for it has always been measured in linguist-years, and that cost is the rate-limiter on revival. Lantern proposes that modern language models can collapse this cost by roughly two orders of magnitude, **but only under a strict honesty constraint** that turns the AI from an untrustworthy oracle into a trustworthy *amplifier*. The core contribution is a loop, seed → induce → generate → learn → grow, in which AI never originates linguistic knowledge, only restructures and multiplies the knowledge a community already holds, with every claim cited and every generated form checked, in code, against attested evidence.
+Half of the world's ~7,000 languages are expected to fall silent this century, roughly one every two weeks. The dominant framing treats this as a sociopolitical inevitability. We argue it is, in large part, a **tooling** problem: the cost of *documenting* a language and *building pedagogy* for it has always been measured in linguist-years, and that cost is the rate-limiter on revival. Lantern proposes that modern language models can collapse this cost by roughly two orders of magnitude, **but only under a strict honesty constraint** that turns the AI from an untrustworthy oracle into a trustworthy *amplifier*. The core contribution is a loop (seed, induce, generate, learn, grow) in which AI never originates linguistic knowledge, only restructures and multiplies the knowledge a community already holds, with every claim cited and every generated form checked, in code, against attested evidence.
 
 ## 1. The problem: documentation is the bottleneck
 
@@ -28,13 +28,7 @@ The zero-to-one is this inversion: not "an AI that speaks dying languages," but 
 
 ## 3. Architecture
 
-The system is a single loop with four stages and one invariant.
-
-```
- Seed ──▶ Induce ──▶ Generate ──▶ Learn ──▶ (contribute) ──▶ Seed′ ──▶ …
-                    │                                          ▲
-                    └────────── corpus compounds ──────────────┘
-```
+The system is a single loop with four stages and one invariant. The stages run in a cycle: **Seed**, then **Induce**, then **Generate**, then **Learn**, then **contribute**, which feeds the corpus back to Seed. With every turn the corpus compounds.
 
 **Seed.** A typed corpus of `Phrase` records (target, gloss, meaning, source, confidence). Ground truth.
 
