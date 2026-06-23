@@ -81,13 +81,13 @@ export function StoryLanding() {
 
       {/* ───────────── 2 · What Lantern actually is (clarity first) ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-28">
-        <StoryReveal className="mx-auto max-w-3xl text-center">
+        <StoryReveal className="max-w-3xl">
           <p className="text-sm uppercase tracking-[0.3em] text-ember">In one sentence</p>
           <h2 className="mt-4 font-display text-3xl leading-tight text-cream sm:text-5xl">
             Lantern builds a language-learning app for languages that are
             disappearing.
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             Think of Duolingo. Now imagine a language so endangered that no one has
             ever built a course for it. Lantern builds that course from scratch,
             using only the handful of words people still remember.
@@ -224,11 +224,11 @@ export function StoryLanding() {
 
       {/* ───────────── 5 · How it works (narrated) ───────────── */}
       <section className="mx-auto max-w-4xl px-5 py-20">
-        <StoryReveal>
-          <p className="text-center text-sm uppercase tracking-[0.3em] text-ember">
+        <StoryReveal className="max-w-2xl">
+          <p className="text-sm uppercase tracking-[0.3em] text-ember">
             What happened next
           </p>
-          <h2 className="mt-4 text-center font-display text-3xl text-cream sm:text-4xl">
+          <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
             A whole course took shape in minutes.
           </h2>
         </StoryReveal>
@@ -271,7 +271,7 @@ export function StoryLanding() {
 
       {/* ───────────── 6 · The real product ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-20">
-        <StoryReveal className="mx-auto max-w-2xl text-center">
+        <StoryReveal className="max-w-2xl">
           <p className="text-sm uppercase tracking-[0.3em] text-ember">Not a mockup</p>
           <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
             This is the actual app.
@@ -324,7 +324,7 @@ export function StoryLanding() {
 
       {/* ───────────── 8 · Bento features ───────────── */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <StoryReveal className="mx-auto max-w-2xl text-center">
+        <StoryReveal className="max-w-2xl">
           <h2 className="font-display text-3xl text-cream sm:text-4xl">
             Everything a learner needs, generated from almost nothing.
           </h2>
@@ -397,14 +397,14 @@ export function StoryLanding() {
 
       {/* ───────────── 10 · The Ark ───────────── */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <StoryReveal>
-          <p className="flex items-center justify-center gap-2 text-center text-sm uppercase tracking-[0.3em] text-ember">
+        <StoryReveal className="max-w-2xl">
+          <p className="flex items-center gap-2 text-sm uppercase tracking-[0.3em] text-ember">
             <Languages className="h-4 w-4" /> She isn&rsquo;t alone
           </p>
-          <h2 className="mx-auto mt-4 max-w-2xl text-center font-display text-3xl text-cream sm:text-4xl">
+          <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
             Languages people are fighting to keep.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-center text-muted">
+          <p className="mt-4 max-w-xl text-muted">
             One has about ten speakers left. Two were declared gone, then brought
             back by their children. Each is a light someone refuses to let go out.
           </p>
@@ -529,11 +529,9 @@ function Feature({
   className?: string;
 }) {
   return (
-    <SpotlightCard className={`p-7 ${className}`}>
-      <span className="inline-grid h-11 w-11 place-items-center rounded-xl bg-surface-2 text-ember">
-        <Icon className="h-5 w-5" />
-      </span>
-      <h3 className="mt-5 font-display text-xl text-cream">{title}</h3>
+    <SpotlightCard className={`flex flex-col p-7 ${className}`}>
+      <Icon className="h-5 w-5 text-ember" />
+      <h3 className="mt-6 font-display text-xl text-cream">{title}</h3>
       <p className="mt-2 leading-relaxed text-muted">{body}</p>
     </SpotlightCard>
   );
