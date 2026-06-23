@@ -14,7 +14,7 @@ const BodyZ = z.object({
   contributedBy: z.string().max(60).optional(),
 });
 
-// POST /api/contribute — add a phrase to a language's living corpus. This is
+// POST /api/contribute, add a phrase to a language's living corpus. This is
 // the flywheel: every contribution invalidates the cached induction, so the
 // next learner gets richer materials.
 export async function POST(req: Request) {

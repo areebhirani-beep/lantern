@@ -10,9 +10,9 @@ export function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 const CONF: Record<Confidence, { color: string; label: string }> = {
-  high: { color: "var(--color-pounamu)", label: "High confidence — well attested" },
-  medium: { color: "var(--color-ember)", label: "Medium confidence — limited evidence" },
-  low: { color: "var(--color-faint)", label: "Low confidence — a lead, not a law" },
+  high: { color: "var(--color-pounamu)", label: "High confidence, well attested" },
+  medium: { color: "var(--color-ember)", label: "Medium confidence, limited evidence" },
+  low: { color: "var(--color-faint)", label: "Low confidence, a lead, not a law" },
 };
 
 export function ConfidenceDot({ level }: { level: Confidence }) {

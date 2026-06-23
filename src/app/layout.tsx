@@ -16,11 +16,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Lantern — carry the light of a language forward",
+  title: "Lantern, carry the light of a language forward",
   description:
-    "A language dies every two weeks. Lantern turns a handful of phrases from an endangered language into a living, growing course — with AI that learns the language's structure from the community's own words, never inventing what it cannot see.",
+    "A language dies every two weeks. Lantern turns a handful of phrases from an endangered language into a living, growing course, with AI that learns the language's structure from the community's own words, never inventing what it cannot see.",
   openGraph: {
-    title: "Lantern — carry the light of a language forward",
+    title: "Lantern, carry the light of a language forward",
     description:
       "Turn a handful of phrases from an endangered language into a living, growing course.",
     type: "website",

@@ -105,7 +105,7 @@ export function Flashcards({
           {language.name}.
         </h3>
         <p className="mt-2 max-w-sm text-sm text-muted">
-          An hour ago this course did not exist. Your reviews are saved — come
+          An hour ago this course did not exist. Your reviews are saved, come
           back and the spacing will bring them up again.
         </p>
         <button
@@ -204,7 +204,7 @@ export function Flashcards({
       </div>
       {!canSpeak && (
         <p className="mt-3 text-center text-xs text-faint">
-          Audio isn&rsquo;t available in this browser — pronunciation playback is
+          Audio isn&rsquo;t available in this browser, pronunciation playback is
           disabled.
         </p>
       )}

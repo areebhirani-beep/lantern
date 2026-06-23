@@ -62,7 +62,7 @@ export function ContributeForm({
     <form onSubmit={submit} className="card p-6">
       <h3 className="font-display text-xl text-cream">Add a phrase</h3>
       <p className="mt-1 text-sm text-muted">
-        Every phrase you add becomes part of the corpus — and the engine
+        Every phrase you add becomes part of the corpus, and the engine
         re-derives a richer course. This is how the ark grows.
       </p>
 

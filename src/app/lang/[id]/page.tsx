@@ -16,9 +16,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const language = getLanguageMeta(id);
-  if (!language) return { title: "Unknown language — Lantern" };
+  if (!language) return { title: "Unknown language, Lantern" };
   return {
-    title: `${language.name} (${language.endonym}) — Lantern`,
+    title: `${language.name} (${language.endonym}), Lantern`,
     description: `${language.blurb} Learn ${language.name} from a living, AI-amplified corpus.`,
   };
 }

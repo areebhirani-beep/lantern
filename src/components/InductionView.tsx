@@ -39,7 +39,7 @@ export function InductionView({
         <div>
           <h3 className="font-display text-xl text-cream">Grammar the engine found</h3>
           <p className="mt-1 text-sm text-muted">
-            Regularities induced from minimal pairs in the corpus — not from
+            Regularities induced from minimal pairs in the corpus, not from
             outside knowledge.
           </p>
           <div className="mt-5 grid gap-3 md:grid-cols-2">

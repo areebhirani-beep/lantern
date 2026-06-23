@@ -19,7 +19,7 @@ export function ScrollProgress() {
   );
 }
 
-/** Words rise and resolve from a blur as they scroll into view — story unfolding. */
+/** Words rise and resolve from a blur as they scroll into view, story unfolding. */
 export function StoryReveal({
   children,
   delay = 0,
@@ -67,7 +67,7 @@ export function Gloss({
   );
 }
 
-/** Slowly drifting warm light — the cinematic, alive atmosphere. */
+/** Slowly drifting warm light, the cinematic, alive atmosphere. */
 export function Atmosphere({ extra }: { extra?: ReactNode }) {
   const blobs = [
     { c: "#ffb454", x: "20%", y: "30%", s: 620, dur: 18, dx: 60, dy: -40 },
@@ -107,7 +107,7 @@ export function Atmosphere({ extra }: { extra?: ReactNode }) {
   );
 }
 
-/** Sparks rising from the flame — deterministic positions (SSR-safe), no random. */
+/** Sparks rising from the flame, deterministic positions (SSR-safe), no random. */
 export function EmberField({ count = 22 }: { count?: number }) {
   const parts = Array.from({ length: count }, (_, i) => ({
     left: (i * 47 + 7) % 100,

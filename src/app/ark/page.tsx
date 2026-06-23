@@ -14,7 +14,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "The Living Ark — Lantern",
+  title: "The Living Ark, Lantern",
   description:
     "Every light is a language. A growing ark of endangered languages being kept alight, one corpus at a time.",
 };
@@ -62,7 +62,7 @@ export default async function ArkPage() {
           <p className="mt-5 text-lg text-muted">
             Each language here is one a community is fighting to keep. Some are
             vulnerable; one has roughly ten speakers left. Lantern gives every
-            one of them the same engine — and room for the other ~3,000 still
+            one of them the same engine, and room for the other ~3,000 still
             waiting.
           </p>
         </Reveal>

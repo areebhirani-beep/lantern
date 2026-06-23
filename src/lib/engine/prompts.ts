@@ -4,7 +4,7 @@ import type { Language, Phrase } from "../types";
 // The induction engine's prompt + structured-output contract.
 //
 // Core principle: the model is documenting an endangered language from a SMALL,
-// community-provided corpus. It reasons over the corpus it can SEE — it never
+// community-provided corpus. It reasons over the corpus it can SEE, it never
 // invents words from outside knowledge. Every claim must trace back to the
 // corpus, and every generated practice word must be attested. This is what
 // keeps Lantern honest in front of linguists.
@@ -68,7 +68,7 @@ export const INDUCTION_TOOL_SCHEMA = {
           items: {
             type: "object",
             properties: {
-              prompt: { type: "string", description: "Shown first — the English meaning." },
+              prompt: { type: "string", description: "Shown first, the English meaning." },
               answer: { type: "string", description: "The target-language form." },
               romanization: { type: "string" },
               hint: { type: "string" },
@@ -127,11 +127,11 @@ export function buildSystemPrompt(language: Language): string {
   return [
     `You are a careful field linguist and language teacher helping a community revitalize ${language.name} (${language.endonym}), a ${language.status.replace(/-/g, " ")} language of ${language.region}.`,
     "",
-    "You are given a SMALL corpus of phrases the community has documented. Your job is to (1) extract a vocabulary bank, (2) induce grammatical patterns, and (3) build a beginner micro-lesson — strictly from this corpus.",
+    "You are given a SMALL corpus of phrases the community has documented. Your job is to (1) extract a vocabulary bank, (2) induce grammatical patterns, and (3) build a beginner micro-lesson, strictly from this corpus.",
     "",
     "NON-NEGOTIABLE RULES:",
     "1. Evidence only. Every vocab item and every grammatical pattern must be supported by the provided phrases. Cite phrase ids as evidence.",
-    "2. No invention. Never output a word form that does not appear in the corpus. You may segment phrases into morphemes that appear in the corpus, but you may not introduce vocabulary from outside knowledge — even if you happen to know the language.",
+    "2. No invention. Never output a word form that does not appear in the corpus. You may segment phrases into morphemes that appear in the corpus, but you may not introduce vocabulary from outside knowledge, even if you happen to know the language.",
     "3. Controlled generation. Practice sentences must be built ONLY by recombining attested vocab according to a pattern you actually found (e.g. swapping a known tense marker, a known noun after a known article). List every vocab form used in `usesVocab`; all must be attested. When in doubt, reuse a corpus sentence verbatim rather than risk an unattested form.",
     "4. Honest confidence. With thin evidence, mark medium/low confidence or omit. A linguist will check your work; being wrong is worse than being incomplete.",
     "5. Respect. This is living cultural heritage. Be accurate and humble; do not flatten nuance.",
@@ -150,13 +150,13 @@ export function buildUserPrompt(language: Language, phrases: Phrase[]): string {
   });
 
   return [
-    `Corpus for ${language.name} — ${phrases.length} phrases:`,
+    `Corpus for ${language.name}, ${phrases.length} phrases:`,
     "",
     ...lines,
     "",
     "Analyze this corpus and call report_induction with:",
     "- vocab: every attested word/morpheme aligned to meaning, with evidence ids.",
-    "- patterns: grammatical regularities the corpus actually demonstrates (look hard for minimal pairs — same word with different markers).",
+    "- patterns: grammatical regularities the corpus actually demonstrates (look hard for minimal pairs, same word with different markers).",
     "- lesson: a warm beginner micro-lesson (8–12 cards) plus 4–8 practice sentences built only from attested vocab.",
   ].join("\n");
 }

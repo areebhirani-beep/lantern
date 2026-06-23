@@ -29,7 +29,7 @@ export async function POST(req: Request) {
   const phrases = await store.getPhrases(languageId);
   if (phrases.length === 0) {
     return Response.json(
-      { error: "No corpus to induce from yet — contribute a few phrases first." },
+      { error: "No corpus to induce from yet, contribute a few phrases first." },
       { status: 400 },
     );
   }

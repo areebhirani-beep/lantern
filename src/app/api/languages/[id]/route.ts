@@ -4,7 +4,7 @@ import { getStore } from "@/lib/store";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// GET /api/languages/:id — language meta + its corpus + any cached induction.
+// GET /api/languages/:id, language meta + its corpus + any cached induction.
 export async function GET(
   _req: Request,
   ctx: { params: Promise<{ id: string }> },

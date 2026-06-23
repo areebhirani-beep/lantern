@@ -3,7 +3,7 @@ import type { InductionResult, Lesson, Pattern, VocabItem } from "../types";
 // ---------------------------------------------------------------------------
 // Verified, hand-checked induction results for the two shipped corpora.
 // Used when no ANTHROPIC_API_KEY is configured, or as a safety net if a live
-// call fails — so the demo is always honest AND always works. Every item here
+// call fails, so the demo is always honest AND always works. Every item here
 // is traceable to the seed corpus in ../seed.
 // ---------------------------------------------------------------------------
 
@@ -76,12 +76,12 @@ const MI_PATTERNS: Pattern[] = [
     languageId: "mi",
     label: "Tense lives in a particle before the verb",
     description:
-      "The verb 'haere' (go) never changes form. Time is carried by a particle in front of it — a textbook minimal-pair set the corpus shows in full.",
+      "The verb 'haere' (go) never changes form. Time is carried by a particle in front of it, a textbook minimal-pair set the corpus shows in full.",
     examples: [
-      "I haere au — I went (past)",
-      "Kei te haere au — I am going (present)",
-      "Ka haere au — I will go (future)",
-      "Kua haere au — I have gone (perfect)",
+      "I haere au, I went (past)",
+      "Kei te haere au, I am going (present)",
+      "Ka haere au, I will go (future)",
+      "Kua haere au, I have gone (perfect)",
     ],
     confidence: "high",
   },
@@ -91,7 +91,7 @@ const MI_PATTERNS: Pattern[] = [
     label: "Number is marked on the article, not the noun",
     description:
       "'whare' (house) is identical in singular and plural. Only the article changes: te → ngā.",
-    examples: ["te whare — the house", "ngā whare — the houses"],
+    examples: ["te whare, the house", "ngā whare, the houses"],
     confidence: "high",
   },
   {
@@ -100,7 +100,7 @@ const MI_PATTERNS: Pattern[] = [
     label: "Possessive 'my' shows number by dropping t-",
     description:
       "To go from one possessed thing to many, the initial t- of the possessive falls away: tāku → āku.",
-    examples: ["tāku pene — my pen", "āku pene — my pens"],
+    examples: ["tāku pene, my pen", "āku pene, my pens"],
     confidence: "high",
   },
   {
@@ -109,7 +109,7 @@ const MI_PATTERNS: Pattern[] = [
     label: "Some nouns lengthen a vowel (macron) to pluralize",
     description:
       "A minority of nouns mark plural by lengthening the first vowel rather than changing the article.",
-    examples: ["matua — parent", "mātua — parents"],
+    examples: ["matua, parent", "mātua, parents"],
     confidence: "medium",
   },
   {
@@ -117,8 +117,8 @@ const MI_PATTERNS: Pattern[] = [
     languageId: "mi",
     label: "Pronouns count people precisely",
     description:
-      "Address forms distinguish one / two / three-or-more listeners — a feature English lacks.",
-    examples: ["koe — you (1)", "kōrua — you (2)", "koutou — you (3+)"],
+      "Address forms distinguish one / two / three-or-more listeners, a feature English lacks.",
+    examples: ["koe, you (1)", "kōrua, you (2)", "koutou, you (3+)"],
     confidence: "high",
   },
 ];
@@ -129,7 +129,7 @@ const MI_LESSON: Lesson = {
   createdAt: 1750000000000,
   title: "Your first words of te reo Māori",
   intro:
-    "Start where every speaker starts — with warmth. Here are greetings, a few people, and one verb you can already bend through time.",
+    "Start where every speaker starts, with warmth. Here are greetings, a few people, and one verb you can already bend through time.",
   cards: [
     { id: "mi-c1", prompt: "hello / be well", answer: "Kia ora", category: "greeting" },
     { id: "mi-c2", prompt: "greetings (formal, to one person)", answer: "Tēnā koe", category: "greeting" },
@@ -182,12 +182,12 @@ const MI_LESSON: Lesson = {
 
 const CHR_VOCAB: VocabItem[] = [
   v("chr", 1, "ᎣᏏᏲ", "hello (formal)", "greeting", "high", ["chr-001"], "osiyo"),
-  v("chr", 2, "ᏏᏲ", "hi (informal)", "greeting", "high", ["chr-002"], "siyo — a shortened osiyo"),
+  v("chr", 2, "ᏏᏲ", "hi (informal)", "greeting", "high", ["chr-002"], "siyo, a shortened osiyo"),
   v("chr", 3, "ᏙᎯᏧ", "how are you?", "greeting", "high", ["chr-003"], "dohitsu"),
   v("chr", 4, "ᏩᏙ", "thank you", "everyday", "high", ["chr-004"], "wado"),
   v("chr", 5, "ᎥᎥ", "yes", "everyday", "high", ["chr-005"], "vv"),
   v("chr", 6, "ᎥᏝ", "no", "everyday", "high", ["chr-006"], "vtla"),
-  v("chr", 7, "Ꮭ", "not (negator)", "particle", "medium", ["chr-008"], "tla — seen in 'tla yigoliga'"),
+  v("chr", 7, "Ꮭ", "not (negator)", "particle", "medium", ["chr-008"], "tla, seen in 'tla yigoliga'"),
   v("chr", 8, "ᏣᎳᎩ", "Cherokee (people / language)", "noun", "high", ["chr-015"], "tsalagi"),
   v("chr", 9, "ᏐᏬ", "one", "numeral", "medium", ["chr-009"], "sowo (also saquu in some dialects)"),
   v("chr", 10, "ᏔᎵ", "two", "numeral", "high", ["chr-010"], "tali"),
@@ -203,8 +203,8 @@ const CHR_PATTERNS: Pattern[] = [
     languageId: "chr",
     label: "Greetings have a full and a shortened form",
     description:
-      "The formal 'osiyo' shortens to 'siyo' in casual speech — the corpus shows both.",
-    examples: ["ᎣᏏᏲ osiyo — hello", "ᏏᏲ siyo — hi"],
+      "The formal 'osiyo' shortens to 'siyo' in casual speech, the corpus shows both.",
+    examples: ["ᎣᏏᏲ osiyo, hello", "ᏏᏲ siyo, hi"],
     confidence: "medium",
   },
   {
@@ -212,8 +212,8 @@ const CHR_PATTERNS: Pattern[] = [
     languageId: "chr",
     label: "Negation centers on a 'tla' particle",
     description:
-      "'no' (ᎥᏝ vtla) and 'I don't understand' (Ꮭ ᏱᎪᎵᎦ tla yigoliga) both carry a tla- negator. With only 15 words, this is a lead, not a law — more data would confirm it.",
-    examples: ["ᎥᏝ vtla — no", "Ꮭ ᏱᎪᎵᎦ tla yigoliga — I don't understand"],
+      "'no' (ᎥᏝ vtla) and 'I don't understand' (Ꮭ ᏱᎪᎵᎦ tla yigoliga) both carry a tla- negator. With only 15 words, this is a lead, not a law, more data would confirm it.",
+    examples: ["ᎥᏝ vtla, no", "Ꮭ ᏱᎪᎵᎦ tla yigoliga, I don't understand"],
     confidence: "low",
   },
 ];
@@ -224,7 +224,7 @@ const CHR_LESSON: Lesson = {
   createdAt: 1750000000000,
   title: "First words in Tsalagi",
   intro:
-    "Sequoyah invented this syllabary in the 1820s and made a whole nation literate within years. Each character is a syllable — start by recognizing a few.",
+    "Sequoyah invented this syllabary in the 1820s and made a whole nation literate within years. Each character is a syllable, start by recognizing a few.",
   cards: [
     { id: "chr-c1", prompt: "hello (formal)", answer: "ᎣᏏᏲ", romanization: "osiyo", category: "greeting" },
     { id: "chr-c2", prompt: "hi (informal)", answer: "ᏏᏲ", romanization: "siyo", category: "greeting" },

@@ -7,7 +7,7 @@ import {
 
 // ---------------------------------------------------------------------------
 // Provider-agnostic LLM access. Lantern's value is the honest amplification
-// mechanism, not any single vendor — so the engine runs on whatever key is
+// mechanism, not any single vendor, so the engine runs on whatever key is
 // present: Gemini (free tier), Anthropic (Claude), or neither (fixtures).
 // ---------------------------------------------------------------------------
 

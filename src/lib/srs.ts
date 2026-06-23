@@ -25,7 +25,7 @@ export function review(state: SrsState, grade: Grade, now: number): SrsState {
       ease: Math.max(1.3, state.ease - 0.2),
       intervalDays: 0,
       reps: 0,
-      dueAt: now + 60 * 1000, // ~1 minute — re-drill this session
+      dueAt: now + 60 * 1000, // ~1 minute, re-drill this session
     };
   }
 

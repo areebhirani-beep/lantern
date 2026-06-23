@@ -3,8 +3,7 @@ import type { Language } from "./types";
 // ---------------------------------------------------------------------------
 // The curated registry of languages in the Lantern Ark.
 // `mi` (Māori) and `chr` (Cherokee) ship with verified, cited seed corpora and
-// are fully inducible. The rest populate the Ark to show the mission's scale —
-// including the near-silent (Ainu, ~10 speakers) and the brought-back-from-
+// are fully inducible. The rest populate the Ark to show the mission's scale, // including the near-silent (Ainu, ~10 speakers) and the brought-back-from-
 // dormant (Manx, Cornish), which prove revival is possible.
 // Figures follow the UNESCO Atlas of the World's Languages in Danger framing.
 // ---------------------------------------------------------------------------
@@ -18,7 +17,7 @@ export const LANGUAGES: Language[] = [
     status: "vulnerable",
     region: "Aotearoa New Zealand",
     speakers: "~50,000 highly fluent; a national revival underway",
-    color: "#34d8a6", // pounamu — greenstone
+    color: "#34d8a6", // pounamu, greenstone
     script: "latin",
     blurb:
       "The poster child for revival: from near-loss to kōhanga reo immersion nests and a Māori Language Act. Proof it can be done.",
@@ -50,7 +49,7 @@ export const LANGUAGES: Language[] = [
     color: "#5ec5c0", // lagoon
     script: "latin",
     blurb:
-      "Banned in schools for decades, now taught in Pūnana Leo immersion nests — a revival that helped inspire Māori kōhanga reo.",
+      "Banned in schools for decades, now taught in Pūnana Leo immersion nests, a revival that helped inspire Māori kōhanga reo.",
     ttsLang: "haw",
   },
   {
@@ -60,7 +59,7 @@ export const LANGUAGES: Language[] = [
     iso639: "ain",
     status: "critically-endangered",
     region: "Hokkaidō, Japan",
-    speakers: "~10 native speakers — a language at the edge of silence",
+    speakers: "~10 native speakers, a language at the edge of silence",
     color: "#7aa2ff", // snow
     script: "latin",
     blurb:
@@ -73,7 +72,7 @@ export const LANGUAGES: Language[] = [
     iso639: "gv",
     status: "severely-endangered",
     region: "Isle of Man",
-    speakers: "Declared 'extinct' in 2009 — then brought back by its children",
+    speakers: "Declared 'extinct' in 2009, then brought back by its children",
     color: "#e2574c",
     script: "latin",
     blurb:
@@ -116,7 +115,7 @@ export const LANGUAGES: Language[] = [
     color: "#b58bff",
     script: "latin",
     blurb:
-      "A thousand years of Ashkenazi life carried in one language — devastated in the 20th century, quietly persisting now.",
+      "A thousand years of Ashkenazi life carried in one language, devastated in the 20th century, quietly persisting now.",
   },
 ];
 

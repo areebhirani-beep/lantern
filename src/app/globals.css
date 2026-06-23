@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   Lantern — design tokens
+   Lantern, design tokens
    "Carry the light of a language forward."
    A warm light held in the dark: deep ink base, lantern-amber glow,
    pounamu (Māori greenstone) jade for life/revival.
@@ -21,7 +21,7 @@
   --color-flame: #ffd488; /* hot core */
   --color-ember-deep: #d98324;
 
-  --color-pounamu: #34d8a6; /* greenstone jade — life */
+  --color-pounamu: #34d8a6; /* greenstone jade, life */
   --color-pounamu-deep: #119b76;
 
   --font-display: var(--font-fraunces);

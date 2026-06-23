@@ -27,7 +27,7 @@ export function Footer() {
         </div>
         <p className="mt-8 max-w-2xl text-xs leading-relaxed text-faint">
           A language disappears roughly every two weeks. Lantern amplifies the
-          words a community already holds — it never invents what it cannot see.
+          words a community already holds, it never invents what it cannot see.
           Seed data is cited from public, reputable sources; pronunciation is an
           approximate guide.
         </p>

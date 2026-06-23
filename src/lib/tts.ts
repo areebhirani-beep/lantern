@@ -1,6 +1,6 @@
 // Client-side pronunciation via the Web Speech API. Free, no key, in-browser.
 // Voices for endangered languages rarely exist, so we match the closest
-// available voice and fall back gracefully — pronunciation is a guide, and the
+// available voice and fall back gracefully, pronunciation is a guide, and the
 // UI says so honestly.
 
 export function ttsSupported(): boolean {

@@ -7,7 +7,7 @@ import { SEED_PHRASES } from "./seed";
 // The living corpus, behind one interface. In-memory by default (zero config,
 // always works), MongoDB Atlas when MONGODB_URI is set (persistent + unlocks
 // the Atlas award). Adding a phrase invalidates that language's cached
-// induction — so the next visit re-derives richer materials. That is the
+// induction, so the next visit re-derives richer materials. That is the
 // flywheel, expressed in code.
 // ---------------------------------------------------------------------------
 

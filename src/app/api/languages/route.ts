@@ -4,7 +4,7 @@ import { getStore } from "@/lib/store";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// GET /api/languages — the Ark roster with live phrase/vocab counts.
+// GET /api/languages, the Ark roster with live phrase/vocab counts.
 export async function GET() {
   const store = await getStore();
   const languages = await Promise.all(
