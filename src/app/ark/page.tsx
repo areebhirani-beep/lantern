@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import { Counter } from "@/components/Counter";
 import { SectionLabel, StatusBadge } from "@/components/ui";
+import { Globe } from "@/components/magic/globe";
 import { LANGUAGES, isInducible } from "@/lib/languages";
 import { getStore } from "@/lib/store";
 import { getFixture } from "@/lib/engine/fixtures";
@@ -54,18 +55,23 @@ export default async function ArkPage() {
     <>
       <Nav />
       <main className="mx-auto max-w-6xl px-5 pb-16 pt-12">
-        <Reveal className="max-w-2xl">
-          <SectionLabel>The Living Ark</SectionLabel>
-          <h1 className="mt-4 font-display text-4xl text-cream sm:text-6xl">
-            Every light is a language.
-          </h1>
-          <p className="mt-5 text-lg text-muted">
-            Each language here is one a community is fighting to keep. Some are
-            vulnerable; one has roughly ten speakers left. Lantern gives every
-            one of them the same engine, and room for the other ~3,000 still
-            waiting.
-          </p>
-        </Reveal>
+        <div className="grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+          <Reveal className="max-w-2xl">
+            <SectionLabel>The Living Ark</SectionLabel>
+            <h1 className="mt-4 font-display text-4xl text-cream sm:text-6xl">
+              Every light is a language.
+            </h1>
+            <p className="mt-5 text-lg text-muted">
+              Each language here is one a community is fighting to keep. Some are
+              vulnerable; one has roughly ten speakers left. Lantern gives every
+              one of them the same engine, and room for the other ~3,000 still
+              waiting.
+            </p>
+          </Reveal>
+          <div className="relative mx-auto aspect-square w-full max-w-[440px]">
+            <Globe />
+          </div>
+        </div>
 
         {/* counters */}
         <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4">

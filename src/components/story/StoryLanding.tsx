@@ -24,6 +24,10 @@ import {
 } from "./primitives";
 import { SpotlightCard } from "./SpotlightCard";
 import { BrowserFrame } from "./BrowserFrame";
+import { TextRevealByWord } from "./TextReveal";
+import { Marquee } from "@/components/magic/marquee";
+import { BorderBeam } from "@/components/magic/border-beam";
+import { AnimatedShinyText } from "@/components/magic/animated-shiny-text";
 
 function Phrase({ mi, en }: { mi: string; en: string }) {
   return (
@@ -49,8 +53,10 @@ export function StoryLanding() {
             </div>
           </StoryReveal>
           <StoryReveal delay={0.25}>
-            <p className="mt-10 text-sm uppercase tracking-[0.3em] text-ember">
-              A true story, like thousands of others
+            <p className="mt-10 text-sm uppercase tracking-[0.3em]">
+              <AnimatedShinyText className="text-ember/70">
+                A true story, like thousands of others
+              </AnimatedShinyText>
             </p>
           </StoryReveal>
           <StoryReveal delay={0.4}>
@@ -164,22 +170,19 @@ export function StoryLanding() {
         </StoryReveal>
       </section>
 
-      {/* ───────────── 3 · The loss (why it matters) ───────────── */}
-      <section className="relative mx-auto max-w-3xl px-5 py-32 text-center">
+      {/* ───────────── 3 · The loss (scroll-revealed, Magic UI text reveal) ───────────── */}
+      <TextRevealByWord text="Every two weeks, a language takes its last breath. A thousand years of grammar, story, and song, gone unwritten, because no one had the time to write it down." />
+
+      <section className="relative mx-auto max-w-3xl px-5 pb-32 text-center">
         <StoryReveal>
-          <p className="font-display text-3xl leading-snug text-cream sm:text-5xl">
-            Every two weeks, somewhere on Earth, a language takes its last breath.
-          </p>
-        </StoryReveal>
-        <StoryReveal delay={0.15}>
-          <p className="mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-muted">
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted">
             Of the world&rsquo;s 7,000 languages, nearly half are expected to fall
             silent within a lifetime. The reason is rarely that no one cares. It is
-            that writing a language down and teaching it has always taken trained
+            that documenting a language and teaching it has always taken trained
             experts years, and most languages will never get that time.
           </p>
         </StoryReveal>
-        <StoryReveal delay={0.3}>
+        <StoryReveal delay={0.2}>
           <p className="mt-10 font-display text-2xl text-ember sm:text-3xl">
             Hers is on that list.
           </p>
@@ -361,6 +364,7 @@ export function StoryLanding() {
       <section className="mx-auto max-w-4xl px-5 py-20">
         <StoryReveal>
           <div className="card relative overflow-hidden p-10 text-center sm:p-14">
+            <BorderBeam duration={9} size={80} />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ember/15 to-transparent" />
             <p className="relative text-sm uppercase tracking-[0.3em] text-ember">
               See it for yourself
@@ -406,7 +410,17 @@ export function StoryLanding() {
           </p>
         </StoryReveal>
 
-        <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="relative mt-12 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+          <Marquee pauseOnHover className="[--duration:34s]">
+            {LANGUAGES.map((l) => (
+              <span key={l.id} className="mx-7 font-display text-2xl text-cream/70">
+                {l.endonym}
+              </span>
+            ))}
+          </Marquee>
+        </div>
+
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {LANGUAGES.map((l, i) => (
             <StoryReveal key={l.id} delay={i * 0.05}>
               <Link href={`/lang/${l.id}`} className="block h-full">

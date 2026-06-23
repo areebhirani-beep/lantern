@@ -28,6 +28,11 @@
   --font-sans: var(--font-inter);
 
   --radius-xl2: 1.25rem;
+
+  /* 21st.dev / Magic UI animation tokens */
+  --animate-marquee: marquee var(--duration, 40s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
+  --animate-shiny-text: shiny-text 8s infinite;
 }
 
 /* Dark-by-default canvas with a low lantern glow rising from the bottom. */
@@ -93,3 +98,16 @@ body {
   to { transform: translateY(0); opacity: 1; }
 }
 .rise { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--gap, 1rem))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap, 1rem))); }
+}
+@keyframes shiny-text {
+  0%, 90%, 100% { background-position: calc(-100% - var(--shiny-width, 100px)) 0; }
+  30%, 60% { background-position: calc(100% + var(--shiny-width, 100px)) 0; }
+}
