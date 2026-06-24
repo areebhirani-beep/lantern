@@ -3,9 +3,9 @@
 **Tagline:** A self-growing digital ark for endangered languages. Lantern amplifies the words a community still remembers into a living course to learn their language, under one unbreakable rule: it never invents a word.
 
 **Required deliverables, where to find them**
+- **Moonshot Paper (the blueprint, start here):** `docs/MOONSHOT_PAPER.md`, the full zero-to-one thesis.
 - **Prototype:** the working web app (live demo link plus the repository).
-- **Moonshot Paper (the blueprint):** `docs/MOONSHOT_PAPER.md`.
-- **Vision presentation:** the film at `lantern-video/out/lantern-promo.mp4`.
+- **Vision film:** the 4K 60fps story at `lantern-video/out/lantern-promo-4k60.mp4`.
 - **Evidence:** reproducible metrics in `docs/EVALUATION.md` and at `GET /api/metrics`.
 
 ## The zero-to-one insight

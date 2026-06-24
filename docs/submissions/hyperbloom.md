@@ -1,7 +1,13 @@
 # Lantern, Hyperbloom Summer submission
 
-**Theme:** Social good
+**Theme:** Social good, mapped to **UN Sustainable Development Goal 4 (Quality Education)**, with **SDG 10 (Reduced Inequalities)** and the preservation of cultural heritage.
 **Tagline:** Half the world's languages will fall silent this century. Lantern is a tool that lets any community turn the words they still remember into a living course to learn their language, with AI that never invents a word.
+
+## How it maps to the theme (SDG 4)
+
+SDG 4 is universal, inclusive, quality education. For roughly 3,000 endangered languages there is no course, no textbook, no app, so for those communities quality education *in their own language* does not exist to be accessed. Lantern manufactures that missing education on demand: it turns a handful of remembered phrases into a real beginner course, in minutes, for a language that had no learning materials an hour before. It also speaks to SDG 10, the people losing their languages are overwhelmingly Indigenous and marginalized communities, and to the safeguarding of intangible cultural heritage.
+
+> Note for judging: everything below is demonstrated on screen in the 2-minute film, the working app, the live induction, and the measured results, so the video stands on its own without opening the repo.
 
 ## The problem (and why it is a social-good problem)
 

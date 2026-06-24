@@ -40,6 +40,19 @@ Per language, from the two cited seed corpora that ship with the app:
 
 ## How it works
 
+```mermaid
+flowchart LR
+    A["Seed<br/>cited phrases"] --> B["Induce<br/>align words, find grammar"]
+    B --> C{"Guardrail<br/>every word attested?"}
+    C -->|fails| X["discard the sentence"]
+    C -->|passes| D["Generate<br/>flashcards + practice"]
+    D --> E["Learn<br/>spaced repetition + speech"]
+    E --> F["Contribute<br/>add a remembered phrase"]
+    F --> A
+```
+
+The guardrail (the diamond) is the heart of it: a probabilistic model is given a hard, code-level correctness property, no unattested word ever reaches a learner.
+
 | Step | What happens |
 |---|---|
 | 1. Seed | A speaker contributes a few phrases with meanings. Twenty is enough. |

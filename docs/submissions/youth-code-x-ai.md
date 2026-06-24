@@ -7,7 +7,9 @@
 
 Pick a language so endangered that no app, no textbook, and no online course exists for it. Lantern takes a handful of remembered phrases, works out the grammar hidden inside them, and builds a real learning course: flashcards, pronunciation you can hear, and spaced repetition. Then it grows: every phrase someone adds rebuilds the course, richer. The one rule it never breaks is that it only teaches words real speakers actually said.
 
-Try it live and watch it learn Māori from 41 phrases, see the grammar it found, and take the course it built.
+Try it live at **lantern-cyan.vercel.app**: watch it learn Māori from 41 phrases, see the grammar it found, and take the course it built.
+
+**Why it matters:** a language goes silent roughly every two weeks, and the communities losing theirs are overwhelmingly Indigenous and marginalized. Lantern points AI at one of the most human problems there is, keeping a people's own words alive, and makes it something a non-expert can actually use.
 
 ## Inspiration
 

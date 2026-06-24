@@ -7,6 +7,7 @@ import {
   HonestEngine,
   Mechanism,
   MeetLantern,
+  Proof,
   SiteOutro,
   Stakes,
   Vision,
@@ -20,13 +21,14 @@ const SCENES: { c: React.FC; frames: number }[] = [
   { c: MeetLantern, frames: 780 },  // 13s
   { c: Mechanism, frames: 1080 },   // 18s
   { c: HonestEngine, frames: 660 }, // 11s
+  { c: Proof, frames: 420 },        // 7s, the numbers behind the promise
   { c: DemoSlot, frames: 2100 },    // 35s (length of the recording)
   { c: Vision, frames: 600 },       // 10s
   { c: Close, frames: 540 },        // 9s
   { c: SiteOutro, frames: 420 },    // 7s, the live site + URL
 ];
 
-export const PROMO_DURATION = SCENES.reduce((n, s) => n + s.frames, 0); // 7200 = 120s at 60fps
+export const PROMO_DURATION = SCENES.reduce((n, s) => n + s.frames, 0); // 7620 = 127s at 60fps
 
 export const LanternPromo: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: C.ink }}>

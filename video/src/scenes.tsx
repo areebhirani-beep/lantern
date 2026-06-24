@@ -10,6 +10,7 @@ import {
 } from "remotion";
 import { C } from "./theme";
 import {
+  AnimatedNumber,
   Backdrop,
   Center,
   display,
@@ -78,6 +79,11 @@ export const ColdOpen: React.FC = () => {
           <div style={display(62)}>
             My grandmother dreams in a
             <br />language I was never taught.
+          </div>
+        </FadeUp>
+        <FadeUp delay={66} style={{ marginTop: 30, maxWidth: 1180 }}>
+          <div style={sans(28, C.muted)}>
+            Lantern rebuilds a dying language from the few words she still remembers.
           </div>
         </FadeUp>
       </Center>
@@ -212,7 +218,51 @@ export const HonestEngine: React.FC = () => {
   );
 };
 
-// 6 ─ Demo (the real screen recording) ───────────────────────────────────────
+// 6 ─ Proof (the numbers behind the promise) ─────────────────────────────────
+function Stat({ n, label }: { n: number; label: string }) {
+  return (
+    <div style={{ textAlign: "center", width: 280 }}>
+      <div style={display(96)}>
+        <AnimatedNumber value={n} />
+      </div>
+      <div style={{ ...sans(24, C.muted), marginTop: 6 }}>{label}</div>
+    </div>
+  );
+}
+
+export const Proof: React.FC = () => {
+  const opacity = useOutro();
+  return (
+    <AbsoluteFill style={{ backgroundColor: C.ink, opacity }}>
+      <Backdrop glow={C.pounamu} intensity={0.12} />
+      <Center>
+        <FadeUp>
+          <div
+            style={{
+              ...sans(24, C.pounamu),
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+            }}
+          >
+            Proof, not a promise
+          </div>
+        </FadeUp>
+        <FadeUp delay={22} style={{ marginTop: 46, display: "flex", gap: 40 }}>
+          <Stat n={41} label="phrases she remembered" />
+          <Stat n={34} label="words recovered" />
+          <Stat n={5} label="patterns of grammar" />
+        </FadeUp>
+        <FadeUp delay={52} style={{ marginTop: 54 }}>
+          <div style={display(50)}>
+            <span style={gradientText}>0</span> invented. Every word traced to a source.
+          </div>
+        </FadeUp>
+      </Center>
+    </AbsoluteFill>
+  );
+};
+
+// 7 ─ Demo (the real screen recording) ───────────────────────────────────────
 export const DemoSlot: React.FC = () => {
   const opacity = useOutro();
   const zoom = useSlowZoom(1, 1.04);
