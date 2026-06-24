@@ -12,6 +12,7 @@ import type {
 import { activeModel, callInduction, hasLLMKey } from "../llm";
 import { buildSystemPrompt, buildUserPrompt } from "./prompts";
 import { getFixture } from "./fixtures";
+import { SEED_PHRASES } from "../seed";
 
 // ---- Runtime validation of the model's structured output -------------------
 
@@ -178,6 +179,17 @@ export async function runInduction(
   phrases: Phrase[],
 ): Promise<InductionResult> {
   const generatedAt = Date.now();
+
+  // Pin the verified seed languages (Māori, Cherokee) to their hand-checked,
+  // fully-cited induction while their corpus is unmodified, so the demo and the
+  // live site show the pristine curated result. The moment a learner contributes
+  // a phrase the corpus grows past the seed and the live engine takes over, so
+  // the contribute flywheel still re-derives live.
+  const seedCount = SEED_PHRASES[language.id]?.length ?? 0;
+  if (seedCount > 0 && phrases.length <= seedCount) {
+    const fx = getFixture(language.id, phrases.length);
+    if (fx) return fx;
+  }
 
   if (!hasLLMKey()) {
     const fx = getFixture(language.id, phrases.length);
