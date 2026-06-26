@@ -13,17 +13,17 @@ It improves how people *connect* in urban spaces in the most literal way: it rec
 
 ## How it maps to the judging criteria
 
-- **Innovation & Creativity** — the core idea is an inversion: the AI is not the expert, it is an *amplifier* of the community's knowledge, and it is **forbidden in code** (not just in a prompt) from ever teaching a word a real speaker didn't say. A probabilistic model handed a hard, deterministic correctness property.
-- **Adherence to Theme** — a civic, public-good tool aimed squarely at the defining cultural problem of the urban future: the languages a city quietly erases as people migrate into it. Infrastructure for *who a city's people are*, not just how it runs.
-- **Real-world Impact & Usefulness** — it ships with eight real endangered languages, two fully learnable today, every word cited to a real source. This is not a mockup; the AI runs live on the deployed site.
-- **Presentation** — a 2–3 minute film, a working deployment, and reproducible measured results at `GET /api/metrics`.
-- **User Experience** — Duolingo-simple: flashcards, pronunciation you can hear, spaced repetition, and a one-field Contribute box that rebuilds the whole course in seconds.
+- **Innovation & Creativity:** an inversion. The AI is not the expert, it is an *amplifier* of the community's knowledge, and it is **forbidden in code** (not just in a prompt) from ever teaching a word a real speaker didn't say. A probabilistic model handed a hard, deterministic correctness property.
+- **Adherence to Theme:** a civic, public-good tool aimed squarely at the defining cultural problem of the urban future, the languages a city quietly erases as people migrate into it. Infrastructure for *who a city's people are*, not just how it runs.
+- **Real-world Impact & Usefulness:** it ships with eight real endangered languages, two fully learnable today, every word cited to a real source. This is not a mockup; the AI runs live on the deployed site.
+- **Presentation:** a 2-3 minute film, a working deployment, and reproducible measured results at `GET /api/metrics`.
+- **User Experience:** Duolingo-simple. Flashcards, pronunciation you can hear, spaced repetition, and a one-field Contribute box that rebuilds the whole course in seconds.
 
 ## Required deliverables
 
 - **Public repository:** this repo.
-- **Working deployment:** **https://lantern-cyan.vercel.app** — the live Next.js app, live induction enabled. Watch it learn Māori from 41 phrases, see the grammar it found, and take the course it built.
-- **Video (2–3 min):** the Lantern film in `video/` (trim the 4K master to the 2–3 min cut).
+- **Working deployment:** the live Next.js app at **https://lantern-cyan.vercel.app**, with live induction enabled. Watch it learn Māori from 41 phrases, see the grammar it found, and take the course it built.
+- **Video (2-3 min):** the Lantern film in `video/` (trim the 4K master to the 2-3 min cut).
 
 > Note for judging: everything below is shown on screen in the film, the working app, the live induction, and the measured results, so the video stands on its own without opening the repo.
 
