@@ -5,10 +5,6 @@ import {
   ArrowRight,
   ArrowDown,
   ShieldCheck,
-  Sprout,
-  Brain,
-  GraduationCap,
-  RefreshCw,
   Volume2,
   Languages,
   Sparkles,
@@ -22,6 +18,7 @@ import {
   StoryReveal,
 } from "./primitives";
 import { Hero } from "./Hero";
+import { HowItWorks } from "./HowItWorks";
 import { FeatureBento } from "./FeatureBento";
 import { TryItCTA } from "./TryItCTA";
 import { SpotlightCard } from "./SpotlightCard";
@@ -219,51 +216,7 @@ export function StoryLanding() {
       </section>
 
       {/* ───────────── 5 · How it works (narrated) ───────────── */}
-      <section className="mx-auto max-w-4xl px-5 py-20">
-        <StoryReveal className="max-w-2xl">
-          <p className="text-sm uppercase tracking-[0.3em] text-ember">
-            What happened next
-          </p>
-          <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
-            A whole course took shape in minutes.
-          </h2>
-        </StoryReveal>
-
-        <div className="mt-16 space-y-5">
-          <Step
-            icon={Sprout}
-            n="01"
-            title="It started with her words"
-            body="The forty-one phrases became the ground truth. They are the only thing Lantern is allowed to learn from."
-          />
-          <Step
-            icon={Brain}
-            n="02"
-            title="It found the grammar hiding inside them"
-            body="Lantern lined up her sentences and spotted a pattern: the verb never changes, and a small word in front of it carries the time."
-          >
-            <div className="grid gap-1.5 font-display text-cream sm:grid-cols-2">
-              <span><span className="text-ember">i</span> haere au, I <span className="text-muted">went</span></span>
-              <span><span className="text-ember">kei te</span> haere au, I&rsquo;m <span className="text-muted">going</span></span>
-              <span><span className="text-ember">ka</span> haere au, I <span className="text-muted">will go</span></span>
-              <span><span className="text-ember">kua</span> haere au, I <span className="text-muted">have gone</span></span>
-            </div>
-          </Step>
-          <Step
-            icon={GraduationCap}
-            n="03"
-            title="It built a course you can take"
-            body="Flashcards, pronunciation you can hear, and spaced repetition that brings each word back just before you would forget it. The kind of thing that normally takes linguists years."
-          />
-          <Step
-            icon={RefreshCw}
-            n="04"
-            title="And it keeps growing"
-            body="Every new phrase she remembers, or anyone adds, makes the course richer. Her language stops shrinking and starts growing again."
-            last
-          />
-        </div>
-      </section>
+      <HowItWorks />
 
       {/* ───────────── 6 · The real product ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-20">
@@ -403,45 +356,5 @@ export function StoryLanding() {
         </div>
       </section>
     </div>
-  );
-}
-
-// A narrated step with an optional worked example.
-function Step({
-  icon: Icon,
-  n,
-  title,
-  body,
-  children,
-  last,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  n: string;
-  title: string;
-  body: string;
-  children?: React.ReactNode;
-  last?: boolean;
-}) {
-  return (
-    <StoryReveal>
-      <div className="relative flex gap-5 sm:gap-8">
-        <div className="flex flex-col items-center">
-          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-line bg-surface text-ember">
-            <Icon className="h-5 w-5" />
-          </div>
-          {!last && <div className="mt-2 w-px flex-1 bg-gradient-to-b from-line to-transparent" />}
-        </div>
-        <div className={last ? "pb-0" : "pb-12"}>
-          <div className="flex items-baseline gap-3">
-            <span className="font-display text-sm text-faint">{n}</span>
-            <h3 className="font-display text-xl text-cream sm:text-2xl">{title}</h3>
-          </div>
-          <p className="mt-2 max-w-xl leading-relaxed text-muted">{body}</p>
-          {children && (
-            <div className="mt-5 rounded-2xl border border-line bg-surface/40 p-5">{children}</div>
-          )}
-        </div>
-      </div>
-    </StoryReveal>
   );
 }
