@@ -3,10 +3,10 @@ import { Flame } from "lucide-react";
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-line/60 bg-ink/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-line bg-ink">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <Link href="/" className="group flex items-center gap-2.5">
-          <span className="relative grid h-8 w-8 place-items-center rounded-lg bg-surface glow-ember">
+          <span className="grid h-8 w-8 place-items-center rounded-md bg-surface">
             <Flame className="h-4 w-4 text-ember flicker" strokeWidth={2.2} />
           </span>
           <span className="font-display text-lg font-medium tracking-tight text-cream">

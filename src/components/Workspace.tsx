@@ -125,7 +125,7 @@ export function Workspace({
       </div>
 
       {/* what is this page */}
-      <div className="mt-6 flex gap-3 rounded-2xl border border-line bg-surface/40 p-4">
+      <div className="mt-6 flex gap-3 rounded-2xl border border-line bg-ink p-4 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
         <Info className="mt-0.5 h-4 w-4 shrink-0 text-ember" />
         <p className="text-sm leading-relaxed text-muted">
           Lantern read{" "}
@@ -237,7 +237,7 @@ export function Workspace({
 
 function InductionLoader() {
   return (
-    <div className="card flex flex-col items-center gap-6 p-12">
+    <div className="flex flex-col items-center gap-6 rounded-3xl border border-line bg-ink p-12 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
       <Loader2 className="h-7 w-7 animate-spin text-ember" />
       <div className="space-y-2.5 text-center">
         {LOADER_STEPS.map((s, i) => (
@@ -265,7 +265,7 @@ function ErrorState({
   onRetry: () => void;
 }) {
   return (
-    <div className="card flex flex-col items-center p-12 text-center">
+    <div className="flex flex-col items-center rounded-3xl border border-line bg-ink p-12 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
       <AlertCircle className="h-7 w-7 text-rose-300" />
       <p className="mt-4 max-w-sm text-sm text-muted">
         {message || "The engine hit a snag."}
@@ -288,7 +288,7 @@ function EmptyState({
   onGo: () => void;
 }) {
   return (
-    <div className="card flex flex-col items-center p-12 text-center">
+    <div className="flex flex-col items-center rounded-3xl border border-line bg-ink p-12 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
       <span
         className="h-3 w-3 rounded-full"
         style={{ backgroundColor: language.color, boxShadow: `0 0 14px ${language.color}` }}

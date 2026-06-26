@@ -2,14 +2,7 @@
 
 import { ArrowDown, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-import { Atmosphere, Gloss } from "./primitives";
-
-// WebGL is client-only — load the 3D lantern after hydration so it never SSRs.
-const LanternScene = dynamic(
-  () => import("./LanternScene").then((m) => m.LanternScene),
-  { ssr: false },
-);
+import { Atmosphere, Gloss, HeroFlame } from "./primitives";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -82,10 +75,12 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-3xl">
         <Rise>
-          <LanternScene className="mx-auto h-64 w-64 sm:h-80 sm:w-80" />
+          <div className="flex justify-center">
+            <HeroFlame size={120} />
+          </div>
         </Rise>
 
-        <Rise delay={0.15} className="mt-2">
+        <Rise delay={0.15} className="mt-9">
           <p className="text-sm uppercase tracking-[0.3em] text-ember/70">
             A true story, like thousands of others
           </p>

@@ -63,7 +63,7 @@ export function StoryLanding() {
         <StoryReveal delay={0.1}>
           <div className="mt-14 grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr]">
             {/* INPUT */}
-            <SpotlightCard className="p-6">
+            <SpotlightCard className="p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
               <p className="text-xs uppercase tracking-[0.2em] text-faint">You give it</p>
               <h3 className="mt-2 font-display text-xl text-cream">
                 A few words someone remembers
@@ -78,7 +78,7 @@ export function StoryLanding() {
                 ].map(([mi, en]) => (
                   <div
                     key={mi}
-                    className="flex items-baseline justify-between rounded-lg border border-line/70 bg-ink/40 px-3.5 py-2"
+                    className="flex items-baseline justify-between rounded-md border border-line bg-ink px-3.5 py-2"
                   >
                     <span className="font-display text-cream">{mi}</span>
                     <span className="text-sm text-muted">{en}</span>
@@ -89,7 +89,7 @@ export function StoryLanding() {
 
             {/* arrow + what it does */}
             <div className="flex flex-col items-center justify-center gap-3 px-2 text-center">
-              <span className="grid h-12 w-12 place-items-center rounded-full border border-ember/40 bg-ember/10 text-ember">
+              <span className="grid h-12 w-12 place-items-center rounded-full border border-line bg-ink text-ember">
                 <Sparkles className="h-5 w-5" />
               </span>
               <p className="max-w-[12rem] text-xs leading-relaxed text-muted">
@@ -100,13 +100,13 @@ export function StoryLanding() {
             </div>
 
             {/* OUTPUT */}
-            <SpotlightCard className="p-6">
+            <SpotlightCard className="p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
               <p className="text-xs uppercase tracking-[0.2em] text-faint">You get</p>
               <h3 className="mt-2 font-display text-xl text-cream">
                 A real course to learn from
               </h3>
               {/* flashcard mock */}
-              <div className="mt-5 rounded-xl border border-line bg-ink/50 p-5 text-center">
+              <div className="mt-5 rounded-lg border border-line bg-ink p-5 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
                 <p className="text-xs uppercase tracking-widest text-faint">say &ldquo;hello&rdquo;</p>
                 <p className="mt-2 font-display text-3xl text-cream">Kia ora</p>
                 <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted">

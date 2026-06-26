@@ -21,11 +21,10 @@ const container = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 const item = {
-  hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 22 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.7, ease: EASE },
   },
 };
@@ -36,16 +35,18 @@ function Card({
   body,
   children,
   className = "",
+  surface = "p-6 sm:p-7",
 }: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   body: string;
   children?: React.ReactNode;
   className?: string;
+  surface?: string;
 }) {
   return (
     <motion.div variants={item} className={className}>
-      <SpotlightCard className="flex h-full flex-col p-6 sm:p-7">
+      <SpotlightCard className={`flex h-full flex-col ${surface}`}>
         <Icon className="h-5 w-5 text-ember" />
         <h3 className="mt-5 font-display text-xl text-cream">{title}</h3>
         <p className="mt-2 leading-relaxed text-muted">{body}</p>
@@ -89,6 +90,7 @@ export function FeatureBento() {
           title="A course for a language that never had one"
           body="No textbook, no app, no data online. Lantern starts from whatever words are left and builds the rest."
           className="sm:col-span-2 lg:col-span-4"
+          surface="p-7 sm:p-9 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
         >
           <div className="flex flex-wrap items-center gap-4">
             <div className="space-y-1.5">
@@ -117,6 +119,7 @@ export function FeatureBento() {
           title="Never invents a word"
           body="Every word it teaches is real and cited. Anything it cannot trace to her words is rejected in code."
           className="lg:col-span-2"
+          surface="rounded-xl! p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
         >
           <div className="space-y-2">
             <div className="flex items-center justify-between rounded-lg border border-line bg-ink/40 px-3 py-2">
@@ -138,6 +141,7 @@ export function FeatureBento() {
           title="Hear every word"
           body="Built-in pronunciation, so you can speak it, not only read it."
           className="lg:col-span-2"
+          surface="p-6 sm:p-7 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
         >
           <div className="flex items-center gap-3">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ember text-ink">
@@ -164,6 +168,7 @@ export function FeatureBento() {
           title="Real grammar, discovered"
           body="It works out tense, plurals, and patterns from the examples it is given."
           className="lg:col-span-2"
+          surface="rounded-xl! p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
         >
           <div className="flex flex-wrap gap-1.5">
             {[
@@ -189,6 +194,7 @@ export function FeatureBento() {
           title="It grows every time someone uses it"
           body="Add a phrase and the whole course re-derives, richer. The record compounds instead of fading."
           className="lg:col-span-2"
+          surface="p-7 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
         >
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-ember/30 bg-ember/10 px-3 py-1.5 text-sm text-ember">

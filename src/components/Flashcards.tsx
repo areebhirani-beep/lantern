@@ -96,7 +96,7 @@ export function Flashcards({
 
   if (done) {
     return (
-      <div className="card flex flex-col items-center p-12 text-center">
+      <div className="flex flex-col items-center rounded-[14px] border border-line bg-ink p-12 text-center">
         <span className="grid h-14 w-14 place-items-center rounded-full bg-pounamu/15 text-pounamu">
           <Check className="h-7 w-7" />
         </span>
@@ -143,7 +143,7 @@ export function Flashcards({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.99 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="card flex min-h-[16rem] w-full flex-col items-center justify-center gap-4 p-10 text-center"
+            className="flex min-h-[16rem] w-full flex-col items-center justify-center gap-4 rounded-[14px] border border-line bg-ink p-10 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
           >
             {!flipped ? (
               <>

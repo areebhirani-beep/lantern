@@ -91,7 +91,7 @@ export default async function ArkPage() {
             <Reveal key={lang.id} delay={i * 0.05}>
               <Link
                 href={`/lang/${lang.id}`}
-                className="card group flex h-full flex-col p-6 transition-colors hover:border-line"
+                className={`card group flex h-full flex-col p-6 transition-colors hover:border-line ${["rounded-2xl", "rounded-3xl", "rounded-xl", "rounded-2xl", "rounded-3xl"][i % 5]} shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]`}
               >
                 <div className="flex items-start justify-between">
                   <span

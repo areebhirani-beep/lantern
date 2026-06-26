@@ -64,15 +64,9 @@ export function HowItWorks() {
         {STEPS.map((s, i) => (
           <div key={s.n} className="flex w-full flex-col items-center">
             {i > 0 && (
-              <span className="my-7 h-10 w-px bg-gradient-to-b from-line to-transparent" />
+              <span className="my-7 h-10 w-px bg-gradient-to-b from-line/60 to-transparent" />
             )}
-            <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-15% 0px" }}
-              transition={{ duration: 0.7, ease: EASE }}
-              className="text-center"
-            >
+            <div className="text-center">
               <span className="font-display text-4xl leading-none text-faint/45 sm:text-5xl">
                 {s.n}
               </span>
@@ -80,7 +74,7 @@ export function HowItWorks() {
               <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted">{s.body}</p>
 
               {s.example && (
-                <div className="mx-auto mt-6 max-w-md rounded-2xl border border-line bg-surface/40 p-5 text-left">
+                <div className="mx-auto mt-6 max-w-md rounded-[14px] border border-line bg-ink p-5 text-left shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
                   <div className="grid gap-1.5 font-display text-cream sm:grid-cols-2">
                     {s.example.map(([particle, rest, gloss]) => (
                       <span key={particle}>
@@ -91,7 +85,7 @@ export function HowItWorks() {
                   </div>
                 </div>
               )}
-            </motion.div>
+            </div>
           </div>
         ))}
       </div>

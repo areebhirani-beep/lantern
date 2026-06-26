@@ -25,7 +25,7 @@ function WorkspacePeek() {
       </div>
 
       {/* Active flashcard */}
-      <div className="mt-4 rounded-xl border border-line bg-surface/50 p-5 text-center">
+      <div className="mt-4 rounded-lg border border-line bg-surface p-5 text-center">
         <p className="text-[11px] uppercase tracking-widest text-faint">say &ldquo;hello&rdquo;</p>
         <p className="mt-1.5 font-display text-3xl text-cream">Kia ora</p>
         <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted">
@@ -66,11 +66,9 @@ export function TryItCTA() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-12% 0px" }}
         transition={{ duration: 0.85, ease: EASE }}
-        className="card relative overflow-hidden p-8 text-center sm:p-12"
+        className="card relative overflow-hidden p-8 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)] sm:p-12"
       >
         <BorderBeam duration={9} size={90} colorFrom="#ffb454" colorTo="#ffd488" />
-        {/* A single warm light rising from the bottom. */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ember/12 to-transparent" />
 
         <div className="relative">
           <p className="text-sm uppercase tracking-[0.3em] text-ember">See it for yourself</p>
