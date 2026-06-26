@@ -14,8 +14,8 @@
   --color-line: #2c2838;
 
   --color-cream: #f4eee3;
-  --color-muted: #a59d90;
-  --color-faint: #6f6859;
+  --color-muted: #c4bdb0;
+  --color-faint: #8b8475;
 
   --color-ember: #ffb454; /* lantern flame */
   --color-flame: #ffd488; /* hot core */
@@ -27,7 +27,7 @@
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-inter);
 
-  --radius-xl2: 1.25rem;
+  --radius-xl2: 0.875rem;
 
   /* 21st.dev / Magic UI animation tokens */
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
@@ -39,8 +39,7 @@
 body {
   background-color: var(--color-ink);
   background-image:
-    radial-gradient(60% 50% at 50% 110%, rgba(255, 180, 84, 0.14), transparent 70%),
-    radial-gradient(40% 40% at 85% 0%, rgba(52, 216, 166, 0.06), transparent 70%);
+    radial-gradient(55% 45% at 50% 112%, rgba(255, 180, 84, 0.10), transparent 72%);
   background-attachment: fixed;
   color: var(--color-cream);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
@@ -76,10 +75,9 @@ body {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.012));
   border: 1px solid var(--color-line);
   border-radius: var(--radius-xl2);
-  backdrop-filter: blur(8px);
 }
 
 .hairline {

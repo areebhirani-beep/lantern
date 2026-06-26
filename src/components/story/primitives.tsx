@@ -67,40 +67,25 @@ export function Gloss({
   );
 }
 
-/** Slowly drifting warm light, the cinematic, alive atmosphere. */
+/** A single still warm light, like a lantern just off-frame, plus a vignette.
+ *  No drifting colored blobs, that repeated-glow look is the AI-background tell. */
 export function Atmosphere({ extra }: { extra?: ReactNode }) {
-  const blobs = [
-    { c: "#ffb454", x: "20%", y: "30%", s: 620, dur: 18, dx: 60, dy: -40 },
-    { c: "#34d8a6", x: "78%", y: "22%", s: 460, dur: 24, dx: -50, dy: 50 },
-    { c: "#d98324", x: "55%", y: "78%", s: 720, dur: 22, dx: 40, dy: -30 },
-  ];
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {blobs.map((b, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full"
-          style={{
-            left: b.x,
-            top: b.y,
-            width: b.s,
-            height: b.s,
-            background: `radial-gradient(circle, ${b.c}22, transparent 68%)`,
-            filter: "blur(40px)",
-            translateX: "-50%",
-            translateY: "-50%",
-          }}
-          animate={{ x: [0, b.dx, 0], y: [0, b.dy, 0] }}
-          transition={{ duration: b.dur, repeat: Infinity, ease: "easeInOut" }}
-        />
-      ))}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 50% at 50% 6%, rgba(255,180,84,0.09), transparent 62%)",
+        }}
+      />
       {extra}
       {/* vignette for cinematic depth */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(0,0,0,0.55) 100%)",
+            "radial-gradient(130% 100% at 50% -5%, transparent 50%, rgba(0,0,0,0.62) 100%)",
         }}
       />
     </div>

@@ -28,6 +28,7 @@ import { TextRevealByWord } from "./TextReveal";
 import { Marquee } from "@/components/magic/marquee";
 import { BorderBeam } from "@/components/magic/border-beam";
 import { AnimatedShinyText } from "@/components/magic/animated-shiny-text";
+import { NumberTicker } from "@/components/magic/number-ticker";
 
 function Phrase({ mi, en }: { mi: string; en: string }) {
   return (
@@ -182,7 +183,35 @@ export function StoryLanding() {
             experts years, and most languages will never get that time.
           </p>
         </StoryReveal>
-        <StoryReveal delay={0.2}>
+        <StoryReveal delay={0.15}>
+          <div className="mx-auto mt-12 grid max-w-2xl grid-cols-3 gap-6 border-y border-line py-9">
+            <div>
+              <div className="font-display text-3xl text-cream sm:text-4xl">
+                <NumberTicker value={7000} />
+              </div>
+              <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-faint">
+                spoken today
+              </p>
+            </div>
+            <div>
+              <div className="font-display text-3xl text-cream sm:text-4xl">
+                <NumberTicker value={3000} />
+              </div>
+              <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-faint">
+                expected to vanish
+              </p>
+            </div>
+            <div>
+              <div className="font-display text-3xl text-ember sm:text-4xl">
+                <NumberTicker value={14} />
+              </div>
+              <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-faint">
+                days between each loss
+              </p>
+            </div>
+          </div>
+        </StoryReveal>
+        <StoryReveal delay={0.3}>
           <p className="mt-10 font-display text-2xl text-ember sm:text-3xl">
             Hers is on that list.
           </p>
