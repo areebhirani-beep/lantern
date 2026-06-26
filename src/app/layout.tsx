@@ -10,6 +10,17 @@ const fraunces = Fraunces({
   axes: ["opsz", "SOFT", "WONK"],
 });
 
+// Fraunces italic, for editorial emphasis in the hero headline. A variable
+// google font can't take an array of styles, so we load italic as its own
+// instance and expose it through a second CSS variable.
+const frauncesItalic = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces-italic",
+  display: "swap",
+  style: "italic",
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -55,7 +66,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${fraunces.variable} ${inter.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${frauncesItalic.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}

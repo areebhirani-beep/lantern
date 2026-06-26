@@ -63,6 +63,12 @@ body {
   font-family: var(--font-display), ui-serif, Georgia, serif;
 }
 
+/* Fraunces italic, for editorial emphasis (hero headline). */
+.font-display-italic {
+  font-family: var(--font-fraunces-italic), var(--font-display), ui-serif, Georgia, serif;
+  font-style: italic;
+}
+
 .text-gradient-ember {
   background: linear-gradient(120deg, var(--color-flame), var(--color-ember) 45%, var(--color-ember-deep));
   -webkit-background-clip: text;

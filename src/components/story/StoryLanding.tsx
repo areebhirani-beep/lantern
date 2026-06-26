@@ -17,17 +17,16 @@ import { LANGUAGES } from "@/lib/languages";
 import {
   Atmosphere,
   EmberField,
-  Gloss,
   HeroFlame,
   ScrollProgress,
   StoryReveal,
 } from "./primitives";
+import { Hero } from "./Hero";
 import { SpotlightCard } from "./SpotlightCard";
 import { BrowserFrame } from "./BrowserFrame";
 import { TextRevealByWord } from "./TextReveal";
 import { Marquee } from "@/components/magic/marquee";
 import { BorderBeam } from "@/components/magic/border-beam";
-import { AnimatedShinyText } from "@/components/magic/animated-shiny-text";
 import { NumberTicker } from "@/components/magic/number-ticker";
 
 function Phrase({ mi, en }: { mi: string; en: string }) {
@@ -45,40 +44,7 @@ export function StoryLanding() {
       <ScrollProgress />
 
       {/* ───────────── 1 · The person ───────────── */}
-      <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 text-center">
-        <Atmosphere extra={<EmberField />} />
-        <div className="relative">
-          <StoryReveal>
-            <div className="flex justify-center">
-              <HeroFlame size={132} />
-            </div>
-          </StoryReveal>
-          <StoryReveal delay={0.25}>
-            <p className="mt-10 text-sm uppercase tracking-[0.3em]">
-              <AnimatedShinyText className="text-ember/70">
-                A true story, like thousands of others
-              </AnimatedShinyText>
-            </p>
-          </StoryReveal>
-          <StoryReveal delay={0.4}>
-            <h1 className="mx-auto mt-6 max-w-4xl font-display text-4xl leading-[1.1] tracking-tight text-cream sm:text-6xl md:text-7xl">
-              My grandmother dreams in a
-              <br className="hidden sm:block" /> language I was never taught.
-            </h1>
-          </StoryReveal>
-          <StoryReveal delay={0.6}>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted">
-              She speaks{" "}
-              <Gloss term="te reo Māori" meaning="the Māori language of New Zealand" />.
-              She is one of the last in our family who can.
-            </p>
-          </StoryReveal>
-        </div>
-        <div className="absolute bottom-10 flex flex-col items-center gap-2 text-faint">
-          <span className="text-xs tracking-widest">WHAT WE DID ABOUT IT</span>
-          <ArrowDown className="h-4 w-4 animate-bounce" />
-        </div>
-      </section>
+      <Hero />
 
       {/* ───────────── 2 · What Lantern actually is (clarity first) ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-28">
