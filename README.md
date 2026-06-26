@@ -82,14 +82,67 @@ The workspace shows the words the community gave it, the grammar the engine foun
 
 ## Architecture
 
-| Layer | Choice |
-|---|---|
-| Framework | Next.js 16 (App Router, React Server Components) |
-| Language | TypeScript end to end |
-| Reasoning | Frontier LLM (Groq or Gemini free tier, or Claude), forced structured output validated with zod |
-| Persistence | MongoDB Atlas, optional, with an in-memory fallback |
-| Styling | Tailwind v4, Framer Motion |
-| Pronunciation | Web Speech API |
+Lantern is a single Next.js application: the marketing pages, the learning workspace, and the induction API all live in one deployable tree. Its core is the **induction engine** — the model only ever *proposes* vocabulary, grammar, and a course, and code *disposes*. Every reply is parsed into a strict schema, and a hard, in-code guardrail drops any lesson sentence containing a word the corpus does not attest, so a probabilistic model is never trusted on its own.
+
+```mermaid
+flowchart TB
+    subgraph browser["Browser — Next.js 16 · App Router + RSC"]
+        page["Server Components<br/>landing · /ark · /lang/:id"]
+        client["Client UI<br/>Workspace · Flashcards · Contribute"]
+    end
+
+    subgraph api["API routes — src/app/api"]
+        induce["POST /induce"]
+        contribute["POST /contribute"]
+        reads["/languages · /stats · /metrics"]
+    end
+
+    subgraph engine["Induction engine — src/lib/engine"]
+        run["runInduction()"]
+        valid["zod-validated<br/>structured output"]
+        guard{"Guardrail<br/>every word attested?"}
+    end
+
+    llm["LLM provider — llm.ts<br/>Groq · Gemini · Claude · fixtures"]
+    store[("Store — store.ts<br/>in-memory ⇄ MongoDB Atlas")]
+    seed["Cited seed corpora<br/>Māori · Cherokee"]
+    drop["Discard sentence"]
+
+    client -->|fetch| induce
+    client -->|fetch| contribute
+    page --> reads
+    reads --> store
+    induce --> run
+    contribute --> store
+    run --> llm --> valid --> guard
+    guard -->|passes| store
+    guard -->|fails| drop
+    seed --> run
+    store -. living corpus .-> run
+
+    classDef proc fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px,color:#111827;
+    classDef guardc fill:#FCE7F3,stroke:#EC4899,stroke-width:2px,color:#111827;
+    classDef data fill:#DCFCE7,stroke:#22C55E,stroke-width:2px,color:#111827;
+    classDef seedc fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px,color:#111827;
+    classDef dropc fill:#FEE2E2,stroke:#EF4444,stroke-width:1.5px,color:#7F1D1D,stroke-dasharray:4 3;
+
+    class page,client,induce,contribute,reads,run,valid,llm proc;
+    class guard guardc;
+    class store data;
+    class seed seedc;
+    class drop dropc;
+```
+
+| Layer | Choice | Why |
+|---|---|---|
+| Framework | Next.js 16 — App Router, React Server Components | One deployable app: server-rendered pages and the induction API share a single tree. |
+| Language | TypeScript, end to end | The domain model in `types.ts` is the single source of truth, shared by engine, store, and UI. |
+| Reasoning | Frontier LLM — Groq, Gemini free tier, or Claude — with forced structured output | Provider-agnostic (`llm.ts`); swap keys without touching the engine. |
+| Validation | `zod` schema + in-code attestation guardrail | The model proposes; code validates the shape and rejects any unattested word. |
+| Persistence | MongoDB Atlas (optional), in-memory fallback | Zero-config by default; the living corpus persists the moment a `MONGODB_URI` is set. |
+| Spaced repetition | SM-2 (`srs.ts`) | Standard, well-understood scheduling for the flashcard course. |
+| Styling | Tailwind v4, Framer Motion | |
+| Pronunciation | Web Speech API (`tts.ts`) | No audio assets to ship; speech is synthesized in the browser. |
 
 ```
 src/lib/
@@ -97,13 +150,26 @@ src/lib/
   languages.ts        the Ark registry (8 languages, 2 fully inducible)
   seed/               verified, cited seed corpora (Māori, Cherokee)
   engine/index.ts     runInduction(): call the model, validate, enforce the guardrail
+  engine/prompts.ts   the induction system + user prompts
   engine/fixtures.ts  verified cached induction (offline and demo safety net)
-  llm.ts              provider-agnostic: Gemini, Claude, or fixtures
+  llm.ts              provider-agnostic: Groq, Gemini, Claude, or fixtures
   store.ts            Store interface: in-memory or MongoDB Atlas
   srs.ts              SM-2 spaced repetition
+  tts.ts              Web Speech pronunciation
 src/app/api/          induce, contribute, languages, stats, metrics
 src/app/              landing, /ark, /lang/[id]
+src/components/       Workspace, InductionView, Flashcards, ContributeForm
 ```
+
+### Request lifecycle: inducing a course
+
+1. The client calls **`POST /api/induce`** with a `languageId`.
+2. The route resolves the active **store** and returns a cached induction if one exists (`force: true` skips the cache and re-runs).
+3. Otherwise it loads the language's cited phrases and hands them to **`runInduction()`**.
+4. For the two verified seed languages the engine pins to a hand-checked **fixture**, so the demo never breaks even with no API key; any other language calls the active **LLM provider**.
+5. The model's reply is parsed into a strict **`zod`** schema — anything malformed is rejected outright.
+6. Every generated practice sentence is tokenized and matched against the attested vocabulary; **any sentence containing an unattested word is discarded** before it is ever saved.
+7. The validated, guardrailed induction is persisted and returned to the UI, which renders the grammar, the cited vocabulary, and a playable course.
 
 Runs with zero configuration. With no key and no database it serves verified, hand-checked induction so the demo never breaks. Add a key and the engine runs live; add a database and the corpus persists.
 
