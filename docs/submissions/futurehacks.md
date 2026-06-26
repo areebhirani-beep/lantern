@@ -29,4 +29,4 @@ It improves how people *connect* in urban spaces in the most literal way: it rec
 
 ## The honest core, in one line
 
-Zero invented words reach a learner, and every vocabulary item is cited, **48/48** across both seed languages. It is not a prompt instruction; it is enforced in code (`src/lib/engine/guardrail.ts`) and independently recomputed at `GET /api/metrics`.
+Zero invented words reach a learner, and every vocabulary item is cited, **48/48** across both seed languages. The guardrail holds on *generated* content too, not just the static word list: **7/7** live practice sentences pass code-level attestation, **0** failures. It is not a prompt instruction; it is enforced in code (`src/lib/engine/guardrail.ts`) and independently recomputed at `GET /api/metrics`, the same numbers a judge can pull right now.
