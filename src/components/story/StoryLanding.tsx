@@ -345,6 +345,50 @@ export function StoryLanding() {
         </StoryReveal>
       </section>
 
+      {/* ───────────── 10.5 · The people ───────────── */}
+      <section className="mx-auto max-w-5xl px-5 py-28">
+        <StoryReveal className="mx-auto max-w-2xl text-center">
+          <p className="text-sm uppercase tracking-[0.3em] text-ember">Real communities</p>
+          <h2 className="mt-4 font-display text-3xl leading-tight text-cream sm:text-4xl">
+            These are the people whose words we carry.
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">
+            Not abstractions — living communities keeping their languages alive. The
+            same way Lantern cites every word, it cites every photo.
+          </p>
+        </StoryReveal>
+        <StoryReveal delay={0.1}>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2">
+            <figure className="overflow-hidden rounded-2xl border border-line shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/people/maori-kapa-haka.jpg"
+                alt="A Māori kapa haka group performing in traditional dress before a large crowd at Te Matatini"
+                className="block aspect-[3/2] w-full object-cover"
+                loading="lazy"
+              />
+              <figcaption className="flex items-center justify-between gap-3 px-4 py-3 text-[11px] text-faint">
+                <span className="text-muted">te reo Māori · Te Matatini kapa haka</span>
+                <span>Schwede66 · CC BY-SA 4.0</span>
+              </figcaption>
+            </figure>
+            <figure className="overflow-hidden rounded-xl border border-line shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/people/cherokee-stickball.jpg"
+                alt="Cherokee players raising traditional sticks during a stickball game at dusk"
+                className="block aspect-[3/2] w-full object-cover"
+                loading="lazy"
+              />
+              <figcaption className="flex items-center justify-between gap-3 px-4 py-3 text-[11px] text-faint">
+                <span className="text-muted">ᏣᎳᎩ Cherokee · traditional stickball</span>
+                <span>NARA · public domain</span>
+              </figcaption>
+            </figure>
+          </div>
+        </StoryReveal>
+      </section>
+
       {/* ───────────── 11 · Close ───────────── */}
       <section className="relative overflow-hidden px-5 py-40 text-center">
         <Atmosphere extra={<EmberField count={14} />} />
