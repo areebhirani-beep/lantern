@@ -2,32 +2,69 @@
 
 # Lantern
 
-**Duolingo for languages that are dying.**
+### Duolingo for languages that are dying.
 
-Lantern turns the few words an elder still remembers into a real course to learn their language, with AI that learns the grammar from those words and never invents one.
+Lantern turns the few words an elder still remembers into a real course to learn their language — with an engine that discovers the grammar from those words and **never invents one**.
+
+[**lantern-cyan.vercel.app**](https://lantern-cyan.vercel.app) &nbsp;·&nbsp; [The film](video/) &nbsp;·&nbsp; [The Moonshot paper](docs/MOONSHOT_PAPER.md)
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Zero hallucinations](https://img.shields.io/badge/hallucinated_words-0-34d8a6?style=flat-square)](docs/EVALUATION.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-ffb454?style=flat-square)](LICENSE)
 &nbsp;
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fareebhirani-beep%2Flantern&env=GROQ_API_KEY,GEMINI_API_KEY,MONGODB_URI&envDescription=Optional.%20A%20free%20Groq%20or%20Gemini%20key%20turns%20on%20live%20induction.)
 
-</div>
+<br/>
 
-![Lantern learning Māori, live](docs/demo.gif)
+![The Lantern landing page](docs/screenshots/home.png)
+
+</div>
 
 ## What it does
 
-Pick a language so endangered that no app, no textbook, and no online course exists for it. Lantern takes a handful of remembered phrases, works out the grammar hidden inside them, and builds a real learning course: flashcards, pronunciation, and spaced repetition. Then it grows. Every phrase someone adds rebuilds the course, richer. The one rule it never breaks is that it only teaches words real speakers actually said.
+Pick a language so endangered that no app, no textbook, and no online course exists for it. Lantern takes a handful of remembered phrases, works out the grammar hidden inside them, and builds a real learning course — flashcards, pronunciation, and spaced repetition. Then it grows: every phrase someone adds rebuilds the course, richer. The one rule it never breaks is that it only teaches words real speakers actually said.
 
 ## By the numbers
 
-Computed live by the app at [`/api/metrics`](src/app/api/metrics/route.ts), so every figure is reproducible rather than asserted ([method](docs/EVALUATION.md)):
+Every figure below is computed live by the running app at [`/api/metrics`](src/app/api/metrics/route.ts), so it is reproducible rather than asserted ([method](docs/EVALUATION.md)):
 
 | Phrases in | Words out | Grammar patterns | Flashcards | Hallucinated words | Vocabulary cited |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | 56 | 48 | 7 | 22 | **0** | **48 / 48** |
+
+```mermaid
+---
+config:
+  themeVariables:
+    xyChart:
+      backgroundColor: "transparent"
+      plotColorPalette: "#ffb454"
+---
+xychart-beta
+    title "A handful of phrases becomes a whole course"
+    x-axis ["Phrases in", "Words out", "Patterns", "Flashcards"]
+    y-axis "Count" 0 --> 60
+    bar [56, 48, 7, 22]
+```
+
+The guardrail is the part that matters: of every word Lantern teaches, **100% is cited to a real source and 0% is invented**.
+
+```mermaid
+---
+config:
+  themeVariables:
+    xyChart:
+      backgroundColor: "transparent"
+      plotColorPalette: "#34d8a6"
+---
+xychart-beta
+    title "Words that reach a learner: every one cited, none invented"
+    x-axis ["Attested", "Cited", "Hallucinated"]
+    y-axis "Count" 0 --> 50
+    bar [48, 48, 0]
+```
 
 Per language, from the two cited seed corpora that ship with the app:
 
@@ -37,6 +74,39 @@ Per language, from the two cited seed corpora that ship with the app:
 | Cherokee (Tsalagi) | 15 | 14 | 2 | 10 | 2 | 0 | 14 / 14 |
 
 **Zero hallucinated words reach a learner, and every vocabulary item is cited.** This is not a prompt instruction. It is enforced in code: every generated sentence is tokenized and checked against the attested vocabulary, and any sentence with an unattested word is discarded ([`src/lib/engine/index.ts`](src/lib/engine/index.ts)).
+
+## See it
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**The engine's findings**
+
+The grammar Lantern induced for Māori — tense particles, article-marked number, possessive classes — each discovered from the seed phrases alone.
+
+</td>
+<td width="50%" valign="top">
+
+**A course you can take**
+
+Your first words of te reo Māori as flashcards on an SM‑2 spaced-repetition schedule, with in-browser pronunciation.
+
+</td>
+</tr>
+<tr>
+<td><a href="https://lantern-cyan.vercel.app/lang/mi"><img src="docs/screenshots/workspace.png" alt="The Lantern workspace showing induced Māori grammar"/></a></td>
+<td><a href="https://lantern-cyan.vercel.app/lang/mi"><img src="docs/screenshots/learn.png" alt="Flashcards generated from the seed phrases"/></a></td>
+</tr>
+</table>
+
+**The Living Ark** — eight endangered languages, with the live corpus counted in real time.
+
+[![The Living Ark](docs/screenshots/ark.png)](https://lantern-cyan.vercel.app/ark)
+
+### See it learn, live
+
+![Lantern inducing a course from a handful of phrases](docs/demo.gif)
 
 ## How it works
 
@@ -50,11 +120,11 @@ flowchart LR
     E --> F(["Contribute<br/>add a remembered phrase"])
     F -. rebuilds richer .-> A
 
-    classDef seed fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px,color:#111827;
-    classDef process fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px,color:#111827;
-    classDef guard fill:#FCE7F3,stroke:#EC4899,stroke-width:2px,color:#111827;
-    classDef learn fill:#DCFCE7,stroke:#22C55E,stroke-width:2px,color:#111827;
-    classDef discard fill:#FEE2E2,stroke:#EF4444,stroke-width:1.5px,color:#7F1D1D,stroke-dasharray:4 3;
+    classDef seed fill:#FCE9C8,stroke:#D98324,stroke-width:2px,color:#3a2a12;
+    classDef process fill:#F1E7D4,stroke:#A8854A,stroke-width:2px,color:#2a2114;
+    classDef guard fill:#FFD699,stroke:#C2410C,stroke-width:2px,color:#3a2200;
+    classDef learn fill:#CDEEE0,stroke:#119B76,stroke-width:2px,color:#0c3a2b;
+    classDef discard fill:#F6D6CE,stroke:#C0392B,stroke-width:1.5px,color:#5a1a12,stroke-dasharray:4 3;
 
     class A,F seed;
     class B,D process;
@@ -63,7 +133,7 @@ flowchart LR
     class X discard;
 ```
 
-The guardrail (the diamond) is the heart of it: a probabilistic model is given a hard, code-level correctness property, no unattested word ever reaches a learner.
+The guardrail (the diamond) is the heart of it: a probabilistic model is handed a hard, code-level correctness property — no unattested word ever reaches a learner.
 
 | Step | What happens |
 |---|---|
@@ -73,12 +143,6 @@ The guardrail (the diamond) is the heart of it: a probabilistic model is given a
 | 4. Grow | Every contribution rebuilds the course, richer. The language's record compounds instead of fading. |
 
 > **It never makes up a word.** An AI cannot truly know a language with fifty speakers left, because there is almost nothing to learn it from. So Lantern reasons only over the phrases it is given, cites its evidence for every word, and runs a code-level guardrail before any lesson reaches a learner.
-
-## The product
-
-![The workspace, showing the grammar and vocabulary induced for Māori](docs/screenshots/workspace.png)
-
-The workspace shows the words the community gave it, the grammar the engine found, a course you can take, and a Contribute tab where adding a phrase rebuilds the course live.
 
 ## Architecture
 
@@ -120,11 +184,11 @@ flowchart TB
     seed --> run
     store -. living corpus .-> run
 
-    classDef proc fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px,color:#111827;
-    classDef guardc fill:#FCE7F3,stroke:#EC4899,stroke-width:2px,color:#111827;
-    classDef data fill:#DCFCE7,stroke:#22C55E,stroke-width:2px,color:#111827;
-    classDef seedc fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px,color:#111827;
-    classDef dropc fill:#FEE2E2,stroke:#EF4444,stroke-width:1.5px,color:#7F1D1D,stroke-dasharray:4 3;
+    classDef proc fill:#F1E7D4,stroke:#A8854A,stroke-width:2px,color:#2a2114;
+    classDef guardc fill:#FFD699,stroke:#C2410C,stroke-width:2px,color:#3a2200;
+    classDef data fill:#CDEEE0,stroke:#119B76,stroke-width:2px,color:#0c3a2b;
+    classDef seedc fill:#FCE9C8,stroke:#D98324,stroke-width:2px,color:#3a2a12;
+    classDef dropc fill:#F6D6CE,stroke:#C0392B,stroke-width:1.5px,color:#5a1a12,stroke-dasharray:4 3;
 
     class page,client,induce,contribute,reads,run,valid,llm proc;
     class guard guardc;
@@ -141,7 +205,7 @@ flowchart TB
 | Validation | `zod` schema + in-code attestation guardrail | The model proposes; code validates the shape and rejects any unattested word. |
 | Persistence | MongoDB Atlas (optional), in-memory fallback | Zero-config by default; the living corpus persists the moment a `MONGODB_URI` is set. |
 | Spaced repetition | SM-2 (`srs.ts`) | Standard, well-understood scheduling for the flashcard course. |
-| Styling | Tailwind v4, Framer Motion | |
+| Styling | Tailwind v4, Framer Motion | Cinematic dark, ember-on-near-black; one accent, restrained motion. |
 | Pronunciation | Web Speech API (`tts.ts`) | No audio assets to ship; speech is synthesized in the browser. |
 
 ```
@@ -177,8 +241,8 @@ Runs with zero configuration. With no key and no database it serves verified, ha
 
 | Language | Status | Speakers | Region | Inducible |
 |---|---|---|---|:---:|
-| Māori | Vulnerable | ~50,000 fluent | Aotearoa New Zealand | yes |
-| Cherokee | Critically endangered | ~1,500–2,000 | Oklahoma and North Carolina | yes |
+| Māori | Vulnerable | ~50,000 fluent | Aotearoa New Zealand | ✅ |
+| Cherokee | Critically endangered | ~1,500–2,000 | Oklahoma and North Carolina | ✅ |
 | Hawaiian | Critically endangered | ~24,000 | Hawaiʻi | |
 | Ainu | Critically endangered | ~10 native | Hokkaidō, Japan | |
 | Manx | Severely endangered | revived from its last speaker | Isle of Man | |
@@ -209,9 +273,9 @@ One click with the button above, or import this repo into [Vercel](https://verce
 
 ## Documentation
 
-- [The Moonshot Paper](docs/MOONSHOT_PAPER.md), the full blueprint and long-term vision.
-- [Evaluation](docs/EVALUATION.md), reproducible metrics and the no-hallucination check.
-- The film, an 86-second story in 4K at 60fps, built in Remotion, in [`video/`](video/).
+- [The Moonshot Paper](docs/MOONSHOT_PAPER.md) — the full blueprint and long-term vision.
+- [Evaluation](docs/EVALUATION.md) — reproducible metrics and the no-hallucination check.
+- The film — an 86-second story in 4K at 60fps, built in Remotion, in [`video/`](video/).
 
 ## Provenance and ethics
 

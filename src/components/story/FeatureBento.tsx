@@ -68,7 +68,7 @@ export function FeatureBento() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-12% 0px" }}
         transition={{ duration: 0.8, ease: EASE }}
-        className="max-w-2xl"
+        className="mx-auto max-w-2xl text-center"
       >
         <p className="text-sm uppercase tracking-[0.3em] text-ember">What it gives you</p>
         <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">

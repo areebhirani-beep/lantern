@@ -5,10 +5,6 @@ import {
   ArrowRight,
   ArrowDown,
   ShieldCheck,
-  Sprout,
-  Brain,
-  GraduationCap,
-  RefreshCw,
   Volume2,
   Languages,
   Sparkles,
@@ -22,19 +18,20 @@ import {
   StoryReveal,
 } from "./primitives";
 import { Hero } from "./Hero";
+import { HowItWorks } from "./HowItWorks";
 import { FeatureBento } from "./FeatureBento";
+import { TryItCTA } from "./TryItCTA";
 import { SpotlightCard } from "./SpotlightCard";
 import { BrowserFrame } from "./BrowserFrame";
 import { TextRevealByWord } from "./TextReveal";
 import { Marquee } from "@/components/magic/marquee";
-import { BorderBeam } from "@/components/magic/border-beam";
 import { NumberTicker } from "@/components/magic/number-ticker";
 
 function Phrase({ mi, en }: { mi: string; en: string }) {
   return (
-    <span className="inline-flex items-baseline gap-2 rounded-full border border-line bg-surface/70 px-3.5 py-1.5">
-      <span className="font-display text-cream">{mi}</span>
-      <span className="text-sm text-muted">{en}</span>
+    <span className="inline-flex items-baseline gap-2">
+      <span className="font-display text-lg text-cream">{mi}</span>
+      <span className="text-sm text-faint">{en}</span>
     </span>
   );
 }
@@ -49,13 +46,13 @@ export function StoryLanding() {
 
       {/* ───────────── 2 · What Lantern actually is (clarity first) ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-28">
-        <StoryReveal className="max-w-3xl">
+        <StoryReveal className="mx-auto max-w-3xl text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-ember">In one sentence</p>
           <h2 className="mt-4 font-display text-3xl leading-tight text-cream sm:text-5xl">
             Lantern builds a language-learning app for languages that are
             disappearing.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             Think of Duolingo. Now imagine a language so endangered that no one has
             ever built a course for it. Lantern builds that course from scratch,
             using only the handful of words people still remember.
@@ -112,8 +109,8 @@ export function StoryLanding() {
               <div className="mt-5 rounded-xl border border-line bg-ink/50 p-5 text-center">
                 <p className="text-xs uppercase tracking-widest text-faint">say &ldquo;hello&rdquo;</p>
                 <p className="mt-2 font-display text-3xl text-cream">Kia ora</p>
-                <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-muted">
-                  <Volume2 className="h-3.5 w-3.5" /> hear it
+                <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted">
+                  <Volume2 className="h-3.5 w-3.5 text-ember/80" /> hear it
                 </span>
               </div>
               {/* grammar mock */}
@@ -201,7 +198,7 @@ export function StoryLanding() {
             </p>
           </StoryReveal>
           <StoryReveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap justify-center gap-2.5">
+            <div className="mt-10 flex flex-wrap items-baseline justify-center gap-x-7 gap-y-3">
               <Phrase mi="Kia ora" en="hello" />
               <Phrase mi="whānau" en="family" />
               <Phrase mi="tama" en="son" />
@@ -219,60 +216,16 @@ export function StoryLanding() {
       </section>
 
       {/* ───────────── 5 · How it works (narrated) ───────────── */}
-      <section className="mx-auto max-w-4xl px-5 py-20">
-        <StoryReveal className="max-w-2xl">
-          <p className="text-sm uppercase tracking-[0.3em] text-ember">
-            What happened next
-          </p>
-          <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
-            A whole course took shape in minutes.
-          </h2>
-        </StoryReveal>
-
-        <div className="mt-16 space-y-5">
-          <Step
-            icon={Sprout}
-            n="01"
-            title="It started with her words"
-            body="The forty-one phrases became the ground truth. They are the only thing Lantern is allowed to learn from."
-          />
-          <Step
-            icon={Brain}
-            n="02"
-            title="It found the grammar hiding inside them"
-            body="Lantern lined up her sentences and spotted a pattern: the verb never changes, and a small word in front of it carries the time."
-          >
-            <div className="grid gap-1.5 font-display text-cream sm:grid-cols-2">
-              <span><span className="text-ember">i</span> haere au, I <span className="text-muted">went</span></span>
-              <span><span className="text-ember">kei te</span> haere au, I&rsquo;m <span className="text-muted">going</span></span>
-              <span><span className="text-ember">ka</span> haere au, I <span className="text-muted">will go</span></span>
-              <span><span className="text-ember">kua</span> haere au, I <span className="text-muted">have gone</span></span>
-            </div>
-          </Step>
-          <Step
-            icon={GraduationCap}
-            n="03"
-            title="It built a course you can take"
-            body="Flashcards, pronunciation you can hear, and spaced repetition that brings each word back just before you would forget it. The kind of thing that normally takes linguists years."
-          />
-          <Step
-            icon={RefreshCw}
-            n="04"
-            title="And it keeps growing"
-            body="Every new phrase she remembers, or anyone adds, makes the course richer. Her language stops shrinking and starts growing again."
-            last
-          />
-        </div>
-      </section>
+      <HowItWorks />
 
       {/* ───────────── 6 · The real product ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-20">
-        <StoryReveal className="max-w-2xl">
+        <StoryReveal className="mx-auto max-w-2xl text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-ember">Not a mockup</p>
           <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
             This is the actual app.
           </h2>
-          <p className="mt-4 text-muted">
+          <p className="mx-auto mt-4 max-w-xl text-muted">
             Everything you see below was learned from those 41 phrases. Nothing was
             invented.
           </p>
@@ -294,7 +247,7 @@ export function StoryLanding() {
         <Atmosphere />
         <div className="relative mx-auto max-w-3xl text-center">
           <StoryReveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-pounamu/30 bg-pounamu/10 px-3.5 py-1.5 text-sm font-medium text-pounamu">
+            <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-pounamu">
               <ShieldCheck className="h-4 w-4" />
               The rule that makes it trustworthy
             </span>
@@ -322,50 +275,18 @@ export function StoryLanding() {
       <FeatureBento />
 
       {/* ───────────── 9 · Try it ───────────── */}
-      <section className="mx-auto max-w-4xl px-5 py-20">
-        <StoryReveal>
-          <div className="card relative overflow-hidden p-10 text-center sm:p-14">
-            <BorderBeam duration={9} size={80} />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ember/15 to-transparent" />
-            <p className="relative text-sm uppercase tracking-[0.3em] text-ember">
-              See it for yourself
-            </p>
-            <h2 className="relative mx-auto mt-5 max-w-2xl font-display text-3xl text-cream sm:text-5xl">
-              Watch Lantern learn Māori from those 41 phrases.
-            </h2>
-            <p className="relative mx-auto mt-5 max-w-xl text-muted">
-              Open the workspace. You will see the words she gave it, the grammar it
-              found, and a course you can take, right now, in your browser.
-            </p>
-            <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                href="/lang/mi"
-                className="group inline-flex h-12 items-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
-              >
-                Open the Māori workspace
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                href="/ark"
-                className="inline-flex h-12 items-center gap-2 rounded-full border border-line px-6 font-medium text-cream transition-colors hover:bg-surface"
-              >
-                See every language
-              </Link>
-            </div>
-          </div>
-        </StoryReveal>
-      </section>
+      <TryItCTA />
 
       {/* ───────────── 10 · The Ark ───────────── */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <StoryReveal className="max-w-2xl">
-          <p className="flex items-center gap-2 text-sm uppercase tracking-[0.3em] text-ember">
+        <StoryReveal className="mx-auto max-w-2xl text-center">
+          <p className="flex items-center justify-center gap-2 text-sm uppercase tracking-[0.3em] text-ember">
             <Languages className="h-4 w-4" /> She isn&rsquo;t alone
           </p>
           <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
             Languages people are fighting to keep.
           </h2>
-          <p className="mt-4 max-w-xl text-muted">
+          <p className="mx-auto mt-4 max-w-xl text-muted">
             One has about ten speakers left. Two were declared gone, then brought
             back by their children. Each is a light someone refuses to let go out.
           </p>
@@ -385,7 +306,7 @@ export function StoryLanding() {
           {LANGUAGES.map((l, i) => (
             <StoryReveal key={l.id} delay={i * 0.05}>
               <Link href={`/lang/${l.id}`} className="block h-full">
-                <SpotlightCard className="flex h-full flex-col p-5 transition-colors hover:border-line">
+                <SpotlightCard className="flex h-full flex-col items-center p-5 text-center transition-colors hover:border-line">
                   <span
                     className="h-2.5 w-2.5 rounded-full"
                     style={{ backgroundColor: l.color, boxShadow: `0 0 10px ${l.color}` }}
@@ -435,45 +356,5 @@ export function StoryLanding() {
         </div>
       </section>
     </div>
-  );
-}
-
-// A narrated step with an optional worked example.
-function Step({
-  icon: Icon,
-  n,
-  title,
-  body,
-  children,
-  last,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  n: string;
-  title: string;
-  body: string;
-  children?: React.ReactNode;
-  last?: boolean;
-}) {
-  return (
-    <StoryReveal>
-      <div className="relative flex gap-5 sm:gap-8">
-        <div className="flex flex-col items-center">
-          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-line bg-surface text-ember">
-            <Icon className="h-5 w-5" />
-          </div>
-          {!last && <div className="mt-2 w-px flex-1 bg-gradient-to-b from-line to-transparent" />}
-        </div>
-        <div className={last ? "pb-0" : "pb-12"}>
-          <div className="flex items-baseline gap-3">
-            <span className="font-display text-sm text-faint">{n}</span>
-            <h3 className="font-display text-xl text-cream sm:text-2xl">{title}</h3>
-          </div>
-          <p className="mt-2 max-w-xl leading-relaxed text-muted">{body}</p>
-          {children && (
-            <div className="mt-5 rounded-2xl border border-line bg-surface/40 p-5">{children}</div>
-          )}
-        </div>
-      </div>
-    </StoryReveal>
   );
 }

@@ -7,11 +7,13 @@
    pounamu (Māori greenstone) jade for life/revival.
 ---------------------------------------------------------------------------- */
 @theme {
-  --color-ink: #09090c;
-  --color-ink-2: #0e0d13;
-  --color-surface: #16141d;
-  --color-surface-2: #1f1c29;
-  --color-line: #2c2838;
+  /* Warm-neutral darks (red >= green >= blue) so no border or surface picks up
+     a cool/violet tint. Keeps the same luminance as the original ramp. */
+  --color-ink: #0a0908;
+  --color-ink-2: #100e0a;
+  --color-surface: #181510;
+  --color-surface-2: #221d15;
+  --color-line: #2e2820;
 
   --color-cream: #f4eee3;
   --color-muted: #c4bdb0;
