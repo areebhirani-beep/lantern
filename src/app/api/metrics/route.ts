@@ -1,18 +1,13 @@
 import { LANGUAGES, isInducible } from "@/lib/languages";
 import { SEED_PHRASES } from "@/lib/seed";
 import { getFixture } from "@/lib/engine/fixtures";
+import { tokenize } from "@/lib/engine/guardrail";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Same tokenization the engine guardrail uses, recomputed here so the metric is
-// an independent check rather than a self-report.
-function tokenize(s: string): string[] {
-  return s
-    .split(/\s+/)
-    .map((t) => t.replace(/[.,!?؟；;:·"'“”()¿¡]/g, "").trim())
-    .filter(Boolean);
-}
+// Reuses the exact tokenization the engine guardrail uses, so this metric is an
+// independent recomputation of the same property rather than a self-report.
 
 // GET /api/metrics — verifiable "by the numbers" for the writeups + paper.
 export async function GET() {

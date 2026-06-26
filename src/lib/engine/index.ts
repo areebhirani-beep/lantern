@@ -13,6 +13,12 @@ import { activeModel, callInduction, hasLLMKey } from "../llm";
 import { buildSystemPrompt, buildUserPrompt } from "./prompts";
 import { getFixture } from "./fixtures";
 import { SEED_PHRASES } from "../seed";
+import {
+  buildCorpusTokens,
+  isFullyAttested,
+  isVocabVerified,
+  tokenize,
+} from "./guardrail";
 
 // ---- Runtime validation of the model's structured output -------------------
 
@@ -70,30 +76,6 @@ const OutputZ = z.object({
 
 type Output = z.infer<typeof OutputZ>;
 
-// ---- The no-hallucination guardrail (enforced in code, not just the prompt) -
-
-function normalizeToken(t: string): string {
-  return t.replace(/[.,!?؟；;:·"'“”()¿¡]/g, "").trim();
-}
-
-function tokenize(s: string): string[] {
-  return s.split(/\s+/).map(normalizeToken).filter(Boolean);
-}
-
-/** Every whitespace token attested anywhere in the corpus or the vocab bank. */
-function buildAttestedTokens(phrases: Phrase[], vocab: VocabItem[]): Set<string> {
-  const set = new Set<string>();
-  for (const p of phrases) for (const t of tokenize(p.target)) set.add(t);
-  for (const v of vocab) for (const t of tokenize(v.form)) set.add(t);
-  return set;
-}
-
-/** A generated sentence survives only if EVERY word in it is attested. */
-function isFullyAttested(target: string, attested: Set<string>): boolean {
-  const toks = tokenize(target);
-  return toks.length > 0 && toks.every((t) => attested.has(t));
-}
-
 // ---- Assembly --------------------------------------------------------------
 
 function assemble(
@@ -105,6 +87,7 @@ function assemble(
   generatedAt: number,
 ): InductionResult {
   const id = language.id;
+  const phraseById = new Map(phrases.map((p) => [p.id, p]));
 
   const vocab: VocabItem[] = parsed.vocab.map((v, i) => ({
     id: `${id}-v${i + 1}`,
@@ -115,6 +98,7 @@ function assemble(
     notes: v.notes,
     confidence: v.confidence,
     evidence: v.evidence,
+    verified: isVocabVerified(v.form, v.evidence, phraseById),
   }));
 
   const patterns: Pattern[] = parsed.patterns.map((p, i) => ({
@@ -126,7 +110,14 @@ function assemble(
     confidence: p.confidence,
   }));
 
-  const attested = buildAttestedTokens(phrases, vocab);
+  // The attestation basis: corpus tokens plus ONLY the vocab forms we verified
+  // against their own citations. Unverified (possibly invented) forms never
+  // become ground truth, so they cannot launder a hallucination into a lesson.
+  const attested = buildCorpusTokens(phrases);
+  for (const v of vocab) {
+    if (v.verified) for (const t of tokenize(v.form)) attested.add(t);
+  }
+
   const practice: PracticeSentence[] = parsed.lesson.practice
     .filter((s) => isFullyAttested(s.target, attested))
     .map((s) => ({
@@ -136,14 +127,18 @@ function assemble(
       note: s.note,
     }));
 
-  const cards: Flashcard[] = parsed.lesson.cards.map((c, i) => ({
-    id: `${id}-c${i + 1}`,
-    prompt: c.prompt,
-    answer: c.answer,
-    romanization: c.romanization,
-    hint: c.hint,
-    category: c.category,
-  }));
+  // Same guardrail on flashcard answers: a card whose answer contains an
+  // unattested word is dropped, never shown to a learner.
+  const cards: Flashcard[] = parsed.lesson.cards
+    .filter((c) => isFullyAttested(c.answer, attested))
+    .map((c, i) => ({
+      id: `${id}-c${i + 1}`,
+      prompt: c.prompt,
+      answer: c.answer,
+      romanization: c.romanization,
+      hint: c.hint,
+      category: c.category,
+    }));
 
   const lesson: Lesson = {
     id: `${id}-lesson`,
