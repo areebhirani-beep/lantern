@@ -61,6 +61,10 @@ export interface VocabItem {
   notes?: string;
   confidence: Confidence;
   evidence: string[]; // ids of phrases that attest this item
+  // True only if every non-gap token of `form` actually occurs in one of its
+  // cited evidence phrases. Unverified vocab is kept (it may be a real
+  // segmentation guess) but is NOT trusted as ground truth by the guardrail.
+  verified?: boolean;
 }
 
 /** A grammatical regularity the engine hypothesized from minimal pairs. */
