@@ -22,6 +22,7 @@ import {
   StoryReveal,
 } from "./primitives";
 import { Hero } from "./Hero";
+import { FeatureBento } from "./FeatureBento";
 import { SpotlightCard } from "./SpotlightCard";
 import { BrowserFrame } from "./BrowserFrame";
 import { TextRevealByWord } from "./TextReveal";
@@ -318,42 +319,7 @@ export function StoryLanding() {
       </section>
 
       {/* ───────────── 8 · Bento features ───────────── */}
-      <section className="mx-auto max-w-6xl px-5 py-20">
-        <StoryReveal className="max-w-2xl">
-          <h2 className="font-display text-3xl text-cream sm:text-4xl">
-            Everything a learner needs, generated from almost nothing.
-          </h2>
-        </StoryReveal>
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Feature
-            className="lg:col-span-2"
-            icon={Sprout}
-            title="A course for a language that never had one"
-            body="No textbook, no app, no data online. Lantern starts from whatever words are left and builds the rest."
-          />
-          <Feature
-            icon={ShieldCheck}
-            title="Never invents a word"
-            body="Every word it teaches is real and cited. The rest is rejected in code."
-          />
-          <Feature
-            icon={Volume2}
-            title="Hear every word"
-            body="Built-in pronunciation so you can speak it, not just read it."
-          />
-          <Feature
-            icon={Brain}
-            title="Real grammar, discovered"
-            body="It works out tense, plurals, and patterns from the examples it is given."
-          />
-          <Feature
-            className="lg:col-span-2"
-            icon={RefreshCw}
-            title="It grows every time someone uses it"
-            body="Add a phrase and the whole course re-derives, richer. The language's record compounds instead of fading."
-          />
-        </div>
-      </section>
+      <FeatureBento />
 
       {/* ───────────── 9 · Try it ───────────── */}
       <section className="mx-auto max-w-4xl px-5 py-20">
@@ -509,25 +475,5 @@ function Step({
         </div>
       </div>
     </StoryReveal>
-  );
-}
-
-function Feature({
-  icon: Icon,
-  title,
-  body,
-  className = "",
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  body: string;
-  className?: string;
-}) {
-  return (
-    <SpotlightCard className={`flex flex-col p-7 ${className}`}>
-      <Icon className="h-5 w-5 text-ember" />
-      <h3 className="mt-6 font-display text-xl text-cream">{title}</h3>
-      <p className="mt-2 leading-relaxed text-muted">{body}</p>
-    </SpotlightCard>
   );
 }
