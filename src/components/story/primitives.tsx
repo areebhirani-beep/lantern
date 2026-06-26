@@ -1,7 +1,15 @@
 "use client";
 
+import { useEffect } from "react";
 import type { CSSProperties, ReactNode } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useMotionValue,
+  useTransform,
+  useMotionTemplate,
+} from "framer-motion";
 
 // ---------------------------------------------------------------------------
 // Cinematic story primitives for the Lantern landing.
@@ -154,6 +162,64 @@ export function HeroFlame({ size = 150 }: { size?: number }) {
       </svg>
     </motion.div>
   );
+}
+
+/** Cursor-reactive 3D tilt: the element leans toward the pointer for real depth.
+ *  ponytail: framer-motion only, no tilt library. */
+export function Tilt({
+  children,
+  className,
+  max = 7,
+}: {
+  children: ReactNode;
+  className?: string;
+  max?: number;
+}) {
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const rotateX = useSpring(useTransform(py, [-0.5, 0.5], [max, -max]), {
+    stiffness: 150,
+    damping: 18,
+  });
+  const rotateY = useSpring(useTransform(px, [-0.5, 0.5], [-max, max]), {
+    stiffness: 150,
+    damping: 18,
+  });
+  return (
+    <motion.div
+      onPointerMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        px.set((e.clientX - r.left) / r.width - 0.5);
+        py.set((e.clientY - r.top) / r.height - 0.5);
+      }}
+      onPointerLeave={() => {
+        px.set(0);
+        py.set(0);
+      }}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/** The lantern's warm key-light, following the pointer so the scene feels lit by
+ *  a physical flame. ponytail: a SINGLE warm light by design, not a drifting
+ *  multicolor aurora — that blob look is the AI-background tell Atmosphere rejects. */
+export function LanternLight() {
+  const x = useSpring(50, { stiffness: 40, damping: 20 });
+  const y = useSpring(12, { stiffness: 40, damping: 20 });
+  useEffect(() => {
+    function onMove(e: PointerEvent) {
+      x.set((e.clientX / window.innerWidth) * 100);
+      y.set((e.clientY / window.innerHeight) * 100);
+    }
+    window.addEventListener("pointermove", onMove);
+    return () => window.removeEventListener("pointermove", onMove);
+  }, [x, y]);
+  const background = useMotionTemplate`radial-gradient(46% 42% at ${x}% ${y}%, rgba(255,180,84,0.16), transparent 60%)`;
+  return <motion.div className="absolute inset-0" style={{ background }} />;
 }
 
 export const display = (size: string, color = "var(--color-cream)"): CSSProperties => ({

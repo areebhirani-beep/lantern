@@ -2,7 +2,7 @@
 
 import { ArrowDown, ShieldCheck, Volume2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Atmosphere, EmberField, Gloss, HeroFlame } from "./primitives";
+import { Atmosphere, EmberField, Gloss, HeroFlame, Tilt, LanternLight } from "./primitives";
 import { AnimatedShinyText } from "@/components/magic/animated-shiny-text";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -45,7 +45,8 @@ function HerWords() {
       transition={{ duration: 1, delay: 0.55, ease: EASE }}
       className="relative w-full max-w-sm"
     >
-      <div className="relative overflow-hidden rounded-2xl border border-line bg-ink/60 p-6 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)]">
+      <Tilt className="w-full">
+        <div className="relative overflow-hidden rounded-2xl border border-line bg-ink/60 p-6 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)]">
         {/* Single warm light source, falling from the upper-right where the flame burns. */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(130%_95%_at_88%_-12%,rgba(255,180,84,0.16),transparent_58%)]" />
         <div className="relative">
@@ -77,7 +78,8 @@ function HerWords() {
             </span>
           </div>
         </div>
-      </div>
+        </div>
+      </Tilt>
 
       {/* A quiet audio tell, the words can be heard, not just read. */}
       <div className="mt-4 flex items-center gap-2 pl-1 text-[11px] text-faint">
@@ -96,7 +98,7 @@ function HerWords() {
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden px-5 py-24 sm:px-8">
-      <Atmosphere extra={<EmberField />} />
+      <Atmosphere extra={<><LanternLight /><EmberField /></>} />
 
       {/* The lantern, large, bleeding off the right edge so it lights the scene
           instead of floating in it. Sits behind the content. */}
