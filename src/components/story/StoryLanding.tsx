@@ -23,11 +23,11 @@ import {
 } from "./primitives";
 import { Hero } from "./Hero";
 import { FeatureBento } from "./FeatureBento";
+import { TryItCTA } from "./TryItCTA";
 import { SpotlightCard } from "./SpotlightCard";
 import { BrowserFrame } from "./BrowserFrame";
 import { TextRevealByWord } from "./TextReveal";
 import { Marquee } from "@/components/magic/marquee";
-import { BorderBeam } from "@/components/magic/border-beam";
 import { NumberTicker } from "@/components/magic/number-ticker";
 
 function Phrase({ mi, en }: { mi: string; en: string }) {
@@ -322,39 +322,7 @@ export function StoryLanding() {
       <FeatureBento />
 
       {/* ───────────── 9 · Try it ───────────── */}
-      <section className="mx-auto max-w-4xl px-5 py-20">
-        <StoryReveal>
-          <div className="card relative overflow-hidden p-10 text-center sm:p-14">
-            <BorderBeam duration={9} size={80} />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ember/15 to-transparent" />
-            <p className="relative text-sm uppercase tracking-[0.3em] text-ember">
-              See it for yourself
-            </p>
-            <h2 className="relative mx-auto mt-5 max-w-2xl font-display text-3xl text-cream sm:text-5xl">
-              Watch Lantern learn Māori from those 41 phrases.
-            </h2>
-            <p className="relative mx-auto mt-5 max-w-xl text-muted">
-              Open the workspace. You will see the words she gave it, the grammar it
-              found, and a course you can take, right now, in your browser.
-            </p>
-            <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                href="/lang/mi"
-                className="group inline-flex h-12 items-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
-              >
-                Open the Māori workspace
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                href="/ark"
-                className="inline-flex h-12 items-center gap-2 rounded-full border border-line px-6 font-medium text-cream transition-colors hover:bg-surface"
-              >
-                See every language
-              </Link>
-            </div>
-          </div>
-        </StoryReveal>
-      </section>
+      <TryItCTA />
 
       {/* ───────────── 10 · The Ark ───────────── */}
       <section className="mx-auto max-w-6xl px-5 py-20">
