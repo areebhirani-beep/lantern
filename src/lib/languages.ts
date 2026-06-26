@@ -60,7 +60,7 @@ export const LANGUAGES: Language[] = [
     status: "critically-endangered",
     region: "Hokkaidō, Japan",
     speakers: "~10 native speakers, a language at the edge of silence",
-    color: "#7aa2ff", // snow
+    color: "#8fb0a3", // frost, a cold pale jade (no blue)
     script: "latin",
     blurb:
       "An isolate with no proven relatives. Each elder lost takes irreplaceable grammar, story, and song with them.",
@@ -112,7 +112,7 @@ export const LANGUAGES: Language[] = [
     status: "definitely-endangered",
     region: "Diaspora, worldwide",
     speakers: "Resilient in some communities; lost in many others",
-    color: "#b58bff",
+    color: "#d8b06a", // warm wheat-gold (no violet)
     script: "latin",
     blurb:
       "A thousand years of Ashkenazi life carried in one language, devastated in the 20th century, quietly persisting now.",

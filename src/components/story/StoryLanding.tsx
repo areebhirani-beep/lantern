@@ -29,9 +29,9 @@ import { NumberTicker } from "@/components/magic/number-ticker";
 
 function Phrase({ mi, en }: { mi: string; en: string }) {
   return (
-    <span className="inline-flex items-baseline gap-2 rounded-full border border-line bg-surface/70 px-3.5 py-1.5">
-      <span className="font-display text-cream">{mi}</span>
-      <span className="text-sm text-muted">{en}</span>
+    <span className="inline-flex items-baseline gap-2">
+      <span className="font-display text-lg text-cream">{mi}</span>
+      <span className="text-sm text-faint">{en}</span>
     </span>
   );
 }
@@ -46,13 +46,13 @@ export function StoryLanding() {
 
       {/* ───────────── 2 · What Lantern actually is (clarity first) ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-28">
-        <StoryReveal className="max-w-3xl">
+        <StoryReveal className="mx-auto max-w-3xl text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-ember">In one sentence</p>
           <h2 className="mt-4 font-display text-3xl leading-tight text-cream sm:text-5xl">
             Lantern builds a language-learning app for languages that are
             disappearing.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
             Think of Duolingo. Now imagine a language so endangered that no one has
             ever built a course for it. Lantern builds that course from scratch,
             using only the handful of words people still remember.
@@ -109,8 +109,8 @@ export function StoryLanding() {
               <div className="mt-5 rounded-xl border border-line bg-ink/50 p-5 text-center">
                 <p className="text-xs uppercase tracking-widest text-faint">say &ldquo;hello&rdquo;</p>
                 <p className="mt-2 font-display text-3xl text-cream">Kia ora</p>
-                <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-muted">
-                  <Volume2 className="h-3.5 w-3.5" /> hear it
+                <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted">
+                  <Volume2 className="h-3.5 w-3.5 text-ember/80" /> hear it
                 </span>
               </div>
               {/* grammar mock */}
@@ -198,7 +198,7 @@ export function StoryLanding() {
             </p>
           </StoryReveal>
           <StoryReveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap justify-center gap-2.5">
+            <div className="mt-10 flex flex-wrap items-baseline justify-center gap-x-7 gap-y-3">
               <Phrase mi="Kia ora" en="hello" />
               <Phrase mi="whānau" en="family" />
               <Phrase mi="tama" en="son" />
@@ -220,12 +220,12 @@ export function StoryLanding() {
 
       {/* ───────────── 6 · The real product ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-20">
-        <StoryReveal className="max-w-2xl">
+        <StoryReveal className="mx-auto max-w-2xl text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-ember">Not a mockup</p>
           <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
             This is the actual app.
           </h2>
-          <p className="mt-4 text-muted">
+          <p className="mx-auto mt-4 max-w-xl text-muted">
             Everything you see below was learned from those 41 phrases. Nothing was
             invented.
           </p>
@@ -247,7 +247,7 @@ export function StoryLanding() {
         <Atmosphere />
         <div className="relative mx-auto max-w-3xl text-center">
           <StoryReveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-pounamu/30 bg-pounamu/10 px-3.5 py-1.5 text-sm font-medium text-pounamu">
+            <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-pounamu">
               <ShieldCheck className="h-4 w-4" />
               The rule that makes it trustworthy
             </span>
@@ -279,14 +279,14 @@ export function StoryLanding() {
 
       {/* ───────────── 10 · The Ark ───────────── */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <StoryReveal className="max-w-2xl">
-          <p className="flex items-center gap-2 text-sm uppercase tracking-[0.3em] text-ember">
+        <StoryReveal className="mx-auto max-w-2xl text-center">
+          <p className="flex items-center justify-center gap-2 text-sm uppercase tracking-[0.3em] text-ember">
             <Languages className="h-4 w-4" /> She isn&rsquo;t alone
           </p>
           <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
             Languages people are fighting to keep.
           </h2>
-          <p className="mt-4 max-w-xl text-muted">
+          <p className="mx-auto mt-4 max-w-xl text-muted">
             One has about ten speakers left. Two were declared gone, then brought
             back by their children. Each is a light someone refuses to let go out.
           </p>
@@ -306,7 +306,7 @@ export function StoryLanding() {
           {LANGUAGES.map((l, i) => (
             <StoryReveal key={l.id} delay={i * 0.05}>
               <Link href={`/lang/${l.id}`} className="block h-full">
-                <SpotlightCard className="flex h-full flex-col p-5 transition-colors hover:border-line">
+                <SpotlightCard className="flex h-full flex-col items-center p-5 text-center transition-colors hover:border-line">
                   <span
                     className="h-2.5 w-2.5 rounded-full"
                     style={{ backgroundColor: l.color, boxShadow: `0 0 10px ${l.color}` }}
