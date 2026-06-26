@@ -59,6 +59,23 @@ export function StoryLanding() {
           </p>
         </StoryReveal>
 
+        <StoryReveal delay={0.05}>
+          <p className="mx-auto mt-7 max-w-2xl text-center text-sm text-faint">
+            <span className="text-ember">0</span> invented words{" · "}
+            <span className="text-ember">48/48</span> words cited{" · "}
+            <span className="text-ember">7/7</span> generated sentences attested
+            <span className="mt-1 block text-[11px] text-faint">
+              recomputed live at{" "}
+              <a
+                href="/api/metrics"
+                className="underline decoration-dotted underline-offset-2 hover:text-cream"
+              >
+                /api/metrics
+              </a>
+            </span>
+          </p>
+        </StoryReveal>
+
         {/* before → after */}
         <StoryReveal delay={0.1}>
           <div className="mt-14 grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr]">
