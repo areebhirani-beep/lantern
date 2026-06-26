@@ -42,13 +42,25 @@ Per language, from the two cited seed corpora that ship with the app:
 
 ```mermaid
 flowchart LR
-    A["Seed<br/>cited phrases"] --> B["Induce<br/>align words, find grammar"]
+    A(["Seed<br/>cited phrases"]) --> B["Induce<br/>align words, find grammar"]
     B --> C{"Guardrail<br/>every word attested?"}
-    C -->|fails| X["discard the sentence"]
     C -->|passes| D["Generate<br/>flashcards + practice"]
+    C -->|fails| X["Discard<br/>the sentence"]
     D --> E["Learn<br/>spaced repetition + speech"]
-    E --> F["Contribute<br/>add a remembered phrase"]
-    F --> A
+    E --> F(["Contribute<br/>add a remembered phrase"])
+    F -. rebuilds richer .-> A
+
+    classDef seed fill:#FEF3C7,stroke:#F59E0B,stroke-width:2px,color:#111827;
+    classDef process fill:#DBEAFE,stroke:#3B82F6,stroke-width:2px,color:#111827;
+    classDef guard fill:#FCE7F3,stroke:#EC4899,stroke-width:2px,color:#111827;
+    classDef learn fill:#DCFCE7,stroke:#22C55E,stroke-width:2px,color:#111827;
+    classDef discard fill:#FEE2E2,stroke:#EF4444,stroke-width:1.5px,color:#7F1D1D,stroke-dasharray:4 3;
+
+    class A,F seed;
+    class B,D process;
+    class C guard;
+    class E learn;
+    class X discard;
 ```
 
 The guardrail (the diamond) is the heart of it: a probabilistic model is given a hard, code-level correctness property, no unattested word ever reaches a learner.
