@@ -114,17 +114,7 @@ export function Hero() {
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-y-16 lg:grid-cols-[1.14fr_0.86fr] lg:gap-x-12">
         {/* LEFT, her story */}
         <div className="max-w-2xl">
-          <Rise>
-            <div className="flex items-center gap-4">
-              <span className="font-display text-sm text-ember/80">Nº 001</span>
-              <span className="h-px w-10 bg-line" />
-              <span className="text-[11px] uppercase tracking-[0.32em] text-faint">
-                Field note · te reo Māori
-              </span>
-            </div>
-          </Rise>
-
-          <Rise delay={0.12} className="mt-6">
+          <Rise delay={0.12}>
             <p className="text-sm uppercase tracking-[0.3em]">
               <AnimatedShinyText className="text-ember/70">
                 A true story, like thousands of others
