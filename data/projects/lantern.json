@@ -1,0 +1,26 @@
+{
+  "name": "Lantern",
+  "tagline": "Learn endangered languages from minimal corpora, without hallucinated words.",
+  "status": "active",
+  "repo": "https://github.com/areebhirani-beep/lantern.git",
+  "live": "https://lantern-cyan.vercel.app",
+  "metrics_endpoint": "https://lantern-cyan.vercel.app/api/metrics",
+  "differentiator": "Anti-hallucination guardrail: refuses to emit any token absent from the source corpus.",
+  "stack": ["Next.js 16 (breaking)", "React 19", "TypeScript", "Tailwind v4", "MongoDB", "@anthropic-ai/sdk", "zod"],
+  "agents": ["@engine", "@data", "@frontend", "@submissions"],
+  "key_paths": {
+    "engine": "src/lib/engine/",
+    "guardrail_check": "src/lib/engine/guardrail.check.ts",
+    "corpora": "src/lib/seed/",
+    "store": "src/lib/store.ts",
+    "metrics_route": "src/app/api/metrics/route.ts",
+    "submissions": "docs/submissions/"
+  },
+  "competitions": ["FutureHacks", "Aethra", "Hyperbloom", "Youth Code x AI", "Moonshot"],
+  "invariants": [
+    "guardrail.check.ts must pass on any engine change",
+    "fixture metrics: 0 hallucinations, 100% vocab citation coverage",
+    "tokenize/normalizeToken stays single-source and case-folded"
+  ],
+  "last_known_commit": "6d9d572 FutureHacks reframe + harden the no-hallucination guardrail"
+}
