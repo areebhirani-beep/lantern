@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Grain } from "@/components/Grain";
+import { Providers } from "@/components/Providers";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -81,7 +82,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${frauncesItalic.variable} ${hanken.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {children}
+        <Providers>{children}</Providers>
         <Grain />
       </body>
     </html>

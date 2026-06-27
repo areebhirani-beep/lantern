@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Flame } from "lucide-react";
+import { AccountMenu } from "@/components/AccountMenu";
 
 export function Nav() {
   return (
@@ -27,6 +28,8 @@ export function Nav() {
           >
             Try it
           </Link>
+          <span className="mx-1 hidden h-5 w-px bg-line sm:block" />
+          <AccountMenu />
         </nav>
       </div>
     </header>
