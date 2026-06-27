@@ -14,7 +14,7 @@ Lantern
 A language dies every two weeks. Lantern is Duolingo for dying languages: it turns the words a community still remembers into a real course, with AI that never invents a word.
 
 ## Built with  (add each as a tag in the "Built with" field)
-`Next.js` · `TypeScript` · `React` · `Tailwind CSS` · `Vercel` · `MongoDB` · `Anthropic Claude` · `Zod` · `Web Speech API` · `Framer Motion` · `cobe`
+`Next.js` · `TypeScript` · `React` · `Tailwind CSS` · `Vercel` · `MongoDB` · `Groq` · `Llama 3.3 70B` · `Anthropic SDK` · `Zod` · `Web Speech API` · `Framer Motion` · `cobe`
 
 ## Links
 - **Try it (live):** https://lantern-cyan.vercel.app
@@ -55,7 +55,7 @@ What makes it trustworthy is an inversion. An AI cannot truly *know* a language 
 - An **induction engine** that does interlinear analysis on the seed corpus, induces morphology from minimal pairs, and writes a lesson by recombining only attested vocabulary, driven through **forced structured output** and validated at runtime with **Zod**.
 - **The guardrail, in code, not in the prompt** (`src/lib/engine/guardrail.ts`): every generated sentence *and* flashcard is tokenized and checked against the attested vocabulary. One unattested word and the item is discarded. That is what gives a probabilistic model a hard correctness property.
 - A course on the **SM-2** spaced-repetition algorithm with in-browser **Web Speech** text-to-speech.
-- **Live induction** on a frontier model with a verified hand-checked fallback so the demo never breaks, and the contribution flywheel persisted in **MongoDB Atlas**.
+- **Live induction** runs an **LLM** — **Llama 3.3 70B on Groq**, driven through the **Anthropic SDK** — with a verified hand-checked fallback so the demo never breaks. The contribution flywheel is persisted in **MongoDB Atlas**.
 
 ## Challenges we ran into
 
