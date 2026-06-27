@@ -12,6 +12,7 @@ const BodyZ = z.object({
   romanization: z.string().max(200).optional(),
   category: z.string().max(40).optional(),
   contributedBy: z.string().max(60).optional(),
+  audioUrl: z.string().url().max(600).optional(),
 });
 
 // POST /api/contribute, add a phrase to a language's living corpus. This is

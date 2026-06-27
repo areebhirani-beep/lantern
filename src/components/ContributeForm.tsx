@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Plus, Loader2 } from "lucide-react";
 import type { Language, Phrase } from "@/lib/types";
+import { PronunciationInput } from "./PronunciationInput";
 
 const CATEGORIES = ["greeting", "everyday", "sentence", "number", "family"];
 
@@ -19,6 +20,7 @@ export function ContributeForm({
   const [category, setCategory] = useState("everyday");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
 
   const isSyllabary = language.script === "syllabary";
 
@@ -31,6 +33,16 @@ export function ContributeForm({
     }
     setBusy(true);
     try {
+      // Upload the pronunciation first (non-blocking: if storage is off or the
+      // upload fails, the phrase still gets contributed, just without audio).
+      let audioUrl: string | undefined;
+      if (audioBlob) {
+        const fd = new FormData();
+        fd.append("audio", audioBlob, "clip.webm");
+        fd.append("languageId", language.id);
+        const ar = await fetch("/api/audio", { method: "POST", body: fd });
+        if (ar.ok) audioUrl = (await ar.json()).url;
+      }
       const res = await fetch("/api/contribute", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,6 +52,7 @@ export function ContributeForm({
           english: english.trim(),
           romanization: romanization.trim() || undefined,
           category,
+          audioUrl,
         }),
       });
       if (!res.ok) {
@@ -50,6 +63,7 @@ export function ContributeForm({
       setTarget("");
       setEnglish("");
       setRomanization("");
+      setAudioBlob(null);
       onContributed(phrase);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
@@ -60,7 +74,7 @@ export function ContributeForm({
 
   return (
     <form onSubmit={submit} className="card p-6">
-      <h3 className="font-display text-xl text-cream">Add a phrase</h3>
+      <h2 className="font-display text-xl text-cream">Add a phrase</h2>
       <p className="mt-1 text-sm text-muted">
         Every phrase you add becomes part of the corpus, and the engine
         re-derives a richer course. This is how the ark grows.
@@ -124,6 +138,8 @@ export function ContributeForm({
             ))}
           </div>
         </div>
+
+        <PronunciationInput onAudio={setAudioBlob} />
       </div>
 
       {error && <p className="mt-4 text-sm text-rose-300">{error}</p>}

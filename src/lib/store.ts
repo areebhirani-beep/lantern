@@ -20,6 +20,7 @@ export interface Store {
     romanization?: string;
     category?: string;
     contributedBy?: string;
+    audioUrl?: string;
   }): Promise<Phrase>;
   getInduction(languageId: string): Promise<InductionResult | null>;
   saveInduction(result: InductionResult): Promise<void>;
@@ -38,6 +39,7 @@ function makePhrase(input: {
   romanization?: string;
   category?: string;
   contributedBy?: string;
+  audioUrl?: string;
 }): Phrase {
   return {
     id: newId(input.languageId),
@@ -46,6 +48,7 @@ function makePhrase(input: {
     english: input.english.trim(),
     romanization: input.romanization?.trim() || undefined,
     category: input.category?.trim() || "everyday",
+    audioUrl: input.audioUrl || undefined,
     confidence: "medium",
     contributedBy: input.contributedBy?.trim() || "community",
     createdAt: Date.now(),

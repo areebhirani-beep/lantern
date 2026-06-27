@@ -1,13 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ArrowRight,
-  ArrowDown,
-  ShieldCheck,
-  Volume2,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { LANGUAGES } from "@/lib/languages";
 import {
   Atmosphere,
@@ -18,6 +12,7 @@ import {
   StoryReveal,
 } from "./primitives";
 import { Hero } from "./Hero";
+import { LiveInduction } from "./LiveInduction";
 import { HowItWorks } from "./HowItWorks";
 import { FeatureBento } from "./FeatureBento";
 import { TryItCTA } from "./TryItCTA";
@@ -28,7 +23,7 @@ import { Marquee } from "@/components/magic/marquee";
 
 export function StoryLanding() {
   return (
-    <div className="relative">
+    <main className="relative">
       <ScrollProgress />
 
       {/* ───────────── 1 · The person ───────────── */}
@@ -70,79 +65,11 @@ export function StoryLanding() {
           </div>
         </StoryReveal>
 
-        {/* input → engine → output */}
+        {/* the live demo: corpus → cited vocabulary, with the guardrail
+            discarding an invented word in real time. Cluely cannot fake this. */}
         <StoryReveal delay={0.1}>
-          <div className="mt-14 grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr]">
-            {/* INPUT */}
-            <SpotlightCard className="p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-              <p className="section-index uppercase tracking-[0.18em]">You give it</p>
-              <h3 className="mt-2 font-display text-xl text-cream">
-                A few words someone remembers
-              </h3>
-              <div className="mt-5 space-y-2.5">
-                {[
-                  ["Kia ora", "hello"],
-                  ["whānau", "family"],
-                  ["I haere au", "I went"],
-                  ["kua haere au", "I have gone"],
-                ].map(([mi, en]) => (
-                  <div
-                    key={mi}
-                    className="flex items-baseline justify-between rounded-data border border-line bg-ink px-3.5 py-2"
-                  >
-                    <span className="font-display text-cream">{mi}</span>
-                    <span className="text-sm text-muted">{en}</span>
-                  </div>
-                ))}
-              </div>
-            </SpotlightCard>
-
-            {/* engine */}
-            <div className="flex flex-col items-center justify-center gap-3 px-2 text-center">
-              <span className="grid h-12 w-12 place-items-center rounded-full border border-line bg-ink text-ember">
-                <Sparkles className="h-5 w-5" />
-              </span>
-              <p className="max-w-[12rem] text-xs leading-relaxed text-muted">
-                Lantern reads them, works out the grammar, and builds the lessons.
-              </p>
-              <ArrowRight className="hidden h-6 w-6 text-ember lg:block" />
-              <ArrowDown className="h-6 w-6 text-ember lg:hidden" />
-            </div>
-
-            {/* OUTPUT */}
-            <SpotlightCard className="p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-              <p className="section-index uppercase tracking-[0.18em]">You get</p>
-              <h3 className="mt-2 font-display text-xl text-cream">
-                A real course to learn from
-              </h3>
-              {/* flashcard mock — a UI surface, centered as the real card is */}
-              <div className="mt-5 rounded-card border border-line bg-ink p-5 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-                <p className="font-mono text-[11px] uppercase tracking-widest text-faint">
-                  say &ldquo;hello&rdquo;
-                </p>
-                <p className="mt-2 font-display text-3xl text-cream">Kia ora</p>
-                <span className="mt-3 inline-flex items-center gap-1.5 font-mono text-xs text-muted">
-                  <Volume2 className="h-3.5 w-3.5 text-ember/80" /> hear it
-                </span>
-              </div>
-              {/* grammar mock */}
-              <p className="mt-5 text-xs text-muted">It even worked out the tenses:</p>
-              <div className="mt-2 flex flex-wrap gap-1.5 font-mono text-xs">
-                {[
-                  ["past", "i haere"],
-                  ["now", "kei te haere"],
-                  ["future", "ka haere"],
-                ].map(([t, v]) => (
-                  <span
-                    key={t}
-                    className="rounded-data bg-surface-2 px-2.5 py-1"
-                  >
-                    <span className="text-pounamu">{t}</span>{" "}
-                    <span className="text-cream">{v}</span>
-                  </span>
-                ))}
-              </div>
-            </SpotlightCard>
+          <div className="mt-14">
+            <LiveInduction />
           </div>
         </StoryReveal>
       </section>
@@ -402,6 +329,6 @@ export function StoryLanding() {
           </StoryReveal>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

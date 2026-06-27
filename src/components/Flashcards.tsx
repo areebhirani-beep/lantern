@@ -47,6 +47,9 @@ export function Flashcards({
   const [learned, setLearned] = useState<Set<string>>(new Set());
   const [srs, setSrs] = useState<SrsMap>({});
 
+  // SRS lives in localStorage; load it post-hydration. A lazy useState initializer
+  // would run during SSR (loadSrs returns {} server-side) and cause a hydration mismatch.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setSrs(loadSrs(language.id)), [language.id]);
 
   const card = session[pos];

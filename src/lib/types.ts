@@ -45,6 +45,7 @@ export interface Phrase {
   english: string;
   gloss?: string; // interlinear gloss (may be human- or AI-supplied)
   category: string; // greeting | everyday | number | family | sentence | ...
+  audioUrl?: string; // speaker-recorded pronunciation (Vercel Blob URL)
   source?: string; // citation for trust
   confidence: Confidence;
   contributedBy: string; // "seed" or a contributor handle

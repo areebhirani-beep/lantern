@@ -174,20 +174,31 @@ export function HeroFlame({ size = 150 }: { size?: number }) {
       <div
         className="absolute rounded-full"
         style={{
-          inset: -size * 0.55,
+          inset: -size * 0.5,
           background:
-            "radial-gradient(circle, rgba(255,180,84,0.45), rgba(255,180,84,0.12) 45%, transparent 70%)",
-          filter: "blur(8px)",
+            "radial-gradient(circle, rgba(255,168,64,0.26), rgba(255,150,50,0.07) 50%, transparent 72%)",
+          filter: "blur(14px)",
         }}
       />
       <svg width={size} height={size} viewBox="0 0 24 24" style={{ position: "relative" }}>
+        <defs>
+          <linearGradient id="hf-outer" x1="12" y1="2" x2="12" y2="20.5" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#ffe9bd" />
+            <stop offset="0.55" stopColor="#ffb454" />
+            <stop offset="1" stopColor="#df7a1d" />
+          </linearGradient>
+          <linearGradient id="hf-inner" x1="12" y1="8" x2="12" y2="17.5" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#fff6df" />
+            <stop offset="1" stopColor="#d98324" />
+          </linearGradient>
+        </defs>
         <path
           d="M12 2c1.5 3 4.5 5 4.5 9a4.5 4.5 0 0 1-9 0c0-1.5.7-2.6 1.5-3.5C9.8 8.8 11 7 12 2z"
-          fill="#ffd488"
+          fill="url(#hf-outer)"
         />
         <path
           d="M12 8.5c.9 1.4 2 2.4 2 4.2a2 2 0 0 1-4 0c0-1 .7-1.8 1.2-2.4.3-.4.6-1 .8-1.8z"
-          fill="#d98324"
+          fill="url(#hf-inner)"
         />
       </svg>
     </motion.div>

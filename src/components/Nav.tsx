@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Flame } from "lucide-react";
+import { AccountMenu } from "@/components/AccountMenu";
+import { authConfigured } from "@/lib/auth-config";
 
 export function Nav() {
   return (
@@ -27,6 +29,12 @@ export function Nav() {
           >
             Try it
           </Link>
+          {authConfigured() && (
+            <>
+              <span className="mx-1 hidden h-5 w-px bg-line sm:block" />
+              <AccountMenu />
+            </>
+          )}
         </nav>
       </div>
     </header>

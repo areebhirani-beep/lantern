@@ -61,6 +61,11 @@ export function Footer() {
                 </a>
               </li>
               <li>
+                <Link href="/faq" className="hover:text-cream">
+                  FAQ
+                </Link>
+              </li>
+              <li>
                 <a
                   href="mailto:siddarthakodithyala28@gmail.com"
                   className="hover:text-cream"

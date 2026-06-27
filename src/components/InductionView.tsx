@@ -37,7 +37,7 @@ export function InductionView({
       {/* patterns */}
       {induction.patterns.length > 0 && (
         <div>
-          <h3 className="font-display text-xl text-cream">Grammar the engine found</h3>
+          <h2 className="font-display text-xl text-cream">Grammar the engine found</h2>
           <p className="mt-1 text-sm text-muted">
             Regularities induced from minimal pairs in the corpus, not from
             outside knowledge.
@@ -46,7 +46,7 @@ export function InductionView({
             {induction.patterns.map((p) => (
               <div key={p.id} className="card p-5">
                 <div className="flex items-start justify-between gap-3">
-                  <h4 className="font-medium text-cream">{p.label}</h4>
+                  <h3 className="font-medium text-cream">{p.label}</h3>
                   <ConfidenceDot level={p.confidence} />
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{p.description}</p>
@@ -71,7 +71,7 @@ export function InductionView({
       <div>
         <div className="flex items-center gap-2">
           <BookOpen className="h-4 w-4 text-ember" />
-          <h3 className="font-display text-xl text-cream">Vocabulary bank</h3>
+          <h2 className="font-display text-xl text-cream">Vocabulary bank</h2>
         </div>
         <p className="mt-1 text-sm text-muted">
           Every entry is aligned to a meaning and traceable to the phrases that

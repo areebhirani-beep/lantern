@@ -14,6 +14,7 @@ import {
   AlertCircle,
   Info,
   ArrowLeft,
+  Volume2,
 } from "lucide-react";
 import type { InductionResult, Language, Phrase } from "@/lib/types";
 import { StatusBadge } from "./ui";
@@ -73,6 +74,8 @@ export function Workspace({
   );
 
   useEffect(() => {
+    // Intentional one-time auto-induce on mount; induce() drives status internally.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (status === "idle") induce();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -335,6 +338,16 @@ function CorpusPanel({
                 {p.target}
                 {p.romanization && (
                   <span className="ml-2 text-sm text-faint">{p.romanization}</span>
+                )}
+                {p.audioUrl && (
+                  <button
+                    type="button"
+                    onClick={() => void new Audio(p.audioUrl).play()}
+                    aria-label="Play speaker pronunciation"
+                    className="ml-2 inline-flex align-middle text-ember/80 transition-colors hover:text-ember"
+                  >
+                    <Volume2 className="h-3.5 w-3.5" />
+                  </button>
                 )}
               </span>
               <span className="shrink-0 text-xs text-muted">{p.english}</span>
