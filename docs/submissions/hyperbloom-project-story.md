@@ -58,6 +58,7 @@ This is not a concept video, it is a working web app, and we measured its behavi
   ──────────────────────────────────────────────
      0   invented words reached a learner          ✓
   48/48  vocabulary items cited (both languages)   ✓
+   7/7   generated practice sentences attested     ✓
 ```
 
 - A probabilistic model given a **hard, code-level correctness property**, reproducible live at `GET /api/metrics`.

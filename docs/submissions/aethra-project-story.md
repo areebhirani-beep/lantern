@@ -60,6 +60,7 @@ We didn't want to just claim it is honest, so we measured it:
   ──────────────────────────────────────────────
      0   invented words reached a learner          ✓
   48/48  vocabulary items cited (both languages)   ✓
+   7/7   generated practice sentences attested     ✓
 ```
 
 - We gave a probabilistic model a **hard, code-level correctness property**: no unattested word ever reaches a learner, and every figure above is reproducible live at `GET /api/metrics`.
