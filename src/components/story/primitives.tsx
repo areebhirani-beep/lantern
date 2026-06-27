@@ -27,11 +27,12 @@ export function ScrollProgress() {
   );
 }
 
-/** Words rise and resolve from a blur as they scroll into view, story unfolding. */
+/** A quiet rise into view. No blur, short travel — restraint reads as craft;
+ *  a blur-everything reveal is the generic-motion tell we're avoiding. */
 export function StoryReveal({
   children,
   delay = 0,
-  y = 28,
+  y = 14,
   className,
 }: {
   children: ReactNode;
@@ -42,13 +43,42 @@ export function StoryReveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, margin: "-12% 0px -12% 0px" }}
-      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
+  );
+}
+
+/** The editorial section spine: a mono index + short label, left-aligned, that
+ *  replaces the all-caps tracked eyebrow stamped above every section. Optionally
+ *  pairs a thin rule so sections read as chapters, not stacked cards. */
+export function SectionHead({
+  index,
+  label,
+  children,
+  tone = "ember",
+  className,
+}: {
+  index: string;
+  label: string;
+  children?: ReactNode;
+  tone?: "ember" | "pounamu";
+  className?: string;
+}) {
+  const accent = tone === "pounamu" ? "text-pounamu" : "text-ember";
+  return (
+    <div className={className}>
+      <div className="flex items-center gap-3">
+        <span className={`section-index ${accent}`}>{index}</span>
+        <span className="h-px flex-1 max-w-[3rem] bg-line" />
+        <span className="section-index uppercase tracking-[0.18em]">{label}</span>
+      </div>
+      {children}
+    </div>
   );
 }
 

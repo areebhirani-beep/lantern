@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Volume2 } from "lucide-react";
-import { BorderBeam } from "@/components/magic/border-beam";
 import { BrowserFrame } from "./BrowserFrame";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -21,23 +20,25 @@ function WorkspacePeek() {
           <span className="font-display text-cream">Māori</span>
           <span className="text-xs text-faint">te reo Māori</span>
         </div>
-        <span className="text-[11px] text-faint">41 phrases</span>
+        <span className="font-mono text-[11px] text-faint">41 phrases</span>
       </div>
 
       {/* Active flashcard */}
-      <div className="mt-4 rounded-lg border border-line bg-surface p-5 text-center">
-        <p className="text-[11px] uppercase tracking-widest text-faint">say &ldquo;hello&rdquo;</p>
+      <div className="mt-4 rounded-card border border-line bg-surface p-5 text-center">
+        <p className="font-mono text-[11px] uppercase tracking-widest text-faint">
+          say &ldquo;hello&rdquo;
+        </p>
         <p className="mt-1.5 font-display text-3xl text-cream">Kia ora</p>
-        <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted">
+        <span className="mt-3 inline-flex items-center gap-1.5 font-mono text-xs text-muted">
           <Volume2 className="h-3.5 w-3.5 text-ember/80" /> hear it
         </span>
       </div>
 
-      {/* Grammar Lantern found, as a clean inline line (no chips) */}
-      <p className="mt-5 text-[11px] uppercase tracking-[0.18em] text-faint">
+      {/* Grammar Lantern found, as a clean inline line */}
+      <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
         Tenses it worked out
       </p>
-      <p className="mt-2 font-display text-cream">
+      <p className="mt-2 font-mono text-cream">
         <span className="text-ember">i</span> haere{"  ·  "}
         <span className="text-ember">kei te</span> haere{"  ·  "}
         <span className="text-ember">ka</span> haere
@@ -48,62 +49,66 @@ function WorkspacePeek() {
         <div className="h-1 flex-1 overflow-hidden rounded-full bg-line">
           <div className="h-full w-1/4 rounded-full bg-ember" />
         </div>
-        <span className="text-[11px] text-faint">Lesson 1 of 6</span>
+        <span className="font-mono text-[11px] text-faint">Lesson 1 of 6</span>
       </div>
     </div>
   );
 }
 
 /**
- * The "try it" CTA, centered and clean: the pitch and actions, then a live-looking
- * peek at the actual workspace so the click point shows what you'll open.
+ * The "try it" CTA, as an asymmetric two-column card: the pitch and actions on
+ * one side, a live-looking peek at the actual workspace on the other, so the
+ * click point shows exactly what opens. No animated borders — the product carries it.
  */
 export function TryItCTA() {
   return (
-    <section className="mx-auto max-w-3xl px-5 py-20">
+    <section className="mx-auto max-w-5xl px-5 py-20">
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-12% 0px" }}
-        transition={{ duration: 0.85, ease: EASE }}
-        className="card relative overflow-hidden p-8 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)] sm:p-12"
+        transition={{ duration: 0.7, ease: EASE }}
+        className="card overflow-hidden p-8 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)] sm:p-10"
       >
-        <BorderBeam duration={9} size={90} colorFrom="#ffb454" colorTo="#ffd488" />
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_minmax(0,21rem)]">
+          <div>
+            <p className="section-index uppercase tracking-[0.18em] text-ember">
+              See it for yourself
+            </p>
+            <h2 className="mt-5 max-w-md font-display text-3xl leading-tight text-cream sm:text-[2.6rem]">
+              Watch Lantern learn Māori from those 41 phrases.
+            </h2>
+            <p className="mt-5 max-w-md text-muted">
+              Open the workspace: her words, the grammar it found, and a course you
+              can take, right now in your browser.
+            </p>
 
-        <div className="relative">
-          <p className="text-sm uppercase tracking-[0.3em] text-ember">See it for yourself</p>
-          <h2 className="mx-auto mt-4 max-w-2xl font-display text-3xl leading-tight text-cream sm:text-[2.75rem]">
-            Watch Lantern learn Māori from those 41 phrases.
-          </h2>
-          <p className="mx-auto mt-5 max-w-md text-muted">
-            Open the workspace: her words, the grammar it found, and a course you
-            can take, right now in your browser.
-          </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/lang/mi"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
+              >
+                Open the Māori workspace
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <Link
+                href="/ark"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-line px-6 font-medium text-cream transition-colors hover:bg-surface"
+              >
+                See every language
+              </Link>
+            </div>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href="/lang/mi"
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
-            >
-              Open the Māori workspace
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <Link
-              href="/ark"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-line px-6 font-medium text-cream transition-colors hover:bg-surface"
-            >
-              See every language
-            </Link>
+            <p className="mt-5 font-mono text-xs text-faint">
+              No sign-up. The real app, running live.
+            </p>
           </div>
 
-          <p className="mt-5 text-xs text-faint">No sign-up. The real app, running live.</p>
-
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-12% 0px" }}
-            transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
-            className="mx-auto mt-10 max-w-md"
+            transition={{ duration: 0.7, delay: 0.12, ease: EASE }}
           >
             <BrowserFrame url="lantern.app/lang/mi">
               <WorkspacePeek />

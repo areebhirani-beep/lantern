@@ -19,9 +19,9 @@ function Rise({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay, ease: EASE }}
     >
       {children}
     </motion.div>
@@ -41,9 +41,9 @@ function HerWords() {
   return (
     <div className="mx-auto w-full max-w-md text-left">
       <div className="rounded-2xl border border-line bg-ink/70 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.75)]">
-        <div className="flex items-center justify-between">
-          <span className="text-[11px] uppercase tracking-[0.28em] text-faint">Her words</span>
-          <span className="text-[11px] text-faint">te reo Māori · 41 phrases</span>
+        <div className="flex items-center justify-between font-mono text-[11px] text-faint">
+          <span className="uppercase tracking-[0.18em]">Her words</span>
+          <span>te reo Māori · 41 phrases</span>
         </div>
 
         <div className="mt-4 divide-y divide-line/60">
@@ -81,7 +81,7 @@ export function Hero() {
         </Rise>
 
         <Rise delay={0.15} className="mt-9">
-          <p className="text-sm uppercase tracking-[0.3em] text-ember/70">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember/70">
             A true story, like thousands of others
           </p>
         </Rise>
@@ -113,7 +113,7 @@ export function Hero() {
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       >
-        <span className="text-[11px] uppercase tracking-[0.3em]">What we did about it</span>
+        <span className="font-mono text-[11px] uppercase tracking-[0.2em]">What we did about it</span>
         <ArrowDown className="h-4 w-4" />
       </motion.div>
     </section>

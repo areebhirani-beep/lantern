@@ -1,8 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { SectionHead, StoryReveal } from "./primitives";
 
 type Step = {
   n: string;
@@ -41,52 +39,51 @@ const STEPS: Step[] = [
 ];
 
 /**
- * The narrated timeline, centered and clean: large Fraunces numerals, a thin
- * connector between steps, and one worked grammar example.
+ * The narrated timeline, left-aligned as an editorial numbered list: a mono step
+ * index in a left rail with a hairline connector, the title and body in a single
+ * reading column, and one worked grammar example set as machine-checked data.
  */
 export function HowItWorks() {
   return (
-    <section className="mx-auto max-w-3xl px-5 py-20">
-      <motion.div
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-12% 0px" }}
-        transition={{ duration: 0.8, ease: EASE }}
-        className="mx-auto max-w-2xl text-center"
-      >
-        <p className="text-sm uppercase tracking-[0.3em] text-ember">What happened next</p>
-        <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
+    <section className="mx-auto max-w-3xl px-5 py-24">
+      <StoryReveal className="max-w-2xl">
+        <SectionHead index="02" label="How it works" />
+        <h2 className="mt-7 font-display text-3xl text-cream sm:text-4xl">
           A whole course took shape in minutes.
         </h2>
-      </motion.div>
+      </StoryReveal>
 
-      <div className="mt-16 flex flex-col items-center">
+      <div className="mt-14">
         {STEPS.map((s, i) => (
-          <div key={s.n} className="flex w-full flex-col items-center">
-            {i > 0 && (
-              <span className="my-7 h-10 w-px bg-gradient-to-b from-line/60 to-transparent" />
-            )}
-            <div className="text-center">
-              <span className="font-display text-4xl leading-none text-faint/45 sm:text-5xl">
-                {s.n}
-              </span>
-              <h3 className="mt-4 font-display text-xl text-cream sm:text-2xl">{s.title}</h3>
-              <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted">{s.body}</p>
+          <StoryReveal key={s.n} delay={i * 0.05}>
+            <div className="grid grid-cols-[auto_1fr] gap-5 sm:gap-7">
+              {/* index rail + connector */}
+              <div className="flex flex-col items-center">
+                <span className="font-mono text-sm text-ember">{s.n}</span>
+                {i < STEPS.length - 1 && (
+                  <span className="mt-2 w-px flex-1 bg-gradient-to-b from-line to-line/20" />
+                )}
+              </div>
 
-              {s.example && (
-                <div className="mx-auto mt-6 max-w-md rounded-[14px] border border-line bg-ink p-5 text-left shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-                  <div className="grid gap-1.5 font-display text-cream sm:grid-cols-2">
-                    {s.example.map(([particle, rest, gloss]) => (
-                      <span key={particle}>
-                        <span className="text-ember">{particle}</span> {rest},{" "}
-                        <span className="text-muted">{gloss}</span>
-                      </span>
-                    ))}
+              <div className="pb-12">
+                <h3 className="font-display text-xl text-cream sm:text-2xl">{s.title}</h3>
+                <p className="mt-2 max-w-xl leading-relaxed text-muted">{s.body}</p>
+
+                {s.example && (
+                  <div className="mt-5 max-w-md rounded-card border border-line bg-ink p-5 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
+                    <div className="grid gap-1.5 font-mono text-sm text-cream sm:grid-cols-2">
+                      {s.example.map(([particle, rest, gloss]) => (
+                        <span key={particle}>
+                          <span className="text-ember">{particle}</span> {rest}
+                          <span className="text-faint">, {gloss}</span>
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
+          </StoryReveal>
         ))}
       </div>
     </section>

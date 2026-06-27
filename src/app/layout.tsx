@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Grain } from "@/components/Grain";
 
@@ -21,10 +21,22 @@ const frauncesItalic = Fraunces({
   axes: ["opsz", "SOFT", "WONK"],
 });
 
-const inter = Inter({
+// Body / UI. A warm humanist grotesque — deliberately not Inter/Geist, the two
+// faces every AI builder defaults to. Carries character without shouting.
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-hanken",
   display: "swap",
+});
+
+// Monospace, used semantically: the machine-checked artifacts (cited words,
+// tense particles, live metrics) are set in mono so "verified in code" is
+// legible in the typography itself, not just claimed in prose.
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-plex",
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -66,7 +78,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${fraunces.variable} ${frauncesItalic.variable} ${inter.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${frauncesItalic.variable} ${hanken.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}

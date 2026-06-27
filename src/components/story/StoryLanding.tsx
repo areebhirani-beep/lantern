@@ -6,7 +6,6 @@ import {
   ArrowDown,
   ShieldCheck,
   Volume2,
-  Languages,
   Sparkles,
 } from "lucide-react";
 import { LANGUAGES } from "@/lib/languages";
@@ -15,6 +14,7 @@ import {
   EmberField,
   HeroFlame,
   ScrollProgress,
+  SectionHead,
   StoryReveal,
 } from "./primitives";
 import { Hero } from "./Hero";
@@ -25,16 +25,6 @@ import { SpotlightCard } from "./SpotlightCard";
 import { BrowserFrame } from "./BrowserFrame";
 import { TextRevealByWord } from "./TextReveal";
 import { Marquee } from "@/components/magic/marquee";
-import { NumberTicker } from "@/components/magic/number-ticker";
-
-function Phrase({ mi, en }: { mi: string; en: string }) {
-  return (
-    <span className="inline-flex items-baseline gap-2">
-      <span className="font-display text-lg text-cream">{mi}</span>
-      <span className="text-sm text-faint">{en}</span>
-    </span>
-  );
-}
 
 export function StoryLanding() {
   return (
@@ -45,14 +35,14 @@ export function StoryLanding() {
       <Hero />
 
       {/* ───────────── 2 · What Lantern actually is (clarity first) ───────────── */}
-      <section className="mx-auto max-w-5xl px-5 py-28">
-        <StoryReveal className="mx-auto max-w-3xl text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-ember">In one sentence</p>
-          <h2 className="mt-4 font-display text-3xl leading-tight text-cream sm:text-5xl">
+      <section className="mx-auto max-w-5xl px-5 py-24 sm:py-28">
+        <StoryReveal className="max-w-3xl">
+          <SectionHead index="01" label="What it is" />
+          <h2 className="mt-7 font-display text-3xl leading-[1.08] text-cream sm:text-5xl">
             Lantern builds a language-learning app for languages that are
             disappearing.
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             Think of Duolingo. Now imagine a language so endangered that no one has
             ever built a course for it. Lantern builds that course from scratch,
             using only the handful of words people still remember.
@@ -60,11 +50,15 @@ export function StoryLanding() {
         </StoryReveal>
 
         <StoryReveal delay={0.05}>
-          <p className="mx-auto mt-7 max-w-2xl text-center text-sm text-faint">
-            <span className="text-ember">0</span> invented words{" · "}
-            <span className="text-ember">48/48</span> words cited{" · "}
-            <span className="text-ember">7/7</span> generated sentences attested
-            <span className="mt-1 block text-[11px] text-faint">
+          <div className="mt-8 max-w-xl border-l-2 border-ember/30 pl-4">
+            <p className="font-mono text-sm text-faint">
+              <span className="text-ember">0</span> invented words
+              <span className="mx-2 text-line">·</span>
+              <span className="text-ember">48/48</span> words cited
+              <span className="mx-2 text-line">·</span>
+              <span className="text-ember">7/7</span> sentences attested
+            </p>
+            <p className="mt-1.5 font-mono text-[11px] text-faint">
               recomputed live at{" "}
               <a
                 href="/api/metrics"
@@ -72,16 +66,16 @@ export function StoryLanding() {
               >
                 /api/metrics
               </a>
-            </span>
-          </p>
+            </p>
+          </div>
         </StoryReveal>
 
-        {/* before → after */}
+        {/* input → engine → output */}
         <StoryReveal delay={0.1}>
           <div className="mt-14 grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr]">
             {/* INPUT */}
             <SpotlightCard className="p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-              <p className="text-xs uppercase tracking-[0.2em] text-faint">You give it</p>
+              <p className="section-index uppercase tracking-[0.18em]">You give it</p>
               <h3 className="mt-2 font-display text-xl text-cream">
                 A few words someone remembers
               </h3>
@@ -89,13 +83,12 @@ export function StoryLanding() {
                 {[
                   ["Kia ora", "hello"],
                   ["whānau", "family"],
-                  ["tama", "son"],
                   ["I haere au", "I went"],
                   ["kua haere au", "I have gone"],
                 ].map(([mi, en]) => (
                   <div
                     key={mi}
-                    className="flex items-baseline justify-between rounded-md border border-line bg-ink px-3.5 py-2"
+                    className="flex items-baseline justify-between rounded-data border border-line bg-ink px-3.5 py-2"
                   >
                     <span className="font-display text-cream">{mi}</span>
                     <span className="text-sm text-muted">{en}</span>
@@ -104,7 +97,7 @@ export function StoryLanding() {
               </div>
             </SpotlightCard>
 
-            {/* arrow + what it does */}
+            {/* engine */}
             <div className="flex flex-col items-center justify-center gap-3 px-2 text-center">
               <span className="grid h-12 w-12 place-items-center rounded-full border border-line bg-ink text-ember">
                 <Sparkles className="h-5 w-5" />
@@ -118,21 +111,23 @@ export function StoryLanding() {
 
             {/* OUTPUT */}
             <SpotlightCard className="p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-              <p className="text-xs uppercase tracking-[0.2em] text-faint">You get</p>
+              <p className="section-index uppercase tracking-[0.18em]">You get</p>
               <h3 className="mt-2 font-display text-xl text-cream">
                 A real course to learn from
               </h3>
-              {/* flashcard mock */}
-              <div className="mt-5 rounded-lg border border-line bg-ink p-5 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-                <p className="text-xs uppercase tracking-widest text-faint">say &ldquo;hello&rdquo;</p>
+              {/* flashcard mock — a UI surface, centered as the real card is */}
+              <div className="mt-5 rounded-card border border-line bg-ink p-5 text-center shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
+                <p className="font-mono text-[11px] uppercase tracking-widest text-faint">
+                  say &ldquo;hello&rdquo;
+                </p>
                 <p className="mt-2 font-display text-3xl text-cream">Kia ora</p>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted">
+                <span className="mt-3 inline-flex items-center gap-1.5 font-mono text-xs text-muted">
                   <Volume2 className="h-3.5 w-3.5 text-ember/80" /> hear it
                 </span>
               </div>
               {/* grammar mock */}
               <p className="mt-5 text-xs text-muted">It even worked out the tenses:</p>
-              <div className="mt-2 flex flex-wrap gap-1.5">
+              <div className="mt-2 flex flex-wrap gap-1.5 font-mono text-xs">
                 {[
                   ["past", "i haere"],
                   ["now", "kei te haere"],
@@ -140,9 +135,9 @@ export function StoryLanding() {
                 ].map(([t, v]) => (
                   <span
                     key={t}
-                    className="rounded-full bg-surface-2 px-2.5 py-1 text-xs"
+                    className="rounded-data bg-surface-2 px-2.5 py-1"
                   >
-                    <span className="text-pounamu">{t}:</span>{" "}
+                    <span className="text-pounamu">{t}</span>{" "}
                     <span className="text-cream">{v}</span>
                   </span>
                 ))}
@@ -152,48 +147,36 @@ export function StoryLanding() {
         </StoryReveal>
       </section>
 
-      {/* ───────────── 3 · The loss (scroll-revealed, Magic UI text reveal) ───────────── */}
+      {/* ───────────── 3 · The loss (the one signature scroll motion) ───────────── */}
       <TextRevealByWord text="Every two weeks, a language takes its last breath. A thousand years of grammar, story, and song, gone unwritten, because no one had the time to write it down." />
 
-      <section className="relative mx-auto max-w-3xl px-5 pb-32 text-center">
-        <StoryReveal>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted">
+      <section className="relative mx-auto max-w-5xl px-5 pb-32">
+        <StoryReveal className="max-w-2xl">
+          <p className="text-lg leading-relaxed text-muted">
             Of the world&rsquo;s 7,000 languages, nearly half are expected to fall
             silent within a lifetime. The reason is rarely that no one cares. It is
             that documenting a language and teaching it has always taken trained
             experts years, and most languages will never get that time.
           </p>
         </StoryReveal>
-        <StoryReveal delay={0.15}>
-          <div className="mx-auto mt-12 grid max-w-2xl grid-cols-3 gap-6 border-y border-line py-9">
-            <div>
-              <div className="font-display text-3xl text-cream sm:text-4xl">
-                <NumberTicker value={7000} />
+        <StoryReveal delay={0.12}>
+          <div className="mt-12 grid max-w-3xl gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-3">
+            {[
+              ["7,000", "spoken today", "text-cream"],
+              ["3,000", "expected to vanish", "text-cream"],
+              ["~14", "days between each loss", "text-ember"],
+            ].map(([fig, label, tone]) => (
+              <div key={label} className="bg-ink p-6">
+                <div className={`font-display text-4xl ${tone}`}>{fig}</div>
+                <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
+                  {label}
+                </p>
               </div>
-              <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-faint">
-                spoken today
-              </p>
-            </div>
-            <div>
-              <div className="font-display text-3xl text-cream sm:text-4xl">
-                <NumberTicker value={3000} />
-              </div>
-              <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-faint">
-                expected to vanish
-              </p>
-            </div>
-            <div>
-              <div className="font-display text-3xl text-ember sm:text-4xl">
-                <NumberTicker value={14} />
-              </div>
-              <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-faint">
-                days between each loss
-              </p>
-            </div>
+            ))}
           </div>
         </StoryReveal>
-        <StoryReveal delay={0.3}>
-          <p className="mt-10 font-display text-2xl text-ember sm:text-3xl">
+        <StoryReveal delay={0.24}>
+          <p className="mt-12 font-display text-2xl text-ember sm:text-3xl">
             Hers is on that list.
           </p>
         </StoryReveal>
@@ -202,31 +185,22 @@ export function StoryLanding() {
       {/* ───────────── 4 · The turn (her words) ───────────── */}
       <section className="relative overflow-hidden px-5 py-28">
         <Atmosphere />
-        <div className="relative mx-auto max-w-3xl text-center">
+        <div className="relative mx-auto max-w-3xl">
           <StoryReveal>
-            <p className="font-display text-3xl leading-snug text-cream sm:text-5xl">
+            <p className="font-display text-3xl leading-[1.12] text-cream sm:text-5xl">
               So we sat with her, and wrote down what she remembers.
             </p>
           </StoryReveal>
-          <StoryReveal delay={0.15}>
-            <p className="mx-auto mt-8 max-w-xl text-lg text-muted">
+          <StoryReveal delay={0.12}>
+            <p className="mt-8 max-w-xl text-lg text-muted">
               Forty-one phrases. Greetings, the names for family, a few small
-              sentences. That was all we had.
+              sentences. That was all we had — and it was enough.
             </p>
           </StoryReveal>
-          <StoryReveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap items-baseline justify-center gap-x-7 gap-y-3">
-              <Phrase mi="Kia ora" en="hello" />
-              <Phrase mi="whānau" en="family" />
-              <Phrase mi="tama" en="son" />
-              <Phrase mi="wai" en="water" />
-              <Phrase mi="I haere au" en="I went" />
-            </div>
-          </StoryReveal>
-          <StoryReveal delay={0.45}>
-            <p className="mx-auto mt-12 max-w-2xl text-xl leading-relaxed text-cream">
+          <StoryReveal delay={0.24}>
+            <p className="mt-10 max-w-2xl text-xl leading-relaxed text-cream">
               Then we handed them to{" "}
-              <span className="font-display text-flame">Lantern</span>.
+              <span className="font-display-italic text-flame">Lantern</span>.
             </p>
           </StoryReveal>
         </div>
@@ -237,12 +211,12 @@ export function StoryLanding() {
 
       {/* ───────────── 6 · The real product ───────────── */}
       <section className="mx-auto max-w-5xl px-5 py-20">
-        <StoryReveal className="mx-auto max-w-2xl text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-ember">Not a mockup</p>
-          <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
-            This is the actual app.
+        <StoryReveal className="max-w-2xl">
+          <SectionHead index="03" label="The real product" />
+          <h2 className="mt-7 font-display text-3xl text-cream sm:text-4xl">
+            This is the actual app, not a mockup.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted">
+          <p className="mt-4 max-w-xl text-muted">
             Everything you see below was learned from those 41 phrases. Nothing was
             invented.
           </p>
@@ -262,27 +236,33 @@ export function StoryLanding() {
       {/* ───────────── 7 · The honest engine ───────────── */}
       <section className="relative overflow-hidden px-5 py-32">
         <Atmosphere />
-        <div className="relative mx-auto max-w-3xl text-center">
+        <div className="relative mx-auto max-w-3xl">
           <StoryReveal>
-            <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-pounamu">
-              <ShieldCheck className="h-4 w-4" />
-              The rule that makes it trustworthy
-            </span>
+            <SectionHead index="04" label="The guardrail" tone="pounamu" />
           </StoryReveal>
-          <StoryReveal delay={0.15}>
-            <h2 className="mt-8 font-display text-4xl text-cream sm:text-6xl">
+          <StoryReveal delay={0.1}>
+            <h2 className="mt-7 max-w-2xl font-display text-4xl leading-[1.05] text-cream sm:text-6xl">
               It never makes up a word.
             </h2>
           </StoryReveal>
-          <StoryReveal delay={0.3}>
-            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted">
+          <StoryReveal delay={0.2}>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted">
               An AI cannot truly know a language with fifty speakers left, because
               there is almost nothing to learn it from. Pretending would be a lie,
               and an insult to the people who carry it. So Lantern only ever uses{" "}
               <span className="text-cream">her</span> words. If it ever tries to
               build a sentence with a word she never said, the app{" "}
-              <span className="text-cream">deletes it automatically</span>, checked in
-              code before anyone sees it.
+              <span className="text-cream">deletes it automatically</span>
+              <span className="text-faint">
+                {" "}
+                — checked in code, before anyone sees it.
+              </span>
+            </p>
+          </StoryReveal>
+          <StoryReveal delay={0.3}>
+            <p className="mt-6 inline-flex items-center gap-2 font-mono text-xs text-pounamu">
+              <ShieldCheck className="h-4 w-4" />
+              guardrail.check.ts · 0 hallucinations · 100% cited
             </p>
           </StoryReveal>
         </div>
@@ -296,14 +276,12 @@ export function StoryLanding() {
 
       {/* ───────────── 10 · The Ark ───────────── */}
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <StoryReveal className="mx-auto max-w-2xl text-center">
-          <p className="flex items-center justify-center gap-2 text-sm uppercase tracking-[0.3em] text-ember">
-            <Languages className="h-4 w-4" /> She isn&rsquo;t alone
-          </p>
-          <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
-            Languages people are fighting to keep.
+        <StoryReveal className="max-w-2xl">
+          <SectionHead index="06" label="The living ark" />
+          <h2 className="mt-7 font-display text-3xl text-cream sm:text-4xl">
+            She isn&rsquo;t alone. These are languages people are fighting to keep.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted">
+          <p className="mt-4 max-w-xl text-muted">
             One has about ten speakers left. Two were declared gone, then brought
             back by their children. Each is a light someone refuses to let go out.
           </p>
@@ -321,45 +299,53 @@ export function StoryLanding() {
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {LANGUAGES.map((l, i) => (
-            <StoryReveal key={l.id} delay={i * 0.05}>
+            <StoryReveal key={l.id} delay={i * 0.04}>
               <Link href={`/lang/${l.id}`} className="block h-full">
-                <SpotlightCard className="flex h-full flex-col items-center p-5 text-center transition-colors hover:border-line">
+                <SpotlightCard className="h-full p-5 transition-colors hover:border-ember/40">
                   <span
-                    className="h-2.5 w-2.5 rounded-full"
+                    className="block h-2.5 w-2.5 rounded-full"
                     style={{ backgroundColor: l.color, boxShadow: `0 0 10px ${l.color}` }}
                   />
-                  <span className="mt-4 font-display text-lg text-cream">{l.name}</span>
-                  <span className="mt-0.5 text-xs text-muted">{l.region}</span>
-                  <span className="mt-3 text-[11px] leading-snug text-faint">{l.speakers}</span>
+                  <span className="mt-4 block font-display text-lg leading-tight text-cream">
+                    {l.name}
+                  </span>
+                  <span className="mt-1 block text-xs text-muted">{l.region}</span>
+                  <span className="mt-3 block font-mono text-[11px] leading-snug text-faint">
+                    {l.speakers}
+                  </span>
                 </SpotlightCard>
               </Link>
             </StoryReveal>
           ))}
         </div>
         <StoryReveal>
-          <div className="mt-8 text-center">
-            <Link href="/ark" className="inline-flex items-center gap-2 text-ember hover:text-flame">
-              Enter the Living Ark <ArrowRight className="h-4 w-4" />
+          <div className="mt-8">
+            <Link
+              href="/ark"
+              className="group inline-flex items-center gap-2 text-ember hover:text-flame"
+            >
+              Enter the Living Ark
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
         </StoryReveal>
       </section>
 
-      {/* ───────────── 10.5 · The people ───────────── */}
-      <section className="mx-auto max-w-5xl px-5 py-28">
-        <StoryReveal className="mx-auto max-w-2xl text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-ember">Real communities</p>
-          <h2 className="mt-4 font-display text-3xl leading-tight text-cream sm:text-4xl">
+      {/* ───────────── 11 · The people ───────────── */}
+      <section className="mx-auto max-w-5xl px-5 py-24">
+        <StoryReveal className="max-w-2xl">
+          <SectionHead index="07" label="The communities" />
+          <h2 className="mt-7 font-display text-3xl leading-tight text-cream sm:text-4xl">
             These are the people whose words we carry.
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
             Not abstractions — living communities keeping their languages alive. The
             same way Lantern cites every word, it cites every photo.
           </p>
         </StoryReveal>
         <StoryReveal delay={0.1}>
           <div className="mt-12 grid gap-5 sm:grid-cols-2">
-            <figure className="overflow-hidden rounded-2xl border border-line shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
+            <figure className="overflow-hidden rounded-card border border-line shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/people/maori-kapa-haka.jpg"
@@ -367,12 +353,12 @@ export function StoryLanding() {
                 className="block aspect-[3/2] w-full object-cover"
                 loading="lazy"
               />
-              <figcaption className="flex items-center justify-between gap-3 px-4 py-3 text-[11px] text-faint">
+              <figcaption className="flex items-center justify-between gap-3 px-4 py-3 font-mono text-[11px] text-faint">
                 <span className="text-muted">te reo Māori · Te Matatini kapa haka</span>
                 <span>Schwede66 · CC BY-SA 4.0</span>
               </figcaption>
             </figure>
-            <figure className="overflow-hidden rounded-xl border border-line shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
+            <figure className="overflow-hidden rounded-card border border-line shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/people/cherokee-stickball.jpg"
@@ -380,7 +366,7 @@ export function StoryLanding() {
                 className="block aspect-[3/2] w-full object-cover"
                 loading="lazy"
               />
-              <figcaption className="flex items-center justify-between gap-3 px-4 py-3 text-[11px] text-faint">
+              <figcaption className="flex items-center justify-between gap-3 px-4 py-3 font-mono text-[11px] text-faint">
                 <span className="text-muted">ᏣᎳᎩ Cherokee · traditional stickball</span>
                 <span>NARA · public domain</span>
               </figcaption>
@@ -389,7 +375,7 @@ export function StoryLanding() {
         </StoryReveal>
       </section>
 
-      {/* ───────────── 11 · Close ───────────── */}
+      {/* ───────────── 12 · Close (deliberate centered bookend) ───────────── */}
       <section className="relative overflow-hidden px-5 py-40 text-center">
         <Atmosphere extra={<EmberField count={14} />} />
         <div className="relative">
@@ -398,20 +384,20 @@ export function StoryLanding() {
               <HeroFlame size={84} />
             </div>
           </StoryReveal>
-          <StoryReveal delay={0.2}>
+          <StoryReveal delay={0.15}>
             <h2 className="mx-auto mt-10 max-w-3xl font-display text-4xl leading-tight text-cream sm:text-6xl">
               A language only dies when the
               <br className="hidden sm:block" /> last person stops speaking it.
             </h2>
           </StoryReveal>
-          <StoryReveal delay={0.4}>
+          <StoryReveal delay={0.3}>
             <p className="mt-7 text-lg text-muted">So we keep speaking. Light one, and see.</p>
             <Link
               href="/lang/mi"
-              className="mt-9 inline-flex h-12 items-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
+              className="group mt-9 inline-flex h-12 items-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
             >
               Start with Māori
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </StoryReveal>
         </div>

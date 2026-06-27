@@ -27,9 +27,14 @@
   --color-pounamu-deep: #119b76;
 
   --font-display: var(--font-fraunces);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-hanken);
+  --font-mono: var(--font-plex);
 
-  --radius-xl2: 0.875rem;
+  /* Intentional radius scale, not one uniform value: hairline-sharp on data
+     and inline chips, softer on editorial feature surfaces. */
+  --radius-data: 0.375rem;
+  --radius-card: 0.75rem;
+  --radius-xl2: 1.125rem;
 
   /* 21st.dev / Magic UI animation tokens */
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
@@ -71,11 +76,20 @@ body {
   font-style: italic;
 }
 
-.text-gradient-ember {
-  background: linear-gradient(120deg, var(--color-flame), var(--color-ember) 45%, var(--color-ember-deep));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Machine-checked artifacts (cited words, tense particles, live metrics) are
+   set in mono — the "verified in code" claim made legible in the type itself. */
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, "SF Mono", monospace;
+  font-feature-settings: "ss01";
+}
+
+/* A quiet, left-aligned section index that replaces the all-caps tracked
+   eyebrow stamped above every section. Reads as an editorial spine. */
+.section-index {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--color-faint);
 }
 
 .glow-ember {

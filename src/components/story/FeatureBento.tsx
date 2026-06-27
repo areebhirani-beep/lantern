@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { SpotlightCard } from "./SpotlightCard";
+import { SectionHead } from "./primitives";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -69,10 +70,10 @@ export function FeatureBento() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-12% 0px" }}
         transition={{ duration: 0.8, ease: EASE }}
-        className="mx-auto max-w-2xl text-center"
+        className="max-w-2xl"
       >
-        <p className="text-sm uppercase tracking-[0.3em] text-ember">What it gives you</p>
-        <h2 className="mt-4 font-display text-3xl text-cream sm:text-4xl">
+        <SectionHead index="05" label="What you get" />
+        <h2 className="mt-7 font-display text-3xl text-cream sm:text-4xl">
           Everything a learner needs, generated from almost nothing.
         </h2>
       </motion.div>
@@ -122,15 +123,15 @@ export function FeatureBento() {
           surface="rounded-xl! p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
         >
           <div className="space-y-2">
-            <div className="flex items-center justify-between rounded-lg border border-line bg-ink/40 px-3 py-2">
+            <div className="flex items-center justify-between rounded-data border border-line bg-ink/40 px-3 py-2">
               <span className="font-display text-cream">whānau</span>
-              <span className="flex items-center gap-1 text-xs text-pounamu">
+              <span className="flex items-center gap-1 font-mono text-xs text-pounamu">
                 <Check className="h-3.5 w-3.5" /> cited
               </span>
             </div>
-            <div className="flex items-center justify-between rounded-lg border border-line/60 bg-ink/25 px-3 py-2">
+            <div className="flex items-center justify-between rounded-data border border-line/60 bg-ink/25 px-3 py-2">
               <span className="font-display text-faint line-through">a word she never said</span>
-              <span className="text-xs text-faint">removed</span>
+              <span className="font-mono text-xs text-faint">removed</span>
             </div>
           </div>
         </Card>
@@ -170,7 +171,7 @@ export function FeatureBento() {
           className="lg:col-span-2"
           surface="rounded-xl! p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
         >
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 font-mono text-xs">
             {[
               ["past", "i", "haere"],
               ["now", "kei te", "haere"],
@@ -178,7 +179,7 @@ export function FeatureBento() {
             ].map(([t, particle, verb]) => (
               <span
                 key={t}
-                className="rounded-full bg-surface-2 px-2.5 py-1 text-xs"
+                className="rounded-data bg-surface-2 px-2.5 py-1"
               >
                 <span className="text-faint">{t} </span>
                 <span className="text-ember">{particle}</span>{" "}
@@ -201,7 +202,7 @@ export function FeatureBento() {
               <Plus className="h-3.5 w-3.5" /> add a phrase
             </span>
             <ArrowRight className="h-4 w-4 text-faint" />
-            <span className="font-display text-lg text-cream">
+            <span className="font-mono text-base text-cream">
               41 <span className="text-faint">→</span> 42
             </span>
           </div>
