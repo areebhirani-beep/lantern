@@ -23,6 +23,12 @@ export function Footer() {
             <Link href="/lang/chr" className="hover:text-cream">
               Cherokee
             </Link>
+            <Link href="/privacy" className="hover:text-cream">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-cream">
+              Terms
+            </Link>
           </div>
         </div>
         <p className="mt-8 max-w-2xl text-xs leading-relaxed text-faint">
