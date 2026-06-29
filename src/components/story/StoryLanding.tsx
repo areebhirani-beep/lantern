@@ -17,7 +17,6 @@ import { LiveInduction } from "./LiveInduction";
 import { HowItWorks } from "./HowItWorks";
 import { FeatureBento } from "./FeatureBento";
 import { TryItCTA } from "./TryItCTA";
-import { SpotlightCard } from "./SpotlightCard";
 import { BrowserFrame } from "./BrowserFrame";
 import { TextRevealByWord } from "./TextReveal";
 import { RollingNumber } from "./RollingNumber";
@@ -27,6 +26,8 @@ import { GlowBorderCard } from "@/components/vengeance/glow-border-card";
 import { PerspectiveGrid } from "@/components/vengeance/perspective-grid";
 import { CyberGlitchText } from "@/components/vengeance/cyber-glitch-text";
 import { TestimonialsCard } from "@/components/vengeance/testimonials-card";
+import { RadialGlowButton } from "@/components/vengeance/radial-glow-button";
+import { LightLines } from "@/components/vengeance/light-lines";
 import AnimatedButton from "@/components/vengeance/animated-button";
 
 /** Mission-framed, honestly-sourced community cards. No fabricated personal
@@ -292,21 +293,37 @@ export function StoryLanding() {
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {LANGUAGES.map((l, i) => (
-            <StoryReveal key={l.id} delay={i * 0.04}>
-              <Link href={`/lang/${l.id}`} className="block h-full">
-                <SpotlightCard className="h-full p-5 transition-colors hover:border-ember/40">
-                  <span
-                    className="block h-2.5 w-2.5 rounded-full"
-                    style={{ backgroundColor: l.color, boxShadow: `0 0 10px ${l.color}` }}
-                  />
-                  <span className="mt-4 block font-display text-lg leading-tight text-cream">
-                    {l.name}
-                  </span>
-                  <span className="mt-1 block text-xs text-muted">{l.region}</span>
-                  <span className="mt-3 block font-mono text-[11px] leading-snug text-faint">
-                    {l.speakers}
-                  </span>
-                </SpotlightCard>
+            <StoryReveal key={l.id} delay={i * 0.04} className="h-full">
+              <Link href={`/lang/${l.id}`} className="group block h-full">
+                {/* Each card's glow is keyed to its own language colour, then warmed
+                    toward ember/flame so eight different hues still read as one
+                    lantern-lit family. The conic ring is slow + clipped to the card,
+                    so it's a calm rim-light, not a drifting blob. */}
+                <GlowBorderCard
+                  width="100%"
+                  height="100%"
+                  borderRadius="1rem"
+                  animationDuration={12 + (i % 4) * 2}
+                  gradientColors={[l.color, "#ffb454", "#ffd488", "#d98324"]}
+                  borderWidth="0.7em"
+                  blurAmount="0.45em"
+                  inset="-0.4em"
+                  className="border border-line bg-surface/40 p-0 backdrop-blur-none transition-colors group-hover:border-ember/40"
+                >
+                  <div className="flex h-full w-full flex-col items-start self-stretch text-left">
+                    <span
+                      className="block h-2.5 w-2.5 rounded-full"
+                      style={{ backgroundColor: l.color, boxShadow: `0 0 10px ${l.color}` }}
+                    />
+                    <span className="mt-4 block font-display text-lg leading-tight text-cream">
+                      {l.name}
+                    </span>
+                    <span className="mt-1 block text-xs text-muted">{l.region}</span>
+                    <span className="mt-3 block font-mono text-[11px] leading-snug text-faint">
+                      {l.speakers}
+                    </span>
+                  </div>
+                </GlowBorderCard>
               </Link>
             </StoryReveal>
           ))}
@@ -350,6 +367,20 @@ export function StoryLanding() {
 
       {/* ───────────── 12 · Close (deliberate centered bookend) ───────────── */}
       <section className="relative overflow-hidden px-5 py-40 text-center">
+        {/* Faint vertical light-rays behind the bookend — ember-recoloured and
+            masked so they read as rising lantern light, never an "AI" wash.
+            No solid gradient (from/to transparent); text stays fully crisp above. */}
+        <div className="pointer-events-none absolute inset-0 -z-0 opacity-60 [mask-image:linear-gradient(to_top,transparent,black_28%,black_78%,transparent)]">
+          <LightLines
+            gradientFrom="transparent"
+            gradientTo="transparent"
+            lineColor="#ffb454"
+            lightColor="#ffd488"
+            linesOpacity={0.05}
+            lightsOpacity={0.22}
+            speedMultiplier={0.6}
+          />
+        </div>
         <Atmosphere extra={<EmberField count={14} />} />
         <div className="relative">
           <StoryReveal>
@@ -365,13 +396,18 @@ export function StoryLanding() {
           </StoryReveal>
           <StoryReveal delay={0.3}>
             <p className="mt-7 text-lg text-muted">So we keep speaking. Light one, and see.</p>
-            <Link
-              href="/lang/mi"
-              className="group mt-9 inline-flex h-12 items-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
-            >
-              Start with Māori
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            <div className="mt-9 flex justify-center">
+              <RadialGlowButton
+                onClick={() => router.push("/lang/mi")}
+                aria-label="Start with Māori"
+                style={{ borderRadius: 9999 }}
+              >
+                <span className="flex items-center gap-2">
+                  Start with Māori
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </RadialGlowButton>
+            </div>
           </StoryReveal>
         </div>
       </section>

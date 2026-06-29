@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, Volume2 } from "lucide-react";
 import { BrowserFrame } from "./BrowserFrame";
 import { BorderBeam } from "@/components/vengeance/border-beam";
 import { InteractiveHoverButton } from "@/components/vengeance/interactive-hover-button";
+import { RadialGlowButton } from "@/components/vengeance/radial-glow-button";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -87,14 +87,17 @@ export function TryItCTA() {
               can take, right now in your browser.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/lang/mi"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
+            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <RadialGlowButton
+                onClick={() => router.push("/lang/mi")}
+                aria-label="Open the Māori workspace"
+                style={{ borderRadius: 9999 }}
               >
-                Open the Māori workspace
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
+                <span className="flex items-center gap-2">
+                  Open the Māori workspace
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </RadialGlowButton>
               <InteractiveHoverButton
                 onClick={() => router.push("/ark")}
                 className="h-12 px-6 text-base font-medium"
