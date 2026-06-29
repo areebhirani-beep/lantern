@@ -6,7 +6,7 @@
 
 Lantern turns the few words a grandmother still remembers into a real course to learn her language, with an engine that discovers the grammar from those words and **never invents one**. Hand it the scraps an elder can still recall, and it gives back flashcards, pronunciation, and a spaced-repetition course, teaching only words real speakers actually said.
 
-[**lantern-cyan.vercel.app**](https://lantern-cyan.vercel.app) &nbsp;·&nbsp; [The film](video/) &nbsp;·&nbsp; [The Moonshot paper](docs/MOONSHOT_PAPER.md)
+[**lantern-cyan.vercel.app**](https://lantern-cyan.vercel.app) &nbsp;·&nbsp; [The film](video/) &nbsp;·&nbsp; [The Moonshot paper](docs/MOONSHOT_PAPER.pdf)
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -380,7 +380,7 @@ src/
   components/              Workspace, InductionView, Flashcards, ContributeForm,
                            PronunciationInput, AccountMenu, AuthForm, Nav, Footer, ...
 scripts/                   failsoft / mongo / blob / firestore round-trip checks
-docs/                      EVALUATION.md, MOONSHOT_PAPER.md, screenshots/, submissions/
+docs/                      EVALUATION.md, MOONSHOT_PAPER.pdf, screenshots/, submissions/
 ```
 
 ## Scripts and checks
@@ -470,7 +470,7 @@ Everything here is **not yet built**. It is listed honestly so the README never 
 - [Evaluation](docs/EVALUATION.md): reproducible metrics and the no-hallucination check.
 - [Contributing](CONTRIBUTING.md): dev setup, the invariants you must not break, and how to verify before "done".
 - [Security](SECURITY.md): input bounds on `/api/audio`, secret hygiene, and no PII in URLs.
-- [The Moonshot Paper](docs/MOONSHOT_PAPER.md): the full blueprint and long-term vision.
+- [The Moonshot Paper](docs/MOONSHOT_PAPER.pdf): the full blueprint and long-term vision (PDF).
 - The film: an 86-second story in 4K at 60fps, built in Remotion, in [`video/`](video/).
 
 ## License
