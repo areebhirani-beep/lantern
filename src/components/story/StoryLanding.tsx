@@ -75,13 +75,13 @@ export function StoryLanding() {
 
         <StoryReveal delay={0.05}>
           <div className="mt-8 max-w-xl border-l-2 border-ember/30 pl-4">
-            <p className="font-mono text-sm text-faint">
+            <div className="font-mono text-sm text-faint">
               <RollingNumber value={0} className="text-ember" /> invented words
               <span className="mx-2 text-line">·</span>
               <RollingNumber value={48} suffix="/48" className="text-ember" /> words cited
               <span className="mx-2 text-line">·</span>
               <RollingNumber value={7} suffix="/7" className="text-ember" /> sentences attested
-            </p>
+            </div>
             <p className="mt-1.5 font-mono text-[11px] text-faint">
               recomputed live at{" "}
               <a
