@@ -131,3 +131,36 @@ body {
   0%, 90%, 100% { background-position: calc(-100% - var(--shiny-width, 100px)) 0; }
   30%, 60% { background-position: calc(100% + var(--shiny-width, 100px)) 0; }
 }
+
+/* ---- Vengeance UI · GlowBorderCard conic glow ----------------------------------
+   The vendored GlowBorderCard sets --glow-color-1..10 and --glow-animation-duration
+   on the card and renders a `.glow-conic` layer expecting a rotating conic gradient
+   driven by an animatable @property angle. Provide it here, in the Lantern palette. */
+@property --glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.glow-conic {
+  background: conic-gradient(
+    from var(--glow-angle),
+    var(--glow-color-1, #ffb454),
+    var(--glow-color-2, #ffd488),
+    var(--glow-color-3, #d98324),
+    var(--glow-color-4, #34d8a6),
+    var(--glow-color-5, #ffb454),
+    var(--glow-color-6, #ffd488),
+    var(--glow-color-7, #d98324),
+    var(--glow-color-8, #34d8a6),
+    var(--glow-color-9, #ffb454),
+    var(--glow-color-10, #ffd488),
+    var(--glow-color-1, #ffb454)
+  );
+  animation: glow-conic-spin var(--glow-animation-duration, 4s) linear infinite;
+}
+@keyframes glow-conic-spin {
+  to { --glow-angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glow-conic { animation: none; }
+}

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { SpotlightCard } from "./SpotlightCard";
 import { SectionHead } from "./primitives";
+import { BorderBeam } from "@/components/vengeance/border-beam";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -37,6 +38,7 @@ function Card({
   children,
   className = "",
   surface = "p-6 sm:p-7",
+  beam,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
@@ -44,10 +46,21 @@ function Card({
   children?: React.ReactNode;
   className?: string;
   surface?: string;
+  beam?: { from: string; to: string; delay?: number };
 }) {
   return (
     <motion.div variants={item} className={className}>
       <SpotlightCard className={`flex h-full flex-col ${surface}`}>
+        {beam && (
+          <BorderBeam
+            size={160}
+            duration={10}
+            delay={beam.delay ?? 0}
+            colorFrom={beam.from}
+            colorTo={beam.to}
+            className="pointer-events-none"
+          />
+        )}
         <Icon className="h-5 w-5 text-ember" />
         <h3 className="mt-5 font-display text-xl text-cream">{title}</h3>
         <p className="mt-2 leading-relaxed text-muted">{body}</p>
@@ -92,6 +105,7 @@ export function FeatureBento() {
           body="No textbook, no app, no data online. Lantern starts from whatever words are left and builds the rest."
           className="sm:col-span-2 lg:col-span-4"
           surface="p-7 sm:p-9 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
+          beam={{ from: "#ffb454", to: "#34d8a6", delay: 0 }}
         >
           <div className="flex flex-wrap items-center gap-4">
             <div className="space-y-1.5">
@@ -121,6 +135,7 @@ export function FeatureBento() {
           body="Every word it teaches is real and cited. Anything it cannot trace to her words is rejected in code."
           className="lg:col-span-2"
           surface="rounded-xl! p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
+          beam={{ from: "#ffb454", to: "#34d8a6", delay: 2 }}
         >
           <div className="space-y-2">
             <div className="flex items-center justify-between rounded-data border border-line bg-ink/40 px-3 py-2">
@@ -143,6 +158,7 @@ export function FeatureBento() {
           body="Built-in pronunciation, so you can speak it, not only read it."
           className="lg:col-span-2"
           surface="p-6 sm:p-7 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
+          beam={{ from: "#ffb454", to: "#34d8a6", delay: 4 }}
         >
           <div className="flex items-center gap-3">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ember text-ink">
@@ -170,6 +186,7 @@ export function FeatureBento() {
           body="It works out tense, plurals, and patterns from the examples it is given."
           className="lg:col-span-2"
           surface="rounded-xl! p-6 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
+          beam={{ from: "#ffb454", to: "#34d8a6", delay: 6 }}
         >
           <div className="flex flex-wrap gap-1.5 font-mono text-xs">
             {[
@@ -196,6 +213,7 @@ export function FeatureBento() {
           body="Add a phrase and the whole course re-derives, richer. The record compounds instead of fading."
           className="lg:col-span-2"
           surface="p-7 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]"
+          beam={{ from: "#ffb454", to: "#34d8a6", delay: 8 }}
         >
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-ember/30 bg-ember/10 px-3 py-1.5 text-sm text-ember">

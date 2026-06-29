@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { LANGUAGES } from "@/lib/languages";
 import {
@@ -16,12 +17,41 @@ import { LiveInduction } from "./LiveInduction";
 import { HowItWorks } from "./HowItWorks";
 import { FeatureBento } from "./FeatureBento";
 import { TryItCTA } from "./TryItCTA";
-import { SpotlightCard } from "./SpotlightCard";
 import { BrowserFrame } from "./BrowserFrame";
 import { TextRevealByWord } from "./TextReveal";
+import { RollingNumber } from "./RollingNumber";
 import { Marquee } from "@/components/magic/marquee";
+import { SpotlightCard } from "./SpotlightCard";
+import { BorderBeam } from "@/components/vengeance/border-beam";
+import { PerspectiveGrid } from "@/components/vengeance/perspective-grid";
+import { CyberGlitchText } from "@/components/vengeance/cyber-glitch-text";
+import { TestimonialsCard } from "@/components/vengeance/testimonials-card";
+import { RadialGlowButton } from "@/components/vengeance/radial-glow-button";
+import { LightLines } from "@/components/vengeance/light-lines";
+import AnimatedButton from "@/components/vengeance/animated-button";
+
+/** Mission-framed, honestly-sourced community cards. No fabricated personal
+ *  quotes — each line states the revival mission, and photo attribution is kept
+ *  inline so the section's "it cites every photo" promise still holds. */
+const COMMUNITY_TESTIMONIALS = [
+  {
+    id: "mi",
+    title: "te reo Māori",
+    description:
+      "From near-loss to kōhanga reo immersion nests and a Māori Language Act — proof a language can be carried forward. Photo: Schwede66, Te Matatini, CC BY-SA 4.0.",
+    image: "/people/maori-kapa-haka.jpg",
+  },
+  {
+    id: "chr",
+    title: "ᏣᎳᎩ Cherokee",
+    description:
+      "Fluent speakers number in the hundreds, keeping a syllabary and grammar alive. Lantern only ever teaches words they actually said. Photo: NARA, public domain.",
+    image: "/people/cherokee-stickball.jpg",
+  },
+];
 
 export function StoryLanding() {
+  const router = useRouter();
   return (
     <main className="relative">
       <ScrollProgress />
@@ -46,13 +76,13 @@ export function StoryLanding() {
 
         <StoryReveal delay={0.05}>
           <div className="mt-8 max-w-xl border-l-2 border-ember/30 pl-4">
-            <p className="font-mono text-sm text-faint">
-              <span className="text-ember">0</span> invented words
+            <div className="font-mono text-sm text-faint">
+              <RollingNumber value={0} className="text-ember" /> invented words
               <span className="mx-2 text-line">·</span>
-              <span className="text-ember">48/48</span> words cited
+              <RollingNumber value={48} suffix="/48" className="text-ember" /> words cited
               <span className="mx-2 text-line">·</span>
-              <span className="text-ember">7/7</span> sentences attested
-            </p>
+              <RollingNumber value={7} suffix="/7" className="text-ember" /> sentences attested
+            </div>
             <p className="mt-1.5 font-mono text-[11px] text-faint">
               recomputed live at{" "}
               <a
@@ -77,7 +107,12 @@ export function StoryLanding() {
       {/* ───────────── 3 · The loss (the one signature scroll motion) ───────────── */}
       <TextRevealByWord text="Every two weeks, a language takes its last breath. A thousand years of grammar, story, and song, gone unwritten, because no one had the time to write it down." />
 
-      <section className="relative mx-auto max-w-5xl px-5 pb-32">
+      <section className="relative mx-auto max-w-5xl overflow-hidden px-5 pb-32">
+        {/* A perspective grid receding into the dark — the quiet scale of the loss. */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-0 h-full opacity-[0.14]">
+          <PerspectiveGrid gridSize={26} showOverlay={false} className="bg-transparent" />
+        </div>
+        <div className="relative">
         <StoryReveal className="max-w-2xl">
           <p className="text-lg leading-relaxed text-muted">
             Of the world&rsquo;s 7,000 languages, nearly half are expected to fall
@@ -89,12 +124,16 @@ export function StoryLanding() {
         <StoryReveal delay={0.12}>
           <div className="mt-12 grid max-w-3xl gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-3">
             {[
-              ["7,000", "spoken today", "text-cream"],
-              ["3,000", "expected to vanish", "text-cream"],
-              ["~14", "days between each loss", "text-ember"],
-            ].map(([fig, label, tone]) => (
+              { value: 7000, prefix: "", label: "spoken today", tone: "text-cream" },
+              { value: 3000, prefix: "", label: "expected to vanish", tone: "text-cream" },
+              { value: 14, prefix: "~", label: "days between each loss", tone: "text-ember" },
+            ].map(({ value, prefix, label, tone }) => (
               <div key={label} className="bg-ink p-6">
-                <div className={`font-display text-4xl ${tone}`}>{fig}</div>
+                <RollingNumber
+                  value={value}
+                  prefix={prefix}
+                  className={`font-display text-4xl ${tone}`}
+                />
                 <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
                   {label}
                 </p>
@@ -107,6 +146,7 @@ export function StoryLanding() {
             Hers is on that list.
           </p>
         </StoryReveal>
+        </div>
       </section>
 
       {/* ───────────── 4 · The turn (her words) ───────────── */}
@@ -125,10 +165,19 @@ export function StoryLanding() {
             </p>
           </StoryReveal>
           <StoryReveal delay={0.24}>
-            <p className="mt-10 max-w-2xl text-xl leading-relaxed text-cream">
-              Then we handed them to{" "}
-              <span className="font-display-italic text-flame">Lantern</span>.
-            </p>
+            <div className="relative mt-10 inline-block overflow-hidden rounded-2xl border border-line bg-ink/50 px-6 py-4">
+              <BorderBeam
+                size={140}
+                duration={9}
+                colorFrom="#ffb454"
+                colorTo="#34d8a6"
+                className="pointer-events-none"
+              />
+              <p className="max-w-2xl text-xl leading-relaxed text-cream">
+                Then we handed them to{" "}
+                <span className="font-display-italic text-flame">Lantern</span>.
+              </p>
+            </div>
           </StoryReveal>
         </div>
       </section>
@@ -149,14 +198,23 @@ export function StoryLanding() {
           </p>
         </StoryReveal>
         <StoryReveal delay={0.1} className="mt-12">
-          <BrowserFrame url="lantern.app/lang/mi">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/preview/structure.png"
-              alt="The Lantern workspace showing the grammar and vocabulary it induced for Māori"
-              className="block w-full"
+          <div className="relative overflow-hidden rounded-2xl">
+            <BrowserFrame url="lantern.app/lang/mi">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/preview/structure.png"
+                alt="The Lantern workspace showing the grammar and vocabulary it induced for Māori"
+                className="block w-full"
+              />
+            </BrowserFrame>
+            <BorderBeam
+              size={260}
+              duration={13}
+              colorFrom="#ffb454"
+              colorTo="#34d8a6"
+              className="pointer-events-none"
             />
-          </BrowserFrame>
+          </div>
         </StoryReveal>
       </section>
 
@@ -169,7 +227,7 @@ export function StoryLanding() {
           </StoryReveal>
           <StoryReveal delay={0.1}>
             <h2 className="mt-7 max-w-2xl font-display text-4xl leading-[1.05] text-cream sm:text-6xl">
-              It never makes up a word.
+              <CyberGlitchText text="It never makes up a word." scrambleDuration={45} />
             </h2>
           </StoryReveal>
           <StoryReveal delay={0.2}>
@@ -187,8 +245,8 @@ export function StoryLanding() {
             </p>
           </StoryReveal>
           <StoryReveal delay={0.3}>
-            <p className="mt-6 inline-flex items-center gap-2 font-mono text-xs text-pounamu">
-              <ShieldCheck className="h-4 w-4" />
+            <p className="mt-8 inline-flex items-center gap-2 rounded-lg border border-line bg-ink/60 px-4 py-3 font-mono text-xs text-pounamu">
+              <ShieldCheck className="h-4 w-4 shrink-0" />
               guardrail.check.ts · 0 hallucinations · 100% cited
             </p>
           </StoryReveal>
@@ -226,9 +284,20 @@ export function StoryLanding() {
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {LANGUAGES.map((l, i) => (
-            <StoryReveal key={l.id} delay={i * 0.04}>
-              <Link href={`/lang/${l.id}`} className="block h-full">
-                <SpotlightCard className="h-full p-5 transition-colors hover:border-ember/40">
+            <StoryReveal key={l.id} delay={i * 0.04} className="h-full">
+              <Link href={`/lang/${l.id}`} className="group block h-full">
+                {/* A per-language colour dot keeps eight hues legible without
+                    washing the card; the panel stays dark so the text reads
+                    cleanly. A subtle BorderBeam rim adds the lantern-lit motion. */}
+                <SpotlightCard className="relative h-full overflow-hidden p-5 transition-colors group-hover:border-ember/40">
+                  <BorderBeam
+                    size={70}
+                    duration={14 + (i % 4) * 2}
+                    delay={i * 1.2}
+                    colorFrom={l.color}
+                    colorTo="#ffb454"
+                    borderWidth={1.2}
+                  />
                   <span
                     className="block h-2.5 w-2.5 rounded-full"
                     style={{ backgroundColor: l.color, boxShadow: `0 0 10px ${l.color}` }}
@@ -247,13 +316,13 @@ export function StoryLanding() {
         </div>
         <StoryReveal>
           <div className="mt-8">
-            <Link
-              href="/ark"
-              className="group inline-flex items-center gap-2 text-ember hover:text-flame"
+            <AnimatedButton
+              onClick={() => router.push("/ark")}
+              className="group h-12 gap-2 rounded-full border-line bg-surface px-6 text-cream hover:bg-surface-2"
             >
               Enter the Living Ark
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </AnimatedButton>
           </div>
         </StoryReveal>
       </section>
@@ -271,39 +340,33 @@ export function StoryLanding() {
           </p>
         </StoryReveal>
         <StoryReveal delay={0.1}>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2">
-            <figure className="overflow-hidden rounded-card border border-line shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/people/maori-kapa-haka.jpg"
-                alt="A Māori kapa haka group performing in traditional dress before a large crowd at Te Matatini"
-                className="block aspect-[3/2] w-full object-cover"
-                loading="lazy"
-              />
-              <figcaption className="flex items-center justify-between gap-3 px-4 py-3 font-mono text-[11px] text-faint">
-                <span className="text-muted">te reo Māori · Te Matatini kapa haka</span>
-                <span>Schwede66 · CC BY-SA 4.0</span>
-              </figcaption>
-            </figure>
-            <figure className="overflow-hidden rounded-card border border-line shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/people/cherokee-stickball.jpg"
-                alt="Cherokee players raising traditional sticks during a stickball game at dusk"
-                className="block aspect-[3/2] w-full object-cover"
-                loading="lazy"
-              />
-              <figcaption className="flex items-center justify-between gap-3 px-4 py-3 font-mono text-[11px] text-faint">
-                <span className="text-muted">ᏣᎳᎩ Cherokee · traditional stickball</span>
-                <span>NARA · public domain</span>
-              </figcaption>
-            </figure>
+          <div className="mt-8 flex justify-center">
+            <TestimonialsCard
+              items={COMMUNITY_TESTIMONIALS}
+              width={560}
+              autoPlay
+              autoPlayInterval={6000}
+            />
           </div>
         </StoryReveal>
       </section>
 
       {/* ───────────── 12 · Close (deliberate centered bookend) ───────────── */}
       <section className="relative overflow-hidden px-5 py-40 text-center">
+        {/* Faint vertical light-rays behind the bookend — ember-recoloured and
+            masked so they read as rising lantern light, never an "AI" wash.
+            No solid gradient (from/to transparent); text stays fully crisp above. */}
+        <div className="pointer-events-none absolute inset-0 -z-0 opacity-60 [mask-image:linear-gradient(to_top,transparent,black_28%,black_78%,transparent)]">
+          <LightLines
+            gradientFrom="transparent"
+            gradientTo="transparent"
+            lineColor="#ffb454"
+            lightColor="#ffd488"
+            linesOpacity={0.05}
+            lightsOpacity={0.22}
+            speedMultiplier={0.6}
+          />
+        </div>
         <Atmosphere extra={<EmberField count={14} />} />
         <div className="relative">
           <StoryReveal>
@@ -319,13 +382,18 @@ export function StoryLanding() {
           </StoryReveal>
           <StoryReveal delay={0.3}>
             <p className="mt-7 text-lg text-muted">So we keep speaking. Light one, and see.</p>
-            <Link
-              href="/lang/mi"
-              className="group mt-9 inline-flex h-12 items-center gap-2 rounded-full bg-ember px-7 font-medium text-ink transition-transform hover:scale-[1.03]"
-            >
-              Start with Māori
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            <div className="mt-9 flex justify-center">
+              <RadialGlowButton
+                onClick={() => router.push("/lang/mi")}
+                aria-label="Start with Māori"
+                style={{ borderRadius: 9999 }}
+              >
+                <span className="flex items-center gap-2">
+                  Start with Māori
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </RadialGlowButton>
+            </div>
           </StoryReveal>
         </div>
       </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { SectionHead, StoryReveal } from "./primitives";
+import { BorderBeam } from "@/components/vengeance/border-beam";
 
 type Step = {
   n: string;
@@ -70,7 +71,14 @@ export function HowItWorks() {
                 <p className="mt-2 max-w-xl leading-relaxed text-muted">{s.body}</p>
 
                 {s.example && (
-                  <div className="mt-5 max-w-md rounded-card border border-line bg-ink p-5 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
+                  <div className="relative mt-5 max-w-md overflow-hidden rounded-card border border-line bg-ink p-5 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.7)]">
+                    <BorderBeam
+                      size={120}
+                      duration={8}
+                      colorFrom="#ffb454"
+                      colorTo="#34d8a6"
+                      className="pointer-events-none"
+                    />
                     <div className="grid gap-1.5 font-mono text-sm text-cream sm:grid-cols-2">
                       {s.example.map(([particle, rest, gloss]) => (
                         <span key={particle}>
