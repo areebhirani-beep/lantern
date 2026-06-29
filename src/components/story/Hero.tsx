@@ -3,6 +3,8 @@
 import { ArrowDown, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { Atmosphere, Gloss, HeroFlame } from "./primitives";
+import { RollingNumber } from "./RollingNumber";
+import { BorderBeam } from "@/components/vengeance/border-beam";
 
 /** CSS fade-rise. Runs on first paint (unlike a JS/framer entrance, which only
  *  fires after hydration and leaves an empty-void flash). Delays are halved so
@@ -28,10 +30,22 @@ function Rise({
 
 /** Loud, honest proof. Big mono numbers in ember, the whole band links to the
  *  live endpoint that recomputes them. */
-function ProofStat({ n, label }: { n: string; label: string }) {
+function ProofStat({
+  value,
+  suffix,
+  label,
+}: {
+  value: number;
+  suffix?: string;
+  label: string;
+}) {
   return (
     <span className="inline-flex items-baseline gap-1.5">
-      <span className="font-mono text-2xl font-medium text-ember sm:text-3xl">{n}</span>
+      <RollingNumber
+        value={value}
+        suffix={suffix}
+        className="font-mono text-2xl font-medium text-ember sm:text-3xl"
+      />
       <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">{label}</span>
     </span>
   );
@@ -48,7 +62,14 @@ function HerWords() {
   ];
   return (
     <div className="mx-auto w-full max-w-md text-left">
-      <div className="rounded-2xl border border-line bg-ink/70 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.75)]">
+      <div className="relative overflow-hidden rounded-2xl border border-line bg-ink/70 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.75)]">
+        <BorderBeam
+          size={150}
+          duration={9}
+          colorFrom="#ffb454"
+          colorTo="#34d8a6"
+          className="pointer-events-none"
+        />
         <div className="flex items-center justify-between font-mono text-[11px] text-faint">
           <span className="uppercase tracking-[0.18em]">Her words</span>
           <span>te reo Māori · 41 phrases</span>
@@ -122,11 +143,11 @@ export function Hero() {
             href="/api/metrics"
             className="group inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-2xl border border-line bg-ink/50 px-6 py-3.5"
           >
-            <ProofStat n="0" label="invented" />
+            <ProofStat value={0} label="invented" />
             <span className="hidden h-7 w-px bg-line sm:block" />
-            <ProofStat n="48 / 48" label="cited" />
+            <ProofStat value={48} suffix=" / 48" label="cited" />
             <span className="hidden h-7 w-px bg-line sm:block" />
-            <ProofStat n="7 / 7" label="attested" />
+            <ProofStat value={7} suffix=" / 7" label="attested" />
             <span className="ml-1 font-mono text-[11px] text-faint underline decoration-dotted underline-offset-2 transition-colors group-hover:text-cream">
               verify · /api/metrics
             </span>

@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, Volume2 } from "lucide-react";
 import { BrowserFrame } from "./BrowserFrame";
+import { BorderBeam } from "@/components/vengeance/border-beam";
+import { InteractiveHoverButton } from "@/components/vengeance/interactive-hover-button";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -61,6 +64,7 @@ function WorkspacePeek() {
  * click point shows exactly what opens. No animated borders — the product carries it.
  */
 export function TryItCTA() {
+  const router = useRouter();
   return (
     <section className="mx-auto max-w-5xl px-5 py-20">
       <motion.div
@@ -91,12 +95,12 @@ export function TryItCTA() {
                 Open the Māori workspace
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
-              <Link
-                href="/ark"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-line px-6 font-medium text-cream transition-colors hover:bg-surface"
+              <InteractiveHoverButton
+                onClick={() => router.push("/ark")}
+                className="h-12 px-6 text-base font-medium"
               >
                 See every language
-              </Link>
+              </InteractiveHoverButton>
             </div>
 
             <p className="mt-5 font-mono text-xs text-faint">
@@ -110,9 +114,18 @@ export function TryItCTA() {
             viewport={{ once: true, margin: "-12% 0px" }}
             transition={{ duration: 0.7, delay: 0.12, ease: EASE }}
           >
-            <BrowserFrame url="lantern.app/lang/mi">
-              <WorkspacePeek />
-            </BrowserFrame>
+            <div className="relative overflow-hidden rounded-2xl">
+              <BrowserFrame url="lantern.app/lang/mi">
+                <WorkspacePeek />
+              </BrowserFrame>
+              <BorderBeam
+                size={220}
+                duration={11}
+                colorFrom="#ffb454"
+                colorTo="#34d8a6"
+                className="pointer-events-none"
+              />
+            </div>
           </motion.div>
         </div>
       </motion.div>
