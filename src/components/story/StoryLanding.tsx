@@ -21,8 +21,8 @@ import { BrowserFrame } from "./BrowserFrame";
 import { TextRevealByWord } from "./TextReveal";
 import { RollingNumber } from "./RollingNumber";
 import { Marquee } from "@/components/magic/marquee";
+import { SpotlightCard } from "./SpotlightCard";
 import { BorderBeam } from "@/components/vengeance/border-beam";
-import { GlowBorderCard } from "@/components/vengeance/glow-border-card";
 import { PerspectiveGrid } from "@/components/vengeance/perspective-grid";
 import { CyberGlitchText } from "@/components/vengeance/cyber-glitch-text";
 import { TestimonialsCard } from "@/components/vengeance/testimonials-card";
@@ -245,19 +245,10 @@ export function StoryLanding() {
             </p>
           </StoryReveal>
           <StoryReveal delay={0.3}>
-            <GlowBorderCard
-              width="100%"
-              height="auto"
-              borderRadius="0.75rem"
-              animationDuration={6}
-              gradientColors={["#34d8a6", "#119b76", "#ffb454", "#ffd488"]}
-              className="mt-8 max-w-sm border border-line bg-ink/70 p-0 text-left backdrop-blur-none"
-            >
-              <p className="inline-flex w-full items-center gap-2 font-mono text-xs text-pounamu">
-                <ShieldCheck className="h-4 w-4 shrink-0" />
-                guardrail.check.ts · 0 hallucinations · 100% cited
-              </p>
-            </GlowBorderCard>
+            <p className="mt-8 inline-flex items-center gap-2 rounded-lg border border-line bg-ink/60 px-4 py-3 font-mono text-xs text-pounamu">
+              <ShieldCheck className="h-4 w-4 shrink-0" />
+              guardrail.check.ts · 0 hallucinations · 100% cited
+            </p>
           </StoryReveal>
         </div>
       </section>
@@ -295,35 +286,30 @@ export function StoryLanding() {
           {LANGUAGES.map((l, i) => (
             <StoryReveal key={l.id} delay={i * 0.04} className="h-full">
               <Link href={`/lang/${l.id}`} className="group block h-full">
-                {/* Each card's glow is keyed to its own language colour, then warmed
-                    toward ember/flame so eight different hues still read as one
-                    lantern-lit family. The conic ring is slow + clipped to the card,
-                    so it's a calm rim-light, not a drifting blob. */}
-                <GlowBorderCard
-                  width="100%"
-                  height="100%"
-                  borderRadius="1rem"
-                  animationDuration={12 + (i % 4) * 2}
-                  gradientColors={[l.color, "#ffb454", "#ffd488", "#d98324"]}
-                  borderWidth="0.7em"
-                  blurAmount="0.45em"
-                  inset="-0.4em"
-                  className="border border-line bg-surface/40 p-0 backdrop-blur-none transition-colors group-hover:border-ember/40"
-                >
-                  <div className="flex h-full w-full flex-col items-start self-stretch text-left">
-                    <span
-                      className="block h-2.5 w-2.5 rounded-full"
-                      style={{ backgroundColor: l.color, boxShadow: `0 0 10px ${l.color}` }}
-                    />
-                    <span className="mt-4 block font-display text-lg leading-tight text-cream">
-                      {l.name}
-                    </span>
-                    <span className="mt-1 block text-xs text-muted">{l.region}</span>
-                    <span className="mt-3 block font-mono text-[11px] leading-snug text-faint">
-                      {l.speakers}
-                    </span>
-                  </div>
-                </GlowBorderCard>
+                {/* A per-language colour dot keeps eight hues legible without
+                    washing the card; the panel stays dark so the text reads
+                    cleanly. A subtle BorderBeam rim adds the lantern-lit motion. */}
+                <SpotlightCard className="relative h-full overflow-hidden p-5 transition-colors group-hover:border-ember/40">
+                  <BorderBeam
+                    size={70}
+                    duration={14 + (i % 4) * 2}
+                    delay={i * 1.2}
+                    colorFrom={l.color}
+                    colorTo="#ffb454"
+                    borderWidth={1.2}
+                  />
+                  <span
+                    className="block h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: l.color, boxShadow: `0 0 10px ${l.color}` }}
+                  />
+                  <span className="mt-4 block font-display text-lg leading-tight text-cream">
+                    {l.name}
+                  </span>
+                  <span className="mt-1 block text-xs text-muted">{l.region}</span>
+                  <span className="mt-3 block font-mono text-[11px] leading-snug text-faint">
+                    {l.speakers}
+                  </span>
+                </SpotlightCard>
               </Link>
             </StoryReveal>
           ))}
